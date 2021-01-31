@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="ionicForm" (ngSubmit)="enviarForm()" #form="ngForm">
+    <app-custom-input
+      label="nombre"
+      name="nombre"
+      type="text"
+      [formGruop]="ionicForm"
+      [form]="form"
+      [Validations]="nombreValidation"
+    ></app-custom-input>
+
+    <app-custom-input
+      label="e-mail"
+      name="mail"
+      type="text"
+      [formGruop]="ionicForm"
+      [form]="form"
+      [Validations]="mailValidation"
+      [brmasker]="{userCaracters: true, type:'text', len:40}"
+      defaultValue="mail@outlool.com"
+    ></app-custom-input>
+
+    <app-custom-input
+      label="fecha de nacimiento"
+      name="fechaNacimiento"
+      type="datetime"
+      [formGruop]="ionicForm"
+      [form]="form"
+      (_ionChange)="getDate($event)"
+      [defaultValue]="defaultDate"
+    ></app-custom-input>
+
+    <app-custom-input
+      label="telefono celular"
+      name="celular"
+      type="text"
+      [formGruop]="ionicForm"
+      [form]="form"
+      [Validations]="celularValidation"
+      [brmasker]="{mask: '00000000', type:'num', len:8}"
+    ></app-custom-input>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block"
+          >Submit</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

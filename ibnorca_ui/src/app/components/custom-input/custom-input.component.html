@@ -1,0 +1,27 @@
+<div [formGroup]="formGruop">
+  <ion-item lines="full">
+    <ion-label position="floating">{{ label }}</ion-label>
+    <ion-input class="margin-top"     
+      *ngIf="type != 'datetime'"
+      [formControlName]="name"
+      [type]="type"
+      [brmasker] = "brmasker"
+    ></ion-input>
+
+    <ion-datetime class="margin-top"     
+      [formControlName]="name"
+      display-format="DD/MM/YYYY"
+      [pickerOptions]="customPickerOption"
+      *ngIf="type === 'datetime'"
+    ></ion-datetime>
+  </ion-item>
+  <div *ngIf="Validations">
+    <div *ngFor="let validation of Validations">
+      <app-message-error
+        [error]="validation.message"
+        *ngIf="form.submitted && ExistsError(validation.validator)"
+      >
+      </app-message-error>
+    </div>
+  </div>
+</div>

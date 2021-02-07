@@ -5,10 +5,11 @@ import { IonicModule } from "@ionic/angular";
 import { CustomInputComponent } from "./custom-input/custom-input.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrMaskerModule } from "br-mask";
+import { CustomHeaderComponent } from "./custom-header/custom-header.component";
 
 @NgModule({
-  declarations: [MessageErrorComponent, CustomInputComponent],
+  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent],
   imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, BrMaskerModule],
-  exports: [MessageErrorComponent, CustomInputComponent], 
+  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent], 
 })
 export class ComponentsModule {}

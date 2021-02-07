@@ -12,6 +12,7 @@ import { IonicStorageModule } from "@ionic/storage";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrMaskerModule } from "br-mask";
+import { ComponentsModule } from "./components/components.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { BrMaskerModule } from "br-mask";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrMaskerModule
+    BrMaskerModule,
+    ComponentsModule
   ],
   providers: [
     StatusBar,

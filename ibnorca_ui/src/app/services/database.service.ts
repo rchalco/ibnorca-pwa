@@ -11,4 +11,16 @@ export class DatabaseService {
     this.storage.set("persona", { nombre: "ruben", apellido: "chalco" });
     console.log("dato rescatado", this.storage.get("persona"));
   }
+
+  setItem(key, _object) {
+    this.storage.set(key, _object);
+  }
+
+  getItem(key) {
+    return this.storage.get(key);
+  }
+
+  removeItem(key) {
+    return this.storage.remove(key);
+  }
 }

@@ -1,0 +1,108 @@
+<app-custom-header
+  title="Programa de Auditoria"
+  icon_name="calendar-number-outline"
+></app-custom-header>
+
+<ion-content>
+  <ion-searchbar animated="true" (ionChange)="buscar($event)"></ion-searchbar>
+  <ion-card>
+    <ion-card-header color="primary">
+      <ion-card-subtitle>NIT 1710124544 / Gestion 2020 - La Paz Bolivia</ion-card-subtitle>
+      <ion-item color="primary">
+        <ion-icon color="light" name="server-outline" slot="start"></ion-icon>
+        <ion-label>ORGANIZACION: YACIMIENTOS PETROLIFEROS DE BOLIVIA</ion-label>
+      </ion-item>
+      <ion-item color="certificacion">
+        <ion-label
+          >PRODUCTO CERTIFICADO: SISTEMA DE GESTIOS SUPPLY CHAIN</ion-label
+        >
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="12">
+          <div class="container-detail-certificacion ion-content-small-font">
+            CÓDIGO DE SERVICIO: REG-PROG-XXXXXXXXX<br />
+            NORMA: ISO/27001 TEC - 1ER SELLO; ISO/27001 TEC - 1ER SELLO; ISO/27001 TEC - 1ER SELLO; ISO/27001 TEC - 1ER SELLO; ISO/27001 TEC - 1ER SELLO; ISO/27001 TEC - 1ER SELLO; ISO/27001 TEC - 1ER SELLO; ISO/27001 TEC - 1ER SELLO; ISO/27001 TEC - 1ER SELLO; ISO/27001 TEC - 1ER SELLO; <br />
+            CODIGO IAF DEL PRODUCTO: XXXXXXXX<br />
+            FECHA EMISION DEL PRIMER CERTIFICADO: 01/01/2001 <br />
+            FECHA EMISION DEL ÚLTIMO CERTIFICADO: 01/01/2001 <br />
+            FECHA VENCIMIENTO DEL ÚLTIMO CERTIFICADO: 01/01/2001 <br />
+            NÚMERO DE CERTIFICADO: XXXXXXXXXXXXXXX<br />            
+            TOTAL AÑOS: 3<br />
+          </div>
+          <ion-slides pager="false" class="slide-full">
+            <ion-slide *ngFor="let a of [1,1,1]; let i=index">
+              <div class="container-detail-auditoria">
+                <ion-item color="title-medium">
+                  <ion-label class="title-medium-font">AÑO {{i + 1}} / ETAPA X [CERTIFICACION/RENOVACION]</ion-label>
+                </ion-item>
+                <ion-row>                  
+                  <ion-col
+                    size="6"
+                    size-lg="6"
+                    size-md="6"
+                    size-sm="6"
+                    size-xs="12"
+                  >
+                    <ion-card mode="ios">
+                      <ion-item color="medium" color="title-small">
+                        <ion-icon name="time" slot="start"></ion-icon>
+                        <ion-label>CRONOGRAMA</ion-label>
+                      </ion-item>
+                      <ion-card-content class="ion-content-small-font">
+                        TIPO DE AUDITORÍA: <span>CERTIFICACIÓN</span><br />
+                        MES PROGRAMADO: NOVIEMBRE <br />
+                        MES REPROGRAMADO: DICIEMBRE <br />
+                        FECHA DE INICIO DE EJECUCIÓN AUDITORÍA: 01/09/2020
+                        <br />
+                        FECHA DE FIN DE EJECUCIÓN AUDITORÍA: 01/09/2020
+                        <br />
+                        CANTIDAD DE DIAS TOTAL(SACAR DEL PRESUPUESTO): XXXXXXXXXXXXXXX<br />
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                  <ion-col
+                    size="6"
+                    size-lg="6"
+                    size-md="6"
+                    size-sm="6"
+                    size-xs="12"
+                  >
+                    <ion-card mode="ios">
+                      <ion-item color="medium" color="title-small">
+                        <ion-icon name="person" slot="start"></ion-icon>
+                        <ion-label>PERSONAL</ion-label>
+                      </ion-item>
+                      <ion-card-content class="ion-content-small-font">
+                        AUDITOR LÌDER: XXXXXXXXXXXXXXXXX <br />
+                        AUDITOR 1: XXXXXXXXXXXXXXXXX <br />
+                        AUDITOR 2: XXXXXXXXXXXXXXXXX <br />
+                        AUDITOR 3: XXXXXXXXXXXXXXXXX <br />
+                        AUDITOR ENSAYOS CON TESTIGO: XXXXXXXXXXXXXXXXX <br />
+                        EXPERTO TÉCNICO: XXXXXXXXXXXXXXXXX <br />
+                        AUDITOR EN FORMACIÓN: XXXXXXXXXXXXXXXXX <br />
+                        ESTADO: Sin fecha de auditoria
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>               
+                <ion-buttons slot="start" class="buttons-group">
+                  <ion-button size="small" fill="outline" color="success">
+                    <ion-icon slot="start" name="save"></ion-icon>
+                    Guardar
+                  </ion-button>
+                  <ion-button size="small" fill="outline" color="secondary">
+                    <ion-icon slot="start" name="document"></ion-icon>
+                    Ver Designacion
+                  </ion-button>
+                </ion-buttons> 
+              </div>
+            </ion-slide>
+          </ion-slides>
+        </ion-col>
+      </ion-row>
+      Informacion basada en el presupuesto realizado para este programa
+    </ion-card-content>
+  </ion-card>
+</ion-content>

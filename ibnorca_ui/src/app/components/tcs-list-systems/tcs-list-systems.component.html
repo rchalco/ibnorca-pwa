@@ -1,0 +1,72 @@
+<div class="container-product-list">
+  <ion-item color="medium" color="title-small" (click)="toggle()">
+    <ion-icon name="menu" slot="start"></ion-icon>
+    <ion-label>ALCANCE / NORMAS / SITIOS</ion-label>
+  </ion-item>
+  <div *ngIf="display">
+    <form [formGroup]="ionicForm" (ngSubmit)="guardarSystem()" #form="ngForm">
+      <app-custom-input
+        label="NOMBRE DE CLIENTE PARA CERTIFICADO"
+        name="nombre_cliente"
+        type="text"
+        [formGruop]="ionicForm"
+        [form]="form"
+        defaultValue="XXXXXXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXXXXXXXX XXXXXXX"
+      ></app-custom-input>      
+    </form>
+    <ion-grid class="ion-margin">
+      <ion-row>        
+        <ion-col>NORMA</ion-col>
+        <ion-col>ALCANCE</ion-col>        
+        <ion-col>FECHA EMISION PRIMER CERTIFICADO</ion-col>
+        <ion-col>FECHA VENCIMIENTO ULTIMO CERTIFICADO</ion-col>
+        <ion-col>NRO DE CERTIFICADO</ion-col>                
+      </ion-row>
+      <ion-row>        
+        <ion-col><input></ion-col>
+        <ion-col><input></ion-col>
+        <ion-col>FECHA EMISION PRIMER CERTIFICADO</ion-col>
+        <ion-col>FECHA VENCIMIENTO ULTIMO CERTIFICADO</ion-col>
+        <ion-col>NRO DE CERTIFICADO</ion-col>                
+      </ion-row>
+      <ion-row>        
+        <ion-col><input></ion-col>
+        <ion-col><input></ion-col>
+        <ion-col>FECHA EMISION PRIMER CERTIFICADO</ion-col>
+        <ion-col>FECHA VENCIMIENTO ULTIMO CERTIFICADO</ion-col>
+        <ion-col>NRO DE CERTIFICADO</ion-col>                
+      </ion-row>
+      <ion-row>        
+        <ion-col><input></ion-col>
+        <ion-col><input></ion-col>
+        <ion-col>FECHA EMISION PRIMER CERTIFICADO</ion-col>
+        <ion-col>FECHA VENCIMIENTO ULTIMO CERTIFICADO</ion-col>
+        <ion-col>NRO DE CERTIFICADO</ion-col>                
+      </ion-row>
+    </ion-grid>  
+    <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col>#</ion-col>
+        <ion-col>OFICINA</ion-col>
+        <ion-col>DIRECCION</ion-col>
+        <ion-col>PAIS</ion-col>
+        <ion-col>DEPTO</ion-col>        
+        <ion-col>CIUDAD</ion-col>
+        <ion-col>NORMA</ion-col>
+        <ion-col>DIAS</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let product of systemList; index as i">
+        <ion-col>{{ i + 1 }}</ion-col>
+        <ion-col><input type="text"></ion-col>
+        <ion-col><input type="text"></ion-col>
+        <ion-col>{{ product.pais }}</ion-col>
+        <ion-col>{{ product.departamento }}</ion-col>
+        <ion-col>{{ product.ciudad }}</ion-col>
+        <ion-col><input type="text"></ion-col>
+        <ion-col>
+          <input type="number" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>

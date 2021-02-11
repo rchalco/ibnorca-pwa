@@ -125,8 +125,9 @@
   --ion-color-contrast-rgb: var(--ion-color-title-small-contrast-rgb);
   --ion-color-shade: var(--ion-color-title-small-shade);
   --ion-color-tint: var(--ion-color-title-small-tint);
-  height: 46px;
-  font-size: 17px;
+  height: 35px;
+  font-size: 12px;
+  padding-top: -15px !important;
   
 }
 

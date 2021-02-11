@@ -14,7 +14,7 @@ import {
   ValidatorFn,
   Validators,
 } from "@angular/forms";
-import { IonDatetime } from "@ionic/angular";
+import { IonDatetime, PopoverController } from "@ionic/angular";
 import { BrMaskModel } from "br-mask";
 import { ValidationControl } from "src/app/interfaces/cross-ui/ValidationControl";
 
@@ -35,8 +35,9 @@ export class CustomInputComponent implements OnInit {
   @Input() brmasker: BrMaskModel = {}; //https://github.com/amarkes/br-mask
   customPickerOption: any;
   customDate: Date;
+  @Input() formatDate = "DD/MM/YYYY";
 
-  constructor() {}
+  constructor(private popoverController: PopoverController) {}
 
   ngOnInit() {
     if (this.formGruop && !this.formGruop.get(this.name)) {
@@ -52,13 +53,6 @@ export class CustomInputComponent implements OnInit {
 
     this.customPickerOption = {
       buttons: [
-        {
-          text: "Cancelar",
-          handler: () => {
-            console.log("Clicked Log. Do not Dismiss.");
-            return false;
-          },
-        },
         {
           text: "Confirmar",
           handler: (event) => {
@@ -78,8 +72,13 @@ export class CustomInputComponent implements OnInit {
             }
 
             if (this._ionChange) {
+              this.popoverController.dismiss({
+                item: this.formGruop.controls[this.name]["valueDate"],
+              });
               this._ionChange.emit(event);
             }
+          
+          
           },
         },
       ],

@@ -15,8 +15,8 @@ import { SystemList } from "src/app/interfaces/apertura_auditoria/system_list";
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  //mode = "TCP";
-  mode = "TCS";
+  mode = "TCP";
+  //mode = "TCS";
   @ViewChild(TcpListProductsComponent, { static: false })
   listProducts: TcpListProductsComponent;
 

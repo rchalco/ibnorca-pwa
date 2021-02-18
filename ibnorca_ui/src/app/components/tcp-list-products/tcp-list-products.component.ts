@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { PopoverController } from "@ionic/angular";
+import { ModalController, PopoverController } from "@ionic/angular";
 import { ProductList } from "src/app/interfaces/apertura_auditoria/product_list";
+import { EdicionTcpProductDetailPage } from "src/app/pages/apertura_auditoria/edicion-tcp-product-detail/edicion-tcp-product-detail.page";
 import { ProductDetailComponent } from "../product-detail/product-detail.component";
 
 @Component({
@@ -11,7 +12,11 @@ import { ProductDetailComponent } from "../product-detail/product-detail.compone
 })
 export class TcpListProductsComponent implements OnInit {
   ionicForm: FormGroup;
-  constructor(private popoverController: PopoverController, public formBuilder: FormBuilder) {}
+  constructor(
+    private popoverController: PopoverController,
+    public formBuilder: FormBuilder,
+    private modalController: ModalController
+  ) {}
   @Input() productList: ProductList[] = [];
   display = false;
   ngOnInit() {
@@ -21,28 +26,40 @@ export class TcpListProductsComponent implements OnInit {
     console.log("se expande");
     this.display = !this.display;
   }
-  guardarData(){
+  guardarData() {}
 
-  }
-  
   async mostrarEdicionProducto(event) {
-    console.log("mostramos popover");
-    const popover = await this.popoverController.create({
-      component: ProductDetailComponent,
-      /*componentProps: {
-        formGruop: this.cronogramaForm,
-        label: "Fecha Eejcucion",
-        name: "FechaEjecucion",
-        type: "datetime",
-        form: "form",
-        defaultValue: Date(),
-      },*/
-      event: event,
-      mode: "md",
+    console.log("mostramos edcion de producto");
+    // const popover = await this.popoverController.create({
+    //   component: ProductDetailComponent,
+    //   /*componentProps: {
+    //     formGruop: this.cronogramaForm,
+    //     label: "Fecha Eejcucion",
+    //     name: "FechaEjecucion",
+    //     type: "datetime",
+    //     form: "form",
+    //     defaultValue: Date(),
+    //   },*/
+    //   event: event,
+    //   mode: "md",
+    //   backdropDismiss: false,
+    // });
+    // await popover.present();
+    // const info = await popover.onDidDismiss();
+    // console.log("Padre", info);
+
+    console.log("ingresando al metodo modal");
+    const modal = await this.modalController.create({
+      component: EdicionTcpProductDetailPage,
+      componentProps: {
+        nombre: "Ruben Chalco",
+        pais: "Bolivia",
+      },
       backdropDismiss: false,
+      cssClass: 'my-custom-modal-css'
     });
-    await popover.present();
-    const info = await popover.onDidDismiss();
-    console.log("Padre", info);
+    await modal.present();
+    const { data } = await modal.onDidDismiss();
+    console.log("retorno de datos del modal", data);
   }
 }

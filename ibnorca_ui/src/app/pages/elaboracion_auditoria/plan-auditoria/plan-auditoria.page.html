@@ -1,0 +1,82 @@
+<app-custom-header
+  title="Plan de Auditoria"
+  icon_name="albums"
+></app-custom-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle
+        >NIT 1710124544 / Gestion 2020 - La Paz Bolivia</ion-card-subtitle
+      >
+      <ion-item color="primary">
+        <ion-icon color="light" name="server-outline" slot="start"></ion-icon>
+        <ion-label>ORGANIZACION: YACIMIENTOS PETROLIFEROS DE BOLIVIA</ion-label>
+      </ion-item>
+    </ion-card-header>
+    <ion-card-content class="ion-content-small-font">
+      <ion-row>
+        <ion-col size="12" size-lg="12" size-md="12" size-sm="12" size-xs="12">
+          <ion-card mode="ios">
+            <ion-item color="medium" color="title-small">
+              <ion-icon name="person" slot="start"></ion-icon>
+              <ion-label>DATOS DE DESIGNACION</ion-label>
+            </ion-item>
+            <ion-card-content class="ion-content-small-font">
+              Código del servicio: <ion-label>XXXXXXXXXXXXXXXX</ion-label><br />
+              Tipo de Auditoría: <ion-label>XXXXXXXXXXXXXXXX</ion-label><br />
+              Fecha de Auditoría: <ion-label>XXXXXXXXXXXXXXXX</ion-label><br />
+              <form [formGroup]="ionicForm" #form="ngForm">
+                <ion-item>
+                  <ion-label position="stacked"
+                    >Documentación de referencia</ion-label
+                  >
+                  <ion-textarea
+                    value="XXXXXXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXXXXXXXXXX XXXXXXX"
+                  >
+                  </ion-textarea>
+                </ion-item>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-lg="12" size-md="12" size-sm="12" size-xs="12">
+          <ion-card mode="ios">
+            <ion-item color="medium" color="title-small">
+              <ion-icon name="person" slot="start"></ion-icon>
+              <ion-label>PERSONAL</ion-label>
+            </ion-item>
+            <ion-card-content class="ion-content-small-font">
+              <ion-fab horizontal="end" vertical="top" slot="fixed">
+                <ion-fab-button color="success" (click)="adicionarPersonal()">
+                  <ion-icon name="add"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+              
+              <ion-grid class="ion-margin">
+                <ion-row>
+                  <ion-col size="1">#</ion-col>
+                  <ion-col>Nombre</ion-col>
+                  <ion-col>Dias in situ</ion-col>
+                  <ion-col>Dias remoto</ion-col>
+                </ion-row>
+                <ion-row
+                  *ngFor="let personal of lstEquipoAuditor; index as i"
+                  class="personal-cronograma"
+                >
+                  <ion-col size="1">{{ i + 1 }}</ion-col>
+                  <ion-col>{{personal.nombre}} </ion-col>
+                  <ion-col
+                    ><input type="number" value="{{personal.diasIsitu}}"
+                  /></ion-col>
+                  <ion-col
+                    ><input type="number" value="{{personal.diasRemoto}}"
+                  /></ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -13,6 +13,7 @@ import { BrMaskerModule } from "br-mask";
 import { ComponentsModule } from "./components/components.module";
 import { DatePipe } from '@angular/common';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

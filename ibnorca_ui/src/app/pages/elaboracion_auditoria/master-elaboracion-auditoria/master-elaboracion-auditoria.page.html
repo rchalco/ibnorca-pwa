@@ -1,0 +1,16 @@
+<ion-toolbar>
+  <ion-segment #segment1 (ionChange)="segmentChanged($event)" color="tertiary">
+    <ion-segment-button value="plan_auditoria">
+      <ion-label>Plan Auditoria</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="lista_verif">
+      <ion-label>Lista Verif. Apertura</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+<ion-content>
+  <app-lista-verificacion-apertura
+    *ngIf="select_component === 'lista_verif'"
+  ></app-lista-verificacion-apertura>
+  
+</ion-content>

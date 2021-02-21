@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'plan-auditoria',
     loadChildren: () => import('./pages/elaboracion_auditoria/plan-auditoria/plan-auditoria.module').then( m => m.PlanAuditoriaPageModule)
+  },
+  {
+    path: 'master-elaboracion-auditoria',
+    loadChildren: () => import('./pages/elaboracion_auditoria/master-elaboracion-auditoria/master-elaboracion-auditoria.module').then( m => m.MasterElaboracionAuditoriaPageModule)
   }
 ];
 

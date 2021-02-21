@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { PopoverController } from "@ionic/angular";
 import { CustomInputComponent } from "src/app/components/custom-input/custom-input.component";
+import { ProductList } from "src/app/interfaces/apertura_auditoria/product_list";
 
 interface Oficina{
 Id: Number;
@@ -18,11 +19,12 @@ NombreOficina: string;
 export class PlanAuditoriaPage implements OnInit {
   mode = "TCP";
   //mode = "TCS";
-  @ViewChild(TcpListProductsComponent, { static: false })
+  /*@ViewChild(TcpListProductsComponent, { static: false })
   listProducts: TcpListProductsComponent;
 
+  
+  listDTOSystemList: SystemList[] = [];*/
   listDTOProduct: ProductList[] = [];
-  listDTOSystemList: SystemList[] = [];
 
   lstEquipoAuditor = [
     {

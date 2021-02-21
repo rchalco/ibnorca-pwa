@@ -101,14 +101,14 @@
                   <ion-col><input type="text" value="{{cronograma.Requisito}}" /></ion-col>
                   <ion-col>
                     <ion-item>
+                      <ion-avatar slot="start">                        
+                        <img src="/assets/img/oficinista.jpg">
+                      </ion-avatar>
                       <ion-select interface="popover" multiple="true" >
-                        <ion-select-option *ngFor="let _equipo of lstEquipo" [value]="_equipo">
+                        <ion-select-option *ngFor="let _equipo of lstEquipo" [value]="_equipo">                          
                           {{_equipo.Funcionario}}
                         </ion-select-option>
-                      </ion-select>
-                      <ion-avatar slot="start">
-                        <img src="https://placehold.it/60?text=B">
-                      </ion-avatar>
+                      </ion-select>                      
                     </ion-item>
                   </ion-col>
                   <ion-col><input type="text" value="{{cronograma.Responsable}}" /></ion-col>

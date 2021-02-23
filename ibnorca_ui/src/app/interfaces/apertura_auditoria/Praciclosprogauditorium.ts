@@ -1,3 +1,10 @@
+import { Praciclocronograma } from "./Praciclocronograma";
+import { Praciclonormassistema } from "./Praciclonormassistema";
+import { Pracicloparticipante } from "./Pracicloparticipante";
+import { Pradireccionespaproducto } from "./Pradireccionespaproducto";
+import { Pradireccionespasistema } from "./Pradireccionespasistema";
+import { Praprogramasdeauditorium } from "./Praprogramasdeauditorium";
+
 export class Praciclosprogauditorium {
     constructor(){
 

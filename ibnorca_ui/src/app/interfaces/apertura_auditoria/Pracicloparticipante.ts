@@ -1,3 +1,5 @@
+import { Praciclosprogauditorium } from "./Praciclosprogauditorium";
+
 export class Pracicloparticipante {
     constructor(){
 

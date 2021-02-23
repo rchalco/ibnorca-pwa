@@ -2,9 +2,20 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { HttpHeaders } from "@angular/common/http";
+
 export const environment = {
   production: false
 };
+
+export const HEADERS_SERVICE =  new HttpHeaders({
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT",
+  Accept: "*/*",
+  "content-type": "application/json",
+});
+export const URL_GLOBAL = "https://localhost:44351/api/";
+export const URL_APERTURA = URL_GLOBAL + "AperturaAuditoria/";
 
 /*
  * For easier debugging in development mode, you can import the following file

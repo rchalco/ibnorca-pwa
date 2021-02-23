@@ -31,6 +31,18 @@ const routes: Routes = [
   {
     path: 'master-elaboracion-auditoria',
     loadChildren: () => import('./pages/elaboracion_auditoria/master-elaboracion-auditoria/master-elaboracion-auditoria.module').then( m => m.MasterElaboracionAuditoriaPageModule)
+  },
+  {
+    path: 'ivo',
+    loadChildren: () => import('./pages/test/ivo/ivo.module').then( m => m.IvoPageModule)
+  },
+  {
+    path: 'ruben',
+    loadChildren: () => import('./pages/test/ruben/ruben.module').then( m => m.RubenPageModule)
+  },
+  {
+    path: 'myke',
+    loadChildren: () => import('./pages/test/myke/myke.module').then( m => m.MykePageModule)
   }
 ];
 

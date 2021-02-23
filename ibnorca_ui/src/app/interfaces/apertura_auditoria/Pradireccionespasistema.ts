@@ -1,3 +1,6 @@
+import { Praciclosprogauditorium } from "./Praciclosprogauditorium";
+
+
 export class Pradireccionespasistema {
     constructor(){
 

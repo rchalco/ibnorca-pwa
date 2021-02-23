@@ -11,11 +11,20 @@ import { CustomHeaderComponent } from "./custom-header/custom-header.component";
 import { MesesComponent } from './meses/meses.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ListaVerificacionAperturaComponent } from './lista-verificacion-apertura/lista-verificacion-apertura.component';
+<<<<<<< HEAD
 import { RegistroCicloComponent } from './registro-ciclo/registro-ciclo.component';
 
 @NgModule({
   declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, RegistroCicloComponent],
   imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, BrMaskerModule],
   exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, RegistroCicloComponent],    
+=======
+import { PlanAuditoriaComponent } from './plan-auditoria/plan-auditoria.component';
+
+@NgModule({
+  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent],
+  imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, BrMaskerModule],
+  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent],   
+>>>>>>> 31d736226d2c6072d5d584019c8c7fca52c65e12
 })
 export class ComponentsModule {}

@@ -11,10 +11,11 @@ import { CustomHeaderComponent } from "./custom-header/custom-header.component";
 import { MesesComponent } from './meses/meses.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ListaVerificacionAperturaComponent } from './lista-verificacion-apertura/lista-verificacion-apertura.component';
+import { RegistroCicloComponent } from './registro-ciclo/registro-ciclo.component';
 
 @NgModule({
-  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent],
+  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, RegistroCicloComponent],
   imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, BrMaskerModule],
-  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent],   
+  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, RegistroCicloComponent],    
 })
 export class ComponentsModule {}

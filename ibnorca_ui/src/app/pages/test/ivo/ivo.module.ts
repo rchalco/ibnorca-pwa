@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { IvoPageRoutingModule } from './ivo-routing.module';
 
 import { IvoPage } from './ivo.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    IvoPageRoutingModule
+    IvoPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [IvoPage]
 })

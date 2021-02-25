@@ -1,0 +1,31 @@
+<p>
+  <ion-card mode="ios">
+    <ion-item color="medium" color="title-small">
+      <ion-icon name="time" slot="start"></ion-icon>
+      <ion-label>CRONOGRAMA</ion-label>
+    </ion-item>
+    <ion-card-content class="ion-content-small-font">
+      TIPO DE AUDITORÍA: <span>CERTIFICACIÓN</span><br />
+      CANTIDAD DE DIAS TOTAL:XXXXXXXXXXXXXXX<br />
+      MES PROGRAMADO:
+      <ion-label (click)="mostrarMesesProgramado($event)"
+        >{{mesProgramado}}
+      </ion-label>
+      <br />
+      MES REPROGRAMADO:
+      <ion-label (click)="mostrarMesesReprogamado($event)"
+        >{{mesReprogramado}} </ion-label
+      ><br />
+      FECHA DE INICIO DE EJECUCIÓN AUDITORÍA:
+      <ion-label (click)="mostrarFechaEjecucion($event)"
+      >{{fechaEjecucion}}
+    </ion-label>
+      <br />
+      FECHA DE FIN DE EJECUCIÓN AUDITORÍA: 
+      <ion-label (click)="mostrarFechaFin($event)"
+      >{{fechaFin}}
+    </ion-label><br />
+    ESTADO: Sin fecha de auditoria
+    </ion-card-content>
+  </ion-card>
+</p>

@@ -14,10 +14,11 @@ import { ListaVerificacionAperturaComponent } from './lista-verificacion-apertur
 import { RegistroCicloComponent } from './registro-ciclo/registro-ciclo.component';
 import { PlanAuditoriaComponent } from './plan-auditoria/plan-auditoria.component';
 import { PraCronogramaComponent } from './pra-cronograma/pra-cronograma.component';
+import { ComCalendarMonthYearComponent } from './com-calendar-month-year/com-calendar-month-year.component';
 
 @NgModule({
-  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent,PraCronogramaComponent], 
+  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, PraCronogramaComponent, ComCalendarMonthYearComponent],
   imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, BrMaskerModule],
-  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent,PraCronogramaComponent],   
+  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, PraCronogramaComponent, ComCalendarMonthYearComponent],
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

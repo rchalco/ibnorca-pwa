@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Month Picker Html template</h2>
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+      <div class="monthPicker">
+        <div class="monthPicker-top" >
+          <button class=" monthPicker-top-action btn">
+            <span class="fa fa-angle-left" (click)="modifierYear(-1)">-</span>
+          </button>
+          <button class="monthPicker-top-current btn">
+            <span class="currentYear">{{yearSelected}}</span>
+            <span class="selectYear">Seleccione Año</span>
+          </button>
+          <button class="monthPicker-top-action btn">
+            <span class="fa fa-angle-right" (click)="modifierYear(1)">+</span>
+          </button>
+        </div>
+        <div class="monthPicker-body">
+          <span class="monthPicker-body-month" *ngFor="let mes of items; let i = index;" (click)="ocSelectMOnth(mes.value)">{{mes.label}}</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

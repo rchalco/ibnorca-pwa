@@ -13,12 +13,11 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ListaVerificacionAperturaComponent } from './lista-verificacion-apertura/lista-verificacion-apertura.component';
 import { RegistroCicloComponent } from './registro-ciclo/registro-ciclo.component';
 import { PlanAuditoriaComponent } from './plan-auditoria/plan-auditoria.component';
-import { PraCronogramaComponent } from './pra-cronograma/pra-cronograma.component';
-import { ComCalendarMonthYearComponent } from './com-calendar-month-year/com-calendar-month-year.component';
+import { CicloParticipanteComponent } from './ciclo-participante/ciclo-participante.component';
 
 @NgModule({
-  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, PraCronogramaComponent, ComCalendarMonthYearComponent],
+  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent], 
   imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, BrMaskerModule],
-  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, PraCronogramaComponent, ComCalendarMonthYearComponent],
+  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent],   
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

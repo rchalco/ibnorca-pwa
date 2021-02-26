@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { MykePageRoutingModule } from './myke-routing.module';
 
 import { MykePage } from './myke.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MykePageRoutingModule
+    MykePageRoutingModule,
+    ComponentsModule
   ],
   declarations: [MykePage]
 })

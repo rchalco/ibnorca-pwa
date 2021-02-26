@@ -1,1 +1,40 @@
 <app-custom-header title="Participantes" icon_name="people"></app-custom-header>
+<ion-content>
+    <ion-card>
+      
+      <ion-card-content class="ion-content-small-font" *ngIf="visibleAdd === 'NO'">
+          <ion-fab horizontal="end" vertical="top" slot="fixed" >
+            <ion-fab-button color="success" (click)="adicionarParticipante()">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+            <ion-row *ngFor="let item of lstParticipantes" >
+                <ion-col >{{item.Cargo}} </ion-col>
+                <ion-col>{{item.ParticipanteContextWs}} </ion-col>
+            </ion-row>
+            
+      </ion-card-content>
+
+      <ion-card-content class="ion-content-small-font" *ngIf="visibleAdd === 'SI'">
+        <ion-row >
+          <ion-col>Cargo</ion-col>
+          <ion-col>Participante</ion-col>
+        </ion-row>
+        <div class="container-detail-certificacion ion-content-small-font">
+            <ion-buttons slot="start" class="buttons-group">
+                <ion-button size="small" fill="outline" color="success" (click)="cancelar()">
+                  <ion-icon slot="start" name="save"></ion-icon>
+                  Guardar
+                </ion-button>
+                <ion-button size="small" fill="outline" color="tertiary" (click)="guardar()">
+                    <ion-icon slot="start" name="document"></ion-icon>
+                    Cancelar
+                  </ion-button>
+            </ion-buttons>
+          </div>
+      </ion-card-content>
+      
+    </ion-card>
+
+  </ion-content>
+  

@@ -1,0 +1,33 @@
+<p>
+  tcs-lista-verificacion-reunion-apertura works!
+</p>
+
+<app-custom-header
+  title="LISTA DE VERIFICACION DE APERTURA"
+  icon_name="list"
+></app-custom-header>
+<ion-content>
+ 
+  <ion-list>
+    <ion-item>
+      <ion-label><strong>Todo</strong></ion-label>
+      <ion-checkbox slot="end" 
+      [(ngModel)]="masterCheck"
+      [indeterminate]="isIndeterminate"
+        (click)="checkMaster($event)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let item of checkBoxList">
+      <ion-label>{{item.item}} {{item.value}}</ion-label>
+      <ion-checkbox slot="end" 
+      [(ngModel)]="item.isChecked" 
+      (ionChange)="checkEvent()"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+
+<ion-label>OBSERVACIONES</ion-label>
+
+</ion-content>
+

@@ -5,10 +5,10 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let entry of data" (click)="clickCheck(entry)">
-      <!-- <ion-checkbox
+      <ion-checkbox
         slot="start"
         [(ngModel)]="entry.selected"
-      ></ion-checkbox> -->
+      ></ion-checkbox>
       <ion-label>{{ entry.name }}</ion-label>
     </ion-item>
   </ion-list>

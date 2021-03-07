@@ -16,7 +16,7 @@ export const HEADERS_SERVICE =  new HttpHeaders({
 });
 export const URL_GLOBAL = "https://localhost:44351/api/";
 export const URL_APERTURA = URL_GLOBAL + "AperturaAuditoria/";
-
+export const URL_ELABORACION = URL_GLOBAL + "ElaboracionAuditoria/";
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

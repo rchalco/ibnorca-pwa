@@ -1,13 +1,20 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { ModalController, PopoverController } from "@ionic/angular";
+import {
+  ModalController,
+  PopoverController,
+  ToastController,
+} from "@ionic/angular";
 import { CustomInputComponent } from "src/app/components/custom-input/custom-input.component";
 import { MesesComponent } from "src/app/components/meses/meses.component";
 import { TcpListProductsComponent } from "src/app/components/tcp-list-products/tcp-list-products.component";
 import { ProductList } from "src/app/interfaces/apertura_auditoria/product_list";
-import { DatePipe } from '@angular/common'
+import { DatePipe } from "@angular/common";
 import { ProductDetailComponent } from "src/app/components/product-detail/product-detail.component";
 import { SystemList } from "src/app/interfaces/apertura_auditoria/system_list";
+import { AperturaAuditoriaService } from "src/app/services/apertura-auditoria.service";
+import { Praprogramasdeauditorium } from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
+import { Cliente } from "src/app/interfaces/General/Cliente";
 
 @Component({
   selector: "app-programa-auditoria",
@@ -15,11 +22,13 @@ import { SystemList } from "src/app/interfaces/apertura_auditoria/system_list";
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  mode = "TCP";
-  //mode = "TCS";
+  currentIdService = 5915;
+  currentPraprogramasdeauditorium: Praprogramasdeauditorium;
+  currentCliente: Cliente;
+  //mode = "TCP";
+  mode = "TCS";
   @ViewChild(TcpListProductsComponent, { static: false })
   listProducts: TcpListProductsComponent;
-
   listDTOProduct: ProductList[] = [];
   listDTOSystemList: SystemList[] = [];
   cronogramaForm: FormGroup;
@@ -32,7 +41,9 @@ export class ProgramaAuditoriaPage implements OnInit {
     public modalController: ModalController,
     public formBuilder: FormBuilder,
     private popoverController: PopoverController,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
+    private aperturaAuditoriaService: AperturaAuditoriaService,
+    private toastCtrl: ToastController
   ) {
     for (let index = 0; index < 8; index++) {
       var elementP = new ProductList();
@@ -53,14 +64,27 @@ export class ProgramaAuditoriaPage implements OnInit {
       elementS.oficina = "PLANTA SUC. LA PAZ";
       elementS.departamento = "LA PAZ";
       elementS.direccion = "Av Pulacayo, Nro 33 Casa Rosada";
-      elementS.dias = 0;            
-      elementS.pais = "BOLIVIA";      
+      elementS.dias = 0;
+      elementS.pais = "BOLIVIA";
       this.listDTOSystemList.push(elementS);
     }
   }
 
   ngOnInit() {
+    ///TDO : convocacmos al servicio para obtner la informacion globla de los servicios TCS TCP
     this.cronogramaForm = this.formBuilder.group({});
+    this.aperturaAuditoriaService
+      .ObtenerProgramaAuditoria(this.currentIdService)
+      .subscribe((resul) => {
+        console.log(resul);
+        if (resul.state === 1) {
+          this.currentPraprogramasdeauditorium = resul.object;
+        } else {
+          this.presentToast(            
+            "No se puede rescartar la informacion: " + resul.message
+          );
+        }
+      });
   }
   async mostrarSitios() {
     console.log("llamando a mostrar sitios");
@@ -113,7 +137,7 @@ export class ProgramaAuditoriaPage implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.fechaEjecucion =this.datepipe.transform(info.data.item, 'dd/MM/yyyy');
+    this.fechaEjecucion = this.datepipe.transform(info.data.item, "dd/MM/yyyy");
   }
 
   async mostrarFechaFin(event) {
@@ -134,8 +158,15 @@ export class ProgramaAuditoriaPage implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.fechaFin =this.datepipe.transform(info.data.item, 'dd/MM/yyyy');
+    this.fechaFin = this.datepipe.transform(info.data.item, "dd/MM/yyyy");
   }
-  
 
+  async presentToast(text) {
+    const toast = await this.toastCtrl.create({
+      message: text,
+      duration: 3000,
+      position: "top",
+    });
+    toast.present();
+  }
 }

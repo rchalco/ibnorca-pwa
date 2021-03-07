@@ -14,8 +14,8 @@
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-item *ngFor="let item of checkBoxList">
-      <ion-label class="ion-text-wrap">{{item.item}} {{item.value}}</ion-label>
+    <ion-item *ngFor="let item of pParamitemselect">
+      <ion-label class="ion-text-wrap"> {{item.itemSelect}}</ion-label>
       <ion-checkbox slot="end" 
       [(ngModel)]="item.isChecked" 
       (ionChange)="checkEvent()"></ion-checkbox>

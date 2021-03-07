@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ValueAccessor } from '@ionic/angular/directives/control-value-accessors/value-accessor';
+import { Paramitemselect } from 'src/app/interfaces/elaboracion_auditoria/list-item-select';
+import { ElaboracionAuditoriaService } from 'src/app/services/elaboracion-auditoria.service';
 
 @Component({
   selector: 'app-tcs-lista-verificacion-reunion-cierre',
@@ -10,7 +13,10 @@ export class TcsListaVerificacionReunionCierreComponent implements OnInit {
   isIndeterminate:boolean;
   masterCheck:boolean;
 
-  checkBoxList = [
+   
+    pParamitemselect: Paramitemselect[];
+
+   checkBoxList = [
     {item:'1.',
       value:"Agradecimiento.",
       isChecked:false
@@ -47,9 +53,15 @@ export class TcsListaVerificacionReunionCierreComponent implements OnInit {
     isChecked:false
   }
   ]
-  constructor() { }
+  constructor(private elaboracionAuditoriaService: ElaboracionAuditoriaService) { }
 
-  ngOnInit() {}
+  ngOnInit() {this.elaboracionAuditoriaService.GetListasVerificacion(2).subscribe((resul) =>{
+ 
+
+    this.pParamitemselect = resul.listEntities;
+
+    
+  });}
 
   checkMaster() {
     setTimeout(()=>{

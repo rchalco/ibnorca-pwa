@@ -1,5 +1,5 @@
 <div class="container-product">
-  <form [formGroup]="ionicForm" (ngSubmit)="guardarProduct()" #form="ngForm">
+  <form [formGroup]="ionicForm" (ngSubmit)="guardarDireccion()" #form="ngForm">
     <app-custom-input
       label="Direccion"
       name="direccion"
@@ -62,11 +62,9 @@
       [form]="form"
       [defaultValue]="pradireccionespasistema.fechaHasta"
     ></app-custom-input>
-    
-    
     <section>
       <ion-button size="small" type="submit">Guardar</ion-button>
-      <ion-button size="small" color="secondary">Cancelar</ion-button>
+      <ion-button size="small" (click)="cancelarDireccion()" color="secondary">Cancelar</ion-button>
     </section>
   </form>
 </div>

@@ -1,0 +1,31 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Código de País"
+      animated="true"
+      (ionChange)="buscarPais($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-list>
+  <ion-item>
+    <ion-select
+      interface="alert"
+      placeholder="Pais"
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarNorma($event)"
+      [value]="currentNorma"
+    >
+      <ion-select-option
+        *ngFor="let norma of listaPaises"
+        [value]="norma"
+        class="cargo-select"
+        >{{ norma.IdparamPais }} - {{ norma.Pais }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>

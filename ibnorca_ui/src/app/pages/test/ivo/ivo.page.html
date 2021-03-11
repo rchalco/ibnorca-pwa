@@ -4,11 +4,51 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="primary" padding>
+
 
 <!-- <app-tcs-lista-verificacion-reunion-cierre>
 </app-tcs-lista-verificacion-reunion-cierre> -->
-<app-tcs-lista-verificacion-reunion-apertura>
-</app-tcs-lista-verificacion-reunion-apertura>
+<!-- <app-tcs-lista-verificacion-reunion-apertura>
+</app-tcs-lista-verificacion-reunion-apertura> -->
+
+<!-- 
+<app-buscar-norma (selectNorma)="cambiarNorma($event)"
+    *ngIf="showBuscadorNormas">
+</app-buscar-norma>
+<app-param-paices>
+</app-param-paices>
+ -->
+ <app-param-paices>
+</app-param-paices>
+
+
+
+
+<!-- 
+<ion-grid>
+  <ion-row color="primary" justify-content-center>
+    <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+      <div text-center>
+        <h3>Ingreso</h3>
+      </div>
+      <div padding>
+        <ion-item>
+          <ion-input name="email" type="email" placeholder="Usuario" ngModel required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input name="password" type="password" placeholder="Clave" ngModel required></ion-input>
+        </ion-item>
+      </div>
+      <div padding>
+        <ion-button size="large" type="submit" [enable]="form.invalid" expand="block" (click) ="register()">Ingresar</ion-button>
+      </div>
+      <div padding>
+        <ion-button size="large" expand="block" (click)="clickMethod($event)">Cancelar</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+ -->
 
 </ion-content>

@@ -18,4 +18,6 @@ export class IvoPage implements OnInit {
       console.log(resul);
     });
   }
+
+  
 }

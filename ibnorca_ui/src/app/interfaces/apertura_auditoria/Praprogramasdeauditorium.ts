@@ -77,6 +77,7 @@ export class Pracicloparticipante {
   cargoDetalleWs: string;
   usuarioRegistro: string;
   fechaDesde: string | null;
+  dias: number | null;
   _cargo: CargoItem;
   _personal: Personal;
 }

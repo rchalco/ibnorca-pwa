@@ -18,14 +18,12 @@ import { TcsListaVerificacionReunionAperturaComponent } from './tcs-lista-verifi
 import { TcsListaVerificacionReunionCierreComponent } from './tcs-lista-verificacion-reunion-cierre/tcs-lista-verificacion-reunion-cierre.component';
 import { PraCronogramaComponent } from './pra-cronograma/pra-cronograma.component';
 import { BuscarNormaComponent } from './buscar-norma/buscar-norma.component';
-import { ParamPaisesComponent } from './param-paises/param-paises.component';
-import { ParamCuidadesComponent } from './param-cuidades/param-cuidades.component';
-import { ParamEstadosDepartamentosComponent } from './param-estados-departamentos/param-estados-departamentos.component';
-
+import { ParamPaicesComponent } from './param-paices/param-paices.component';
+import { PraDireccionSistemaComponent } from './pra-direccion-sistema/pra-direccion-sistema.component';
 
 @NgModule({
-  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent,TcsListaVerificacionReunionCierreComponent, PraCronogramaComponent, BuscarNormaComponent, ParamPaisesComponent,ParamCuidadesComponent,ParamEstadosDepartamentosComponent], 
+  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent,TcsListaVerificacionReunionCierreComponent, PraCronogramaComponent, BuscarNormaComponent, ParamPaicesComponent,PraDireccionSistemaComponent], 
   imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, BrMaskerModule],
-  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent,TcsListaVerificacionReunionCierreComponent, PraCronogramaComponent, BuscarNormaComponent, ParamPaisesComponent,ParamCuidadesComponent,ParamEstadosDepartamentosComponent],   
+  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent,TcsListaVerificacionReunionCierreComponent, PraCronogramaComponent, BuscarNormaComponent, ParamPaicesComponent,PraDireccionSistemaComponent],   
 })
 export class ComponentsModule {}

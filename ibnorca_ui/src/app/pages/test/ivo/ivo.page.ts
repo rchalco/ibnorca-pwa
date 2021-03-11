@@ -12,10 +12,12 @@ export class IvoPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("Ingresando a INit");
+    /*console.log("Ingresando a INit");
 
     this.elaboracionAuditoriaService.GetListasVerificacion(1).subscribe((resul) =>{
       console.log(resul);
-    });
+    });*/
   }
+
+  
 }

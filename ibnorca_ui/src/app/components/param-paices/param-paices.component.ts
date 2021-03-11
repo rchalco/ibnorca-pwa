@@ -12,8 +12,8 @@ import { AperturaAuditoriaService } from 'src/app/services/apertura-auditoria.se
 export class ParamPaicesComponent implements OnInit {
 
   listaPaises: Pais[];
-  currentNorma: Pais;
-  @Output() public selectNorma: EventEmitter<Pais> = new EventEmitter<Pais>();
+  currentPais: Pais;
+  @Output() public selectPaisEmit: EventEmitter<Pais> = new EventEmitter<Pais>();
 
   constructor(private aperturaAuditoriaService: AperturaAuditoriaService) { }
 
@@ -22,18 +22,17 @@ export class ParamPaicesComponent implements OnInit {
   buscarPais(event) {
     let codigoPais = event.detail.value;
     if (codigoPais.length > 3) {
-      console.log("buscamos la norma");
+      console.log("buscamos el pais");
       this.aperturaAuditoriaService.BuscarPais(codigoPais).subscribe((x) => {
         console.log(x);
         this.listaPaises = x.listEntities;
       });
     }
   }
-  seleccionarNorma(event) {
-    console.log("seleccionar norma", event);
-    console.log("selectNorma",this.selectNorma);
-    if (this.selectNorma) {
-      this.selectNorma.emit(<Pais>event.detail.value);
+  seleccionarPais(event) {
+    console.log("seleccionar pais", event);    
+    if (this.selectPaisEmit) {
+      this.selectPaisEmit.emit(<Pais>event.detail.value);
     }
   }
 

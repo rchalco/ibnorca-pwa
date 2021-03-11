@@ -1,9 +1,5 @@
-<p>
-  tcs-lista-verificacion-reunion-apertura works!
-</p>
-
 <app-custom-header
-  title="TCS - LISTA DE VERIFICACION DE APERTURA"
+  title="TCS-LISTA DE VERIFICACION DE CIERRE"
   icon_name="list"
 ></app-custom-header>
 <ion-content>
@@ -19,7 +15,7 @@
   </ion-list>
   <ion-list>
     <ion-item *ngFor="let item of pParamitemselect">
-      <ion-label class="ion-text-wrap">{{item.itemSelect}}</ion-label>
+      <ion-label class="ion-text-wrap"> {{item.itemSelect}}</ion-label>
       <ion-checkbox slot="end" 
       [(ngModel)]="item.isChecked" 
       (ionChange)="checkEvent()"></ion-checkbox>
@@ -27,4 +23,3 @@
   </ion-list>
 
 </ion-content>
-

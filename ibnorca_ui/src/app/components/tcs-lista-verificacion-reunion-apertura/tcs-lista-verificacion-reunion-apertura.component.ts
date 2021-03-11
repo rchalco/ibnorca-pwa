@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Paramitemselect } from 'src/app/interfaces/elaboracion_auditoria/list-item-select';
+import { ElaboracionAuditoriaService } from 'src/app/services/elaboracion-auditoria.service';
 
 @Component({
   selector: 'app-tcs-lista-verificacion-reunion-apertura',
@@ -9,6 +11,8 @@ export class TcsListaVerificacionReunionAperturaComponent implements OnInit {
 
   isIndeterminate:boolean;
   masterCheck:boolean;
+
+  pParamitemselect: Paramitemselect[];
 
   checkBoxList = [
     {item:'1.',
@@ -66,10 +70,15 @@ export class TcsListaVerificacionReunionAperturaComponent implements OnInit {
     }
   ];
 
-  constructor(){
+  constructor(private elaboracionAuditoriaService: ElaboracionAuditoriaService){
    
   }
-  ngOnInit() {}
+  ngOnInit() {
+      this.elaboracionAuditoriaService.GetListasVerificacion(1).subscribe((resul) =>{
+        this.pParamitemselect = resul.listEntities;
+    });
+
+  }
 
   checkMaster() {
     setTimeout(()=>{

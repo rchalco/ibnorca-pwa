@@ -1,0 +1,30 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Código de Norma"
+      animated="true"
+      (ionChange)="buscar($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-list>
+  <ion-item>
+    <ion-select
+      interface="alert"
+      placeholder="Norma"
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarNorma($event)"
+      [value]="currentNorma"
+    >
+      <ion-select-option
+        *ngFor="let norma of listaNormas"
+        [value]="norma"
+        class="cargo-select"
+        >{{ norma.codigoNorma }} - {{ norma.nombreNorma }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>

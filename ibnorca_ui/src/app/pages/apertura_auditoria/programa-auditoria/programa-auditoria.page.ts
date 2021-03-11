@@ -15,6 +15,8 @@ import { SystemList } from "src/app/interfaces/apertura_auditoria/system_list";
 import { AperturaAuditoriaService } from "src/app/services/apertura-auditoria.service";
 import { Praprogramasdeauditorium } from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
 import { Cliente } from "src/app/interfaces/General/Cliente";
+import { DatosServicio } from "src/app/interfaces/apertura_auditoria/IBDatosServicio";
+import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
 
 @Component({
   selector: "app-programa-auditoria",
@@ -22,21 +24,13 @@ import { Cliente } from "src/app/interfaces/General/Cliente";
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  currentIdService = 5915;
+  //currentIdService = 14455;
+  currentIdService = 5915;  
   currentPraprogramasdeauditorium: Praprogramasdeauditorium;
+  currentDatosServicio: DatosServicio;
   currentCliente: Cliente;
-  //mode = "TCP";
   mode = "TCS";
-  @ViewChild(TcpListProductsComponent, { static: false })
-  listProducts: TcpListProductsComponent;
-  listDTOProduct: ProductList[] = [];
-  listDTOSystemList: SystemList[] = [];
-  cronogramaForm: FormGroup;
-  defaultDate = new Date();
-  mesProgramado = "ENERO";
-  mesReprogramado = "FEBRERO";
-  fechaEjecucion = "01/01/2000";
-  fechaFin = "01/01/2000";
+
   constructor(
     public modalController: ModalController,
     public formBuilder: FormBuilder,
@@ -44,121 +38,52 @@ export class ProgramaAuditoriaPage implements OnInit {
     public datepipe: DatePipe,
     private aperturaAuditoriaService: AperturaAuditoriaService,
     private toastCtrl: ToastController
-  ) {
-    for (let index = 0; index < 8; index++) {
-      var elementP = new ProductList();
-      elementP.ciudad = "LA PAZ";
-      elementP.departamento = "LA PAZ";
-      elementP.direccion = "Calle Sucre, Nro 33 Casa Rosada";
-      elementP.marca = "XXXXXXXXXX";
-      elementP.nombre = "Producto XX";
-      elementP.norma = "NB ISO xxx/XXX 2015";
-      elementP.pais = "BOLIVIA";
-      elementP.sello = "1";
-      this.listDTOProduct.push(elementP);
-    }
-
-    for (let index = 0; index < 8; index++) {
-      var elementS = new SystemList();
-      elementS.ciudad = "LA PAZ";
-      elementS.oficina = "PLANTA SUC. LA PAZ";
-      elementS.departamento = "LA PAZ";
-      elementS.direccion = "Av Pulacayo, Nro 33 Casa Rosada";
-      elementS.dias = 0;
-      elementS.pais = "BOLIVIA";
-      this.listDTOSystemList.push(elementS);
-    }
-  }
+  ) {}
 
   ngOnInit() {
     ///TDO : convocacmos al servicio para obtner la informacion globla de los servicios TCS TCP
-    this.cronogramaForm = this.formBuilder.group({});
     this.aperturaAuditoriaService
       .ObtenerProgramaAuditoria(this.currentIdService)
       .subscribe((resul) => {
         console.log(resul);
         if (resul.state === 1) {
           this.currentPraprogramasdeauditorium = resul.object;
+          this.currentCliente = JSON.parse(resul.object.organizacionContentWs);
+          this.currentDatosServicio = JSON.parse(
+            resul.object.detalleServicioWs
+          );
+
+          this.currentPraprogramasdeauditorium.praciclosprogauditoria.forEach(
+            (x) => {
+              //copiamos los estaodos del ciclo al cronoramoa
+              x.praciclocronogramas[0].estado = x.estadoDescripcion;
+              //deseralizamos los cargos
+              if (x.pracicloparticipantes) {
+                x.pracicloparticipantes.forEach((yy) => {
+                  yy._cargo = JSON.parse(yy.cargoDetalleWs);
+                  if (yy._cargo["cod_tipoauditor"]) {
+                    yy._cargo.idCargoPuesto = yy._cargo["cod_tipoauditor"];
+                    yy._cargo.cargoPuesto = yy._cargo["descripcion"];
+                  }
+                  if (yy.participanteDetalleWs) {
+                    yy._personal = JSON.parse(yy.participanteDetalleWs);
+                  }
+                });
+              }
+            }
+          );
+
+          this.mode = this.currentDatosServicio.area;
         } else {
-          this.presentToast(            
+          this.presentToast(
             "No se puede rescartar la informacion: " + resul.message
           );
         }
       });
   }
+
   async mostrarSitios() {
     console.log("llamando a mostrar sitios");
-  }
-  enviarCronogramaForm() {}
-
-  getDateMesProgramado(event) {}
-
-  async mostrarMesesProgramado(event) {
-    const popover = await this.popoverController.create({
-      component: MesesComponent,
-      event: event,
-      mode: "ios",
-      backdropDismiss: false,
-    });
-    await popover.present();
-    const info = await popover.onDidDismiss();
-    console.log("Padre", info);
-    this.mesProgramado = info.data.item.label;
-  }
-
-  async mostrarMesesReprogamado(event) {
-    const popover = await this.popoverController.create({
-      component: MesesComponent,
-      event: event,
-      mode: "ios",
-      backdropDismiss: false,
-    });
-    await popover.present();
-    const info = await popover.onDidDismiss();
-    console.log("Padre", info);
-    this.mesReprogramado = info.data.item.label;
-  }
-
-  async mostrarFechaEjecucion(event) {
-    const popover = await this.popoverController.create({
-      component: CustomInputComponent,
-      componentProps: {
-        formGruop: this.cronogramaForm,
-        label: "Fecha Eejcucion",
-        name: "FechaEjecucion",
-        type: "datetime",
-        form: "form",
-        defaultValue: Date(),
-      },
-      event: event,
-      mode: "ios",
-      backdropDismiss: false,
-    });
-    await popover.present();
-    const info = await popover.onDidDismiss();
-    console.log("Padre", info);
-    this.fechaEjecucion = this.datepipe.transform(info.data.item, "dd/MM/yyyy");
-  }
-
-  async mostrarFechaFin(event) {
-    const popover = await this.popoverController.create({
-      component: CustomInputComponent,
-      componentProps: {
-        formGruop: this.cronogramaForm,
-        label: "Fecha Eejcucion",
-        name: "FechaEjecucion",
-        type: "datetime",
-        form: "form",
-        defaultValue: Date(),
-      },
-      event: event,
-      mode: "ios",
-      backdropDismiss: false,
-    });
-    await popover.present();
-    const info = await popover.onDidDismiss();
-    console.log("Padre", info);
-    this.fechaFin = this.datepipe.transform(info.data.item, "dd/MM/yyyy");
   }
 
   async presentToast(text) {
@@ -166,6 +91,7 @@ export class ProgramaAuditoriaPage implements OnInit {
       message: text,
       duration: 3000,
       position: "top",
+      color: "danger",
     });
     toast.present();
   }

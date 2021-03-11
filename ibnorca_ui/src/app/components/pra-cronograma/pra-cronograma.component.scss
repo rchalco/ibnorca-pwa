@@ -1,8 +1,40 @@
-.label-cronograma{
-    font-weight: bold;
-    font-size: 12px;
+.label-cronograma {
+  font-weight: bold;
+  font-size: 12px;
 }
-.data-cronograma{
-    font-style: italic;
-    font-size: 13px;
+.data-cronograma {
+  font-style: italic;
+  font-size: 13px;
+}
+.ion-content-small-font {
+  font-family: "Calibri Light";
+  font-size: 12px;
+  color: #093537;
+}
+.title-medium-font {
+  font-family: "Courier New";
+  font-weight: bold;
+}
+ion-card-content {
+  text-align: left;
+}
+.box-click {
+  min-width: 100px;
+  min-height: 20px;
+  border-bottom: solid;
+  border-color: #778e8f;
+  border-width: 1px;
+  padding: 2px;
+  margin-left: 3px;
+  display: inline-block;
+}
+.edit-item {
+  cursor: grab;
+}
+.edit-item:hover {
+  background-color: #9dd8dc;
+}
+.item-cronograma {
+  display: block;
+  margin-bottom: 4px;
 }

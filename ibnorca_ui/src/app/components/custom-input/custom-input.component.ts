@@ -24,6 +24,7 @@ import { ValidationControl } from "src/app/interfaces/cross-ui/ValidationControl
   styleUrls: ["./custom-input.component.scss"],
 })
 export class CustomInputComponent implements OnInit {
+  @Input() readonly: boolean = false;
   @Input() label: string;
   @Input() name: string;
   @Input() type: string;
@@ -35,9 +36,13 @@ export class CustomInputComponent implements OnInit {
   @Input() brmasker: BrMaskModel = {}; //https://github.com/amarkes/br-mask
   customPickerOption: any;
   customDate: Date;
+  currentDate = new Date();
   @Input() formatDate = "DD/MM/YYYY";
+  @Input() maxDate = this.currentDate.getUTCFullYear() + 10;
 
-  constructor(private popoverController: PopoverController) {}
+  constructor(private popoverController: PopoverController) {
+    console.log("maxDate", this.maxDate);
+  }
 
   ngOnInit() {
     if (this.formGruop && !this.formGruop.get(this.name)) {
@@ -57,17 +62,19 @@ export class CustomInputComponent implements OnInit {
           text: "Confirmar",
           handler: (event) => {
             console.log(event);
+            let day = 1;
+            if (event.day) day = event.day.value;
             this.customDate = new Date(
               event.year.value,
-              event.month.value-1,
-              event.day.value,
+              event.month.value - 1,
+              day,
               0,
               0,
               0,
               0
             );
-            
-            if (this.type === "datetime") {              
+
+            if (this.type === "datetime") {
               this.formGruop.controls[this.name]["valueDate"] = this.customDate;
             }
 
@@ -77,8 +84,6 @@ export class CustomInputComponent implements OnInit {
               });
               this._ionChange.emit(event);
             }
-          
-          
           },
         },
       ],
@@ -100,6 +105,4 @@ export class CustomInputComponent implements OnInit {
   ExistsError(validator: ValidatorFn) {
     return validator(this.formGruop.controls[this.name]);
   }
-
-  
 }

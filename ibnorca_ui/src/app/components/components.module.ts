@@ -15,10 +15,13 @@ import { RegistroCicloComponent } from './registro-ciclo/registro-ciclo.componen
 import { PlanAuditoriaComponent } from './plan-auditoria/plan-auditoria.component';
 import { CicloParticipanteComponent } from './ciclo-participante/ciclo-participante.component';
 import { TcsListaVerificacionReunionAperturaComponent } from './tcs-lista-verificacion-reunion-apertura/tcs-lista-verificacion-reunion-apertura.component';
+import { PraCronogramaComponent } from './pra-cronograma/pra-cronograma.component';
+import { BuscarNormaComponent } from './buscar-norma/buscar-norma.component';
+
 
 @NgModule({
-  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent], 
+  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent, PraCronogramaComponent, BuscarNormaComponent], 
   imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, BrMaskerModule],
-  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent],   
+  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent, PraCronogramaComponent, BuscarNormaComponent],   
 })
 export class ComponentsModule {}

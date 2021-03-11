@@ -1,32 +1,51 @@
-<p>
-  <ion-card mode="ios">
-    <ion-item color="medium" color="title-small">
-      <ion-icon name="time" slot="start"></ion-icon>
-      <ion-label>CRONOGRAMA</ion-label>
-    </ion-item>
-    <ion-card-content class="ion-content-small-font">
-      <span class="label-cronograma">TIPO DE AUDITORÍA:</span> <span class="data-cronograma">CERTIFICACIÓN</span><br />
-      <span class="label-cronograma">CANTIDAD DE DIAS TOTAL</span><span class="data-cronograma">00</span><br />
+<ion-card mode="ios" *ngIf="currentPraciclocronogramas">
+  <ion-item color="medium" color="title-small">
+    <ion-icon name="time" slot="start"></ion-icon>
+    <ion-label>CRONOGRAMA</ion-label>
+  </ion-item>
+  <ion-card-content class="ion-content-small-font">
+    <div class="item-cronograma">
+      <span class="label-cronograma">CANTIDAD DE DIAS TOTAL: </span>
+      <span class="data-cronograma" class="box-click">
+        {{ currentPraciclocronogramas.cantidadDeDiasTotal }}
+      </span>
+    </div>
+    <div class="item-cronograma">
       <span class="label-cronograma">MES PROGRAMADO:</span>
-      
-      <ion-label (click)="mostrarMesesProgramado($event)"
-        >{{mesProgramado}}
+      <span (click)="mostrarMesesProgramado($event)" class="box-click edit-item">
+        {{ currentPraciclocronogramas.mesProgramado | date: "MM/yyyy" }}
+      </span>
+    </div>
+    <div class="item-cronograma">
+      <span class="label-cronograma">MES REPROGRAMADO:</span>
+      <ion-label (click)="mostrarMesesReprogamado($event)" class="box-click edit-item">
+        {{ currentPraciclocronogramas.mesReprogramado | date: "MM/yyyy" }}
       </ion-label>
-      <br />
-      MES REPROGRAMADO:
-      <ion-label (click)="mostrarMesesReprogamado($event)"
-        >{{mesReprogramado}} </ion-label
-      ><br />
-      FECHA DE INICIO DE EJECUCIÓN AUDITORÍA:
-      <ion-label (click)="mostrarFechaEjecucion($event)"
-      >{{fechaEjecucion}}
-    </ion-label>
-      <br />
-      FECHA DE FIN DE EJECUCIÓN AUDITORÍA: 
-      <ion-label (click)="mostrarFechaFin($event)"
-      >{{fechaFin}}
-    </ion-label><br />
-    ESTADO: Sin fecha de auditoria
-    </ion-card-content>
-  </ion-card>
-</p>
+    </div>
+    <div class="item-cronograma">
+      <span class="label-cronograma">FECHA DE INICIO DE EJECUCIÓN AUDITORÍA:</span>
+      <ion-label (click)="mostrarFechaEjecucion($event)" class="box-click edit-item">
+        {{
+          currentPraciclocronogramas.fechaInicioDeEjecucionDeAuditoria
+            | date: "dd/MM/yyyy"
+        }}
+      </ion-label>
+    </div>
+    <div class="item-cronograma">
+      <span class="label-cronograma">FECHA DE FIN DE EJECUCIÓN AUDITORÍA:</span>
+      <ion-label (click)="mostrarFechaFin($event)" class="box-click edit-item">
+        {{
+          currentPraciclocronogramas.fechaDeFinDeEjecucionAuditoria
+            | date: "dd/MM/yyyy"
+        }}
+      </ion-label>
+    </div>
+    <div class="item-cronograma">
+      <span class="label-cronograma">ESTADO:</span>
+      <ion-label class="box-click">
+        {{ currentPraciclocronogramas.estado }}
+      </ion-label>
+    </div>
+
+  </ion-card-content>
+</ion-card>

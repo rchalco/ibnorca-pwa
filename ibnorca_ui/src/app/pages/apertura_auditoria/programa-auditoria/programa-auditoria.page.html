@@ -4,33 +4,39 @@
 ></app-custom-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card *ngIf="currentCliente">
     <ion-card-header color="primary">
-      <ion-card-subtitle>NIT 1710124544 / Gestion 2020 - La Paz Bolivia</ion-card-subtitle
+      <ion-card-subtitle
+        >NIT {{currentCliente.NIT}} /
+        {{currentPraprogramasdeauditorium.oficina}}</ion-card-subtitle
       >
       <ion-item color="primary">
         <ion-icon color="light" name="server-outline" slot="start"></ion-icon>
-        <ion-label>ORGANIZACION: YACIMIENTOS PETROLIFEROS DE BOLIVIA</ion-label>
+        <ion-label>CLIENTE: {{currentCliente.NombreRazon}}</ion-label>
       </ion-item>
       <ion-item color="certificacion">
-        <ion-label>CÓDIGO DE SERVICIO: REG-PROG-XXXXXXXXX</ion-label>
+        <ion-label
+          >CÓDIGO DE SERVICIO:
+          {{currentPraprogramasdeauditorium.codigoServicioWs}}</ion-label
+        >
       </ion-item>
     </ion-card-header>
     <ion-card-content>
       <ion-row>
         <ion-col size="12">
           <div class="container-detail-certificacion ion-content-small-font">
-            TIPO DE SERVICIO: CERFIFICACION/RENOVACION<br />
-            CODIGO IAF: XXXXXXXX<br />                        
+            TIPO DE SERVICIO: PENDIENTE<br />
+            CODIGO IAF: {{currentPraprogramasdeauditorium.codigoIafws}}<br />
           </div>
           <ion-slides pager="false" class="slide-full">
-            <ion-slide *ngFor="let a of [1,1,1]; let i=index">
+            <ion-slide
+              *ngFor="let ciclo of currentPraprogramasdeauditorium.praciclosprogauditoria; let i=index"
+            >
               <div class="container-detail-auditoria">
                 <ion-item color="title-medium">
                   <ion-label class="title-medium-font"
-                    >AÑO {{i + 1}} / ETAPA X
-                    [CERTIFICACION/RENOVACION]</ion-label
-                  >
+                    >AÑO {{ciclo.anio}} {{ciclo.referencia}}
+                  </ion-label>
                 </ion-item>
                 <ion-row>
                   <ion-col
@@ -40,35 +46,9 @@
                     size-sm="6"
                     size-xs="12"
                   >
-                    <ion-card mode="ios">
-                      <ion-item color="medium" color="title-small">
-                        <ion-icon name="time" slot="start"></ion-icon>
-                        <ion-label>CRONOGRAMA</ion-label>
-                      </ion-item>
-                      <ion-card-content class="ion-content-small-font">
-                        TIPO DE AUDITORÍA: <span>CERTIFICACIÓN</span><br />
-                        CANTIDAD DE DIAS TOTAL:XXXXXXXXXXXXXXX<br />
-                        MES PROGRAMADO:
-                        <ion-label (click)="mostrarMesesProgramado($event)"
-                          >{{mesProgramado}}
-                        </ion-label>
-                        <br />
-                        MES REPROGRAMADO:
-                        <ion-label (click)="mostrarMesesReprogamado($event)"
-                          >{{mesReprogramado}} </ion-label
-                        ><br />
-                        FECHA DE INICIO DE EJECUCIÓN AUDITORÍA:
-                        <ion-label (click)="mostrarFechaEjecucion($event)"
-                        >{{fechaEjecucion}}
-                      </ion-label>
-                        <br />
-                        FECHA DE FIN DE EJECUCIÓN AUDITORÍA: 
-                        <ion-label (click)="mostrarFechaFin($event)"
-                        >{{fechaFin}}
-                      </ion-label><br />
-                      ESTADO: Sin fecha de auditoria
-                      </ion-card-content>
-                    </ion-card>
+                    <app-pra-cronograma
+                      [currentPraciclocronogramas]="ciclo.praciclocronogramas[0]"
+                    ></app-pra-cronograma>
                   </ion-col>
                   <ion-col
                     size="6"
@@ -77,31 +57,20 @@
                     size-sm="6"
                     size-xs="12"
                   >
-                    <ion-card mode="ios">
-                      <ion-item color="medium" color="title-small">
-                        <ion-icon name="person" slot="start"></ion-icon>
-                        <ion-label>PERSONAL</ion-label>
-                      </ion-item>
-                      <ion-card-content class="ion-content-small-font">
-                        <span *ngFor="let i of [1,1,1,1,1,1,1]">AUDITOR LÌDER: XXXXXXXXXXXXXXXXX<br /></span> 
-                        AUDITOR 1: XXXXXXXXXXXXXXXXX <br />
-                        AUDITOR 2: XXXXXXXXXXXXXXXXX <br />
-                        AUDITOR 3: XXXXXXXXXXXXXXXXX <br />
-                        AUDITOR ENSAYOS CON TESTIGO: XXXXXXXXXXXXXXXXX <br />
-                        EXPERTO TÉCNICO: XXXXXXXXXXXXXXXXX <br />
-                        AUDITOR EN FORMACIÓN: XXXXXXXXXXXXXXXXX <br />                        
-                      </ion-card-content>
-                    </ion-card>
+                    <app-ciclo-participante
+                      [currentPracicloparticipantes]="ciclo.pracicloparticipantes"
+                    ></app-ciclo-participante>
                   </ion-col>
                 </ion-row>
-                <app-tcp-list-products
-                  #listProducts
-                  [productList]="listDTOProduct"
+                <app-tcp-list-products                  
+                  [productList]="ciclo.pradireccionespaproductos"
+                  [nombreOrganizacion]="ciclo.nombreOrganizacionCertificado"
                   *ngIf="mode === 'TCP'"
                 ></app-tcp-list-products>
-                <app-tcs-list-systems
-                  #listProducts
-                  [systemList]="listDTOSystemList"
+                <app-tcs-list-systems                  
+                  [nombreOrganizacion]="ciclo.nombreOrganizacionCertificado"
+                  [direccionesSistema]="ciclo.pradireccionespasistemas"
+                  [normasSistema]="ciclo.praciclonormassistemas"
                   *ngIf="mode === 'TCS'"
                 ></app-tcs-list-systems>
                 <ion-buttons slot="start" class="buttons-group">
@@ -112,10 +81,6 @@
                   <ion-button size="small" fill="outline" color="tertiary">
                     <ion-icon slot="start" name="document"></ion-icon>
                     Ver Designacion
-                  </ion-button>
-                  <ion-button size="small" fill="outline" color="tertiary">
-                    <ion-icon slot="start" name="document"></ion-icon>
-                    Actualizar desde Presupuesto
                   </ion-button>
                 </ion-buttons>
               </div>

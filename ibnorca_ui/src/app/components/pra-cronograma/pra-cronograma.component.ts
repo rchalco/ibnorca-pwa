@@ -1,35 +1,42 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { PopoverController } from '@ionic/angular';
-import { CustomInputComponent } from '../custom-input/custom-input.component';
-import { MesesComponent } from '../meses/meses.component';
+import { Praciclocronograma } from "./../../interfaces/apertura_auditoria/Praprogramasdeauditorium";
+import { DatePipe } from "@angular/common";
+import { Component, Input, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { PopoverController } from "@ionic/angular";
+import { CustomInputComponent } from "../custom-input/custom-input.component";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
-  selector: 'app-pra-cronograma',
-  templateUrl: './pra-cronograma.component.html',
-  styleUrls: ['./pra-cronograma.component.scss'],
+  selector: "app-pra-cronograma",
+  templateUrl: "./pra-cronograma.component.html",
+  styleUrls: ["./pra-cronograma.component.scss"],
 })
 export class PraCronogramaComponent implements OnInit {
-  mesProgramado = "ENERO";
-  mesReprogramado = "FEBRERO";
-  fechaEjecucion = "01/01/2000";
+  @Input() currentPraciclocronogramas: Praciclocronograma;
   cronogramaForm: FormGroup;
-  fechaFin = "01/01/2000";
 
   constructor(
     private popoverController: PopoverController,
     public datepipe: DatePipe,
-    public formBuilder: FormBuilder) { 
-
-  }
+    public formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.cronogramaForm = this.formBuilder.group({});
+    console.log("currentPraciclocronogramas", this.currentPraciclocronogramas);
   }
   async mostrarMesesProgramado(event) {
     const popover = await this.popoverController.create({
-      component: MesesComponent,
+      component: CustomInputComponent,
+      componentProps: {
+        formGruop: this.cronogramaForm,
+        label: "Mes Programado",
+        name: "FechaEjecucion",
+        type: "datetime",
+        form: "form",
+        formatDate: "MM/YYYY",
+        defaultValue: Date(),
+      },
       event: event,
       mode: "ios",
       backdropDismiss: false,
@@ -37,12 +44,21 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.mesProgramado = info.data.item.label;
+    this.currentPraciclocronogramas.mesProgramado = info.data.item;    
   }
 
   async mostrarMesesReprogamado(event) {
     const popover = await this.popoverController.create({
-      component: MesesComponent,
+      component: CustomInputComponent,
+      componentProps: {
+        formGruop: this.cronogramaForm,
+        label: "Mes Reprogramado",
+        name: "FechaEjecucion",
+        type: "datetime",
+        form: "form",
+        formatDate: "MM/YYYY",
+        defaultValue: Date(),
+      },
       event: event,
       mode: "ios",
       backdropDismiss: false,
@@ -50,7 +66,7 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.mesProgramado = info.data.item.label;
+    this.currentPraciclocronogramas.mesReprogramado = info.data.item;    
   }
 
   async mostrarFechaEjecucion(event) {
@@ -71,7 +87,7 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.fechaEjecucion =this.datepipe.transform(info.data.item, 'dd/MM/yyyy');
+    this.currentPraciclocronogramas.fechaInicioDeEjecucionDeAuditoria = info.data.item;    
   }
 
   async mostrarFechaFin(event) {
@@ -79,7 +95,7 @@ export class PraCronogramaComponent implements OnInit {
       component: CustomInputComponent,
       componentProps: {
         formGruop: this.cronogramaForm,
-        label: "Fecha Eejcucion",
+        label: "Fecha Fin Eejcucion",
         name: "FechaEjecucion",
         type: "datetime",
         form: "form",
@@ -92,7 +108,6 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.fechaFin =this.datepipe.transform(info.data.item, 'dd/MM/yyyy');
+    this.currentPraciclocronogramas.fechaDeFinDeEjecucionAuditoria = info.data.item;    
   }
-
 }

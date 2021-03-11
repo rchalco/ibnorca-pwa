@@ -19,10 +19,6 @@ const routes: Routes = [
   {
     path: 'programa-auditoria',
     loadChildren: () => import('./pages/apertura_auditoria/programa-auditoria/programa-auditoria.module').then( m => m.ProgramaAuditoriaPageModule)
-  },
-  {
-    path: 'edicion-tcp-product-detail',
-    loadChildren: () => import('./pages/apertura_auditoria/edicion-tcp-product-detail/edicion-tcp-product-detail.module').then( m => m.EdicionTcpProductDetailPageModule)
   },  
   {
     path: 'plan-auditoria',

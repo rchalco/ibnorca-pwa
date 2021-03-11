@@ -1,16 +1,20 @@
 <div [formGroup]="formGruop">
   <ion-item lines="full">
     <ion-label position="floating">{{ label }}</ion-label>
-    <ion-input class="margin-top"     
+    <ion-input
+      class="margin-top"
       *ngIf="type != 'datetime'"
       [formControlName]="name"
-      [type]="type"      
+      [type]="type"
+      [readonly]="readonly"
     ></ion-input>
-    <ion-datetime class="margin-top"     
+    <ion-datetime
+      class="margin-top"
       [formControlName]="name"
       [pickerOptions]="customPickerOption"
       *ngIf="type === 'datetime'"
-      displayFormat="DD/MM/YYYY"
+      [displayFormat]="formatDate"
+      [max]="maxDate"
     ></ion-datetime>
   </ion-item>
   <div *ngIf="Validations">

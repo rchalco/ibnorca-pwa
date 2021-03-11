@@ -1,0 +1,24 @@
+<div class="container-product">
+  <form [formGroup]="ionicForm" (ngSubmit)="guardarProduct()" #form="ngForm">
+    <app-custom-input
+      label="Norma"
+      name="norma"
+      type="text"
+      [formGruop]="ionicForm"
+      [form]="form"
+      [defaultValue]="praciclonormassistema.norma"
+    ></app-custom-input>
+    <app-custom-input
+      label="Alcance"
+      name="alcance"
+      type="text"
+      [formGruop]="ionicForm"
+      [form]="form"
+      [defaultValue]="praciclonormassistema.alcance"
+    ></app-custom-input>
+        <section>
+      <ion-button size="small" type="submit">Guardar</ion-button>
+      <ion-button size="small" (click)="cancelarNorma()" color="secondary">Cancelar</ion-button>
+    </section>
+  </form>
+</div>

@@ -1,0 +1,69 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Código de País"
+      animated="true"
+      (ionChange)="buscarPais($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-list>
+  <ion-item>
+    <ion-select
+      interface="alert"
+      placeholder="Pais"
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarPais($event)"
+      [value]="currentPais"
+    >
+      <ion-select-option
+        *ngFor="let norma of listaPaises"
+        [value]="norma"
+        class="cargo-select"
+        >{{ norma.idPais }} - {{ norma.paisNombre }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-select
+      interface="alert"
+      placeholder="Estados - Departamentos"
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarEstados($event)"
+      [value]="currentCiudad"
+    >
+      <ion-select-option
+        *ngFor="let norma of listaEstados"
+        [value]="norma"
+        class="cargo-select"
+        >{{ norma.idEstado }} - {{ norma.estNombre }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-select
+      interface="alert"
+      placeholder="Ciudad"
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarCiudad($event)"
+      [value]="currentCiudad"
+    >
+      <ion-select-option
+        *ngFor="let norma of listaCiudades"
+        [value]="norma"
+        class="cargo-select"
+        >{{ norma.idCiudad }} - {{ norma.nomCiudad }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</ion-list>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Pradireccionespasistema, Praprogramasdeauditorium } from 'src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium';
 
 @Component({
   selector: 'app-myke',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./myke.page.scss'],
 })
 export class MykePage implements OnInit {
+  currentPradireccionespasistema: Pradireccionespasistema;
 
   constructor() { }
 
   ngOnInit() {
+    this.currentPradireccionespasistema =  new Pradireccionespasistema();
+    this.currentPradireccionespasistema.ciudad = "La Paz";
   }
 
 }

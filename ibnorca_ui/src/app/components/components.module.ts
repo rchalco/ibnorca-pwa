@@ -17,10 +17,11 @@ import { CicloParticipanteComponent } from './ciclo-participante/ciclo-participa
 import { TcsListaVerificacionReunionAperturaComponent } from './tcs-lista-verificacion-reunion-apertura/tcs-lista-verificacion-reunion-apertura.component';
 import { TcsListaVerificacionReunionCierreComponent } from './tcs-lista-verificacion-reunion-cierre/tcs-lista-verificacion-reunion-cierre.component';
 import { PraCronogramaComponent } from './pra-cronograma/pra-cronograma.component';
+import { PraDireccionSistemaComponent } from './pra-direccion-sistema/pra-direccion-sistema.component';
 
 @NgModule({
-  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent,TcsListaVerificacionReunionCierreComponent, PraCronogramaComponent], 
+  declarations: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent,TcsListaVerificacionReunionCierreComponent, PraCronogramaComponent, PraDireccionSistemaComponent], 
   imports: [CommonModule, IonicModule, ReactiveFormsModule, FormsModule, BrMaskerModule],
-  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent,TcsListaVerificacionReunionCierreComponent, PraCronogramaComponent],   
+  exports: [MessageErrorComponent, CustomInputComponent, CustomHeaderComponent, CustomHeaderComponent, TcpListProductsComponent, TcsListSystemsComponent, MesesComponent, ProductDetailComponent, ListaVerificacionAperturaComponent, PlanAuditoriaComponent, RegistroCicloComponent, CicloParticipanteComponent,TcsListaVerificacionReunionAperturaComponent,TcsListaVerificacionReunionCierreComponent, PraCronogramaComponent,PraDireccionSistemaComponent],   
 })
 export class ComponentsModule {}

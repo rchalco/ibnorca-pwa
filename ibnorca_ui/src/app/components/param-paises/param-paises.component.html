@@ -35,8 +35,8 @@
       class="cargo-select"
       okText="Ok"
       cancelText="Cancelar"
-      (ionChange)="seleccionarEstados($event)"
-      [value]="currentCiudad"
+      (ionChange)="seleccionarEstado($event)"
+      [value]="currentDepartamento"
     >
       <ion-select-option
         *ngFor="let norma of listaEstados"
@@ -46,7 +46,6 @@
       </ion-select-option>
     </ion-select>
   </ion-item>
-
   <ion-item>
     <ion-select
       interface="alert"

@@ -8,63 +8,55 @@
       [form]="form"
       [defaultValue]="pradireccionespasistema.direccion"
     ></app-custom-input>
-    <app-custom-input
-      label="PAIS"
-      name="pais"
-      type="text"
-      [formGruop]="ionicForm"
-      readonly="true"
-      [form]="form"
-      [defaultValue]="pradireccionespasistema.pais"
-    ></app-custom-input>
-    <app-custom-input
-      label="Departamento"
-      name="estado"
-      type="text"
-      [formGruop]="ionicForm"
-      [form]="form"
-      readonly="true"
-      [defaultValue]="pradireccionespasistema.departamento"
-    ></app-custom-input>
-    
-    <app-custom-input
-      label="Ciudad"
-      name="ciudad"
-      type="text"
-      [formGruop]="ionicForm"
-      [form]="form"
-      readonly="true"
-      [defaultValue]="pradireccionespasistema.ciudad"
-    ></app-custom-input>
+    <div *ngIf="mode === 'default-pais'">
+      <app-custom-input
+        label="PAIS"
+        name="pais"
+        type="text"
+        [formGruop]="ionicForm"
+        readonly="true"
+        [form]="form"
+        [defaultValue]="pradireccionespasistema.pais"
+        (click)="cambiarModoPais()"
+      ></app-custom-input>
+      <app-custom-input
+        label="Departamento"
+        name="estado"
+        type="text"
+        [formGruop]="ionicForm"
+        [form]="form"
+        readonly="true"
+        [defaultValue]="pradireccionespasistema.departamento"
+      ></app-custom-input>
+      <app-custom-input
+        label="Ciudad"
+        name="ciudad"
+        type="text"
+        [formGruop]="ionicForm"
+        [form]="form"
+        readonly="true"
+        [defaultValue]="pradireccionespasistema.ciudad"
+      ></app-custom-input>
+    </div>
+    <app-param-paises
+      *ngIf="mode === 'edit-pais'"
+      [defaulValue]="pradireccionespasistema.pais"
+      (selectLocalizacionEmit) = "localizacionSeleccionda($event)"
+    ></app-param-paises>
     <app-custom-input
       label="Dias"
       name="dias"
       type="number"
       [formGruop]="ionicForm"
       [form]="form"
-      readonly="true"
+      readonly="false"
       [defaultValue]="pradireccionespasistema.dias"
-    ></app-custom-input>
-    
-    <app-custom-input
-      label="Fecha Desde"
-      name="fechadesde"
-      type="date"
-      [formGruop]="ionicForm"
-      [form]="form"
-      [defaultValue]="pradireccionespasistema.fechaDesde"
-    ></app-custom-input>
-    <app-custom-input
-      label="Fecha Hasta"
-      name="fechahasta"
-      type="date"
-      [formGruop]="ionicForm"
-      [form]="form"
-      [defaultValue]="pradireccionespasistema.fechaHasta"
-    ></app-custom-input>
+    ></app-custom-input>    
     <section>
       <ion-button size="small" type="submit">Guardar</ion-button>
-      <ion-button size="small" (click)="cancelarDireccion()" color="secondary">Cancelar</ion-button>
+      <ion-button size="small" (click)="cancelarDireccion()" color="secondary"
+        >Cancelar</ion-button
+      >
     </section>
   </form>
 </div>

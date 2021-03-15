@@ -1,9 +1,10 @@
-import { Praciclonormassistema, Pradireccionespasistema } from './../../interfaces/apertura_auditoria/Praprogramasdeauditorium';
+import {
+  Praciclonormassistema,
+  Pradireccionespasistema,
+} from "./../../interfaces/apertura_auditoria/Praprogramasdeauditorium";
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { PopoverController } from "@ionic/angular";
-
-
 
 @Component({
   selector: "app-tcs-list-systems",
@@ -16,10 +17,13 @@ export class TcsListSystemsComponent implements OnInit {
     public formBuilder: FormBuilder
   ) {}
   ionicForm: FormGroup;
+  mode: string = "list";
   @Input() nombreOrganizacion: string;
   @Input() direccionesSistema: Pradireccionespasistema[] = [];
   @Input() normasSistema: Praciclonormassistema[] = [];
+  currentdireccionesSistema: Pradireccionespasistema;
   display = false;
+  
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({});
   }
@@ -28,4 +32,11 @@ export class TcsListSystemsComponent implements OnInit {
     this.display = !this.display;
   }
   guardarSystem() {}
+
+  editar(item, i) {
+    console.log("item", item);
+    this.mode = "edit";
+    this.currentdireccionesSistema = item; 
+  }
+  eliminar(i) {}
 }

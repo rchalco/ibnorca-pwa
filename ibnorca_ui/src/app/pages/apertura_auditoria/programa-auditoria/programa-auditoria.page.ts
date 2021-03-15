@@ -24,8 +24,8 @@ import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  currentIdService = 14455;//TCO
-  //currentIdService = 5915;  //TCS
+  //currentIdService = 14455;//TCO
+  currentIdService = 5915;  //TCS
   currentPraprogramasdeauditorium: Praprogramasdeauditorium;
   currentDatosServicio: DatosServicio;
   currentCliente: Cliente;

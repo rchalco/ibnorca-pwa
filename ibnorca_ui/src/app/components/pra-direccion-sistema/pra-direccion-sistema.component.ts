@@ -1,23 +1,29 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { ToastController } from "@ionic/angular";
 import { Pradireccionespasistema } from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
-import { ConvertFormToObject } from 'src/app/interfaces/cross-ui/ConvertFormToObject';
+import {
+  ConvertFormToObject,
+  ConvertObjectToForm,
+} from "src/app/interfaces/cross-ui/ConvertFormToObject";
+import { Localizacion } from "src/app/interfaces/General/Localizacion";
 
 @Component({
-  selector: 'app-pra-direccion-sistema',
-  templateUrl: './pra-direccion-sistema.component.html',
-  styleUrls: ['./pra-direccion-sistema.component.scss'],
+  selector: "app-pra-direccion-sistema",
+  templateUrl: "./pra-direccion-sistema.component.html",
+  styleUrls: ["./pra-direccion-sistema.component.scss"],
 })
 export class PraDireccionSistemaComponent implements OnInit {
   ionicForm: FormGroup;
   @Input() pradireccionespasistema: Pradireccionespasistema;
-  @Output() guardarProductEmitter= new EventEmitter<Pradireccionespasistema>();
-  @Output() cancelarDireccionEmitter = new EventEmitter<Pradireccionespasistema>();
+  @Output() guardarProductEmitter = new EventEmitter<Pradireccionespasistema>();
+  @Output()
+  cancelarDireccionEmitter = new EventEmitter<Pradireccionespasistema>();
+  mode: string = "default-pais";
   constructor(
     private toastController: ToastController,
     public formBuilder: FormBuilder
-    ) { }
+  ) {}
 
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({});
@@ -31,9 +37,9 @@ export class PraDireccionSistemaComponent implements OnInit {
     toast.present();
   }
   guardarDireccion() {
-    ConvertFormToObject.convert(this.ionicForm,this.pradireccionespasistema);
+    ConvertFormToObject.convert(this.ionicForm, this.pradireccionespasistema);
     this.presentToast("Dirección guardada correctamente").then((resul) => {
-      if(this.guardarProductEmitter){
+      if (this.guardarProductEmitter) {
         this.guardarProductEmitter.emit(this.pradireccionespasistema);
       }
     });
@@ -42,5 +48,15 @@ export class PraDireccionSistemaComponent implements OnInit {
     if (this.cancelarDireccionEmitter) {
       this.cancelarDireccionEmitter.emit(this.pradireccionespasistema);
     }
+  }
+  cambiarModoPais() {
+    this.mode = "edit-pais";
+  }
+  localizacionSeleccionda(localizacion: Localizacion) {
+    this.pradireccionespasistema.pais = localizacion.pais.paisNombre;
+    this.pradireccionespasistema.departamento = localizacion.estado.estNombre;
+    this.pradireccionespasistema.ciudad = localizacion.ciudad.nomCiudad;
+    ConvertObjectToForm.convert(this.ionicForm, this.pradireccionespasistema);
+    this.mode = "default-pais";
   }
 }

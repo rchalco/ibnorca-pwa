@@ -25,7 +25,9 @@ export class ParamPaisesComponent implements OnInit {
 
   constructor(private aperturaAuditoriaService: AperturaAuditoriaService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.buscarPaisInit(this.defaulValue);
+  }
 
   buscarPais(event) {
     let codigoPais = event.detail.value;
@@ -37,8 +39,17 @@ export class ParamPaisesComponent implements OnInit {
       });
     }
   }
+
+  buscarPaisInit(_pais) {
+    this.aperturaAuditoriaService.BuscarPais(_pais).subscribe((x) => {
+      this.listaPaises = x.listEntities;
+      if (this.listaPaises && this.listaPaises.length > 0)
+        this.currentPais = this.listaPaises[0];
+    });
+  }
   seleccionarPais(event) {
     console.log("seleccionar pais", event);
+    this.currentPais = <Pais>event.detail.value;
     this.buscarEstados((<Pais>event.detail.value).idPais);
   }
 
@@ -51,6 +62,7 @@ export class ParamPaisesComponent implements OnInit {
   }
   seleccionarEstado(event) {
     console.log("Estado Seleccionado", event);
+    this.currentEstado = <Estado>event.detail.value; 
     this.buscarCiudad((<Estado>event.detail.value).idEstado);
   }
 

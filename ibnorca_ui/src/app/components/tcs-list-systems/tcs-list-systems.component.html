@@ -4,7 +4,7 @@
     <ion-label>ALCANCE / NORMAS / DIRECCIONES</ion-label>
   </ion-item>
   <div *ngIf="display">
-    <ion-list>
+    <ion-list *ngIf="mode === 'list'">
       <ion-item>
         <ion-label position="stacked">
           Nombre del cliente para el Certificado
@@ -63,7 +63,7 @@
         <ion-icon
           name="pencil-sharp"
           slot="start"
-          (click)="editar(item, i)"
+          (click)="editar(direccion, i)"
           class="big-icon"
         ></ion-icon>
         <ion-icon
@@ -73,17 +73,21 @@
           class="big-icon"
         ></ion-icon>
         <div class="direccion-block">
-          <h2>{{ direccion.nombre }} - Diás Insitu: {{direccion.dias}}</h2>
+          <h2>{{ direccion.nombre }} - Diás Insitu: {{ direccion.dias }}</h2>
           <p>
             Dirección:
             <span class="sub-title">{{ direccion.direccion }}</span>
           </p>
           <p class="detail-paragraph">
             Pais: {{ direccion.pais }} | Departamento:
-            {{ direccion.departamento }} | Ciudad: {{direccion.ciudad}}
+            {{ direccion.departamento }} | Ciudad: {{ direccion.ciudad }}
           </p>
         </div>
       </ion-item>
     </ion-list>
+    <app-pra-direccion-sistema
+      *ngIf="mode === 'edit'"
+      [pradireccionespasistema]="currentdireccionesSistema"
+    ></app-pra-direccion-sistema>
   </div>
 </div>

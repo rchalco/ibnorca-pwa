@@ -4,6 +4,7 @@
       placeholder="Código de País"
       animated="true"
       (ionChange)="buscarPais($event)"
+      [value] = "defaulValue"
     ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -36,7 +37,7 @@
       okText="Ok"
       cancelText="Cancelar"
       (ionChange)="seleccionarEstado($event)"
-      [value]="currentDepartamento"
+      [value]="currentEstado"
     >
       <ion-select-option
         *ngFor="let norma of listaEstados"

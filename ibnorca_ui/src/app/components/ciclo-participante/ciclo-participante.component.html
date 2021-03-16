@@ -36,6 +36,11 @@
             {{ item._personal.nombreCompleto }}
           </ion-label>
         </ion-col>
+        <ion-col>
+          <ion-label *ngIf="item._personal">
+            {{ item.dias }}
+          </ion-label>
+        </ion-col>
       </ion-row>
     </ion-card-content>
 
@@ -67,7 +72,9 @@
           </ion-select>
           
         </ion-item>
-        
+        <ion-item>
+          <ion-input type="number" placeholder="Dias"   [(ngModel)]="cantidadDias" name="cantidadDias"></ion-input>
+        </ion-item>
         <ion-item>
           <ion-select
             interface="alert"
@@ -86,7 +93,6 @@
             >
           </ion-select>
         </ion-item>
-        <ion-input value="custom"></ion-input>
       </ion-list>
     </ion-card-content>
   </ion-card>

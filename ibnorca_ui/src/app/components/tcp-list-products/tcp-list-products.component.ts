@@ -33,7 +33,10 @@ export class TcpListProductsComponent implements OnInit {
     this.currentIndex = i;
   }
 
-  eliminar(index) {}
+  eliminar(index) {
+    console.log("evento eliminar", index);
+    this.productList.splice(index, 1);
+  }
 
   adicionar() {
     this.mode = "EDIT";
@@ -43,9 +46,10 @@ export class TcpListProductsComponent implements OnInit {
 
   guardarProducto(event) {
     this.mode = "LIST";
-    this.productList[this.currentIndex] = event;
+    if (this.operacion === "UPD") this.productList[this.currentIndex] = event;
+    else this.productList.push(event);
   }
-  cancelarProducto(event){
+  cancelarProducto(event) {
     this.mode = "LIST";
   }
 }

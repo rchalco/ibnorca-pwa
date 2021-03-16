@@ -73,7 +73,7 @@ export class Pracicloparticipante {
   idPrAcicloProgAuditoria: number | null;
   idParticipanteWs: number | null;
   participanteDetalleWs: string;
-  idCargoWs: number | null;
+  idCargoWs: number | null;  
   cargoDetalleWs: string;
   usuarioRegistro: string;
   fechaDesde: string | null;

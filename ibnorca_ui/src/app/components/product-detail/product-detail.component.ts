@@ -5,7 +5,8 @@ import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Pradireccionespaproducto } from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
 import { EmitterVisitorContext } from '@angular/compiler';
-import { ConvertFormToObject } from 'src/app/interfaces/cross-ui/ConvertFormToObject';
+import { ConvertFormToObject, ConvertObjectToForm } from 'src/app/interfaces/cross-ui/ConvertFormToObject';
+import { Localizacion } from 'src/app/interfaces/General/Localizacion';
 
 @Component({
   selector: "app-product-detail",
@@ -18,6 +19,7 @@ export class ProductDetailComponent implements OnInit {
   @Input() pradireccionespaproducto: Pradireccionespaproducto;
   @Output() guardarProductEmitter= new EventEmitter<Pradireccionespaproducto>();
   @Output() cancelarProductEmitter= new EventEmitter<Pradireccionespaproducto>();
+  mode: string = "default-pais";
   constructor(
     private toastController: ToastController,
     public formBuilder: FormBuilder
@@ -59,4 +61,15 @@ export class ProductDetailComponent implements OnInit {
       this.cancelarProductEmitter.emit(this.pradireccionespaproducto);
     }
   }
+  cambiarModoPais() {
+    this.mode = "edit-pais";
+  }
+  localizacionSeleccionda(localizacion: Localizacion) {
+    this.pradireccionespaproducto.pais = localizacion.pais.paisNombre;
+    this.pradireccionespaproducto.estado = localizacion.estado.estNombre;
+    this.pradireccionespaproducto.ciudad = localizacion.ciudad.nomCiudad;
+    //ConvertObjectToForm.convert(this.ionicForm, this.pradireccionespaproducto);
+    ConvertFormToObject.convert(this.ionicForm, this.pradireccionespaproducto);
+    this.mode = "default-pais";
+  }  
 }

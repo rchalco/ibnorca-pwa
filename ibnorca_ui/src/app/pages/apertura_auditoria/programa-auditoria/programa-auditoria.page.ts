@@ -27,7 +27,7 @@ import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  currentIdService = 14455; //TCO
+  currentIdService = 11037; //TCP
   //currentIdService = 5915;  //TCS
   currentPraprogramasdeauditorium: Praprogramasdeauditorium;
   currentDatosServicio: DatosServicio;
@@ -101,7 +101,7 @@ export class ProgramaAuditoriaPage implements OnInit {
         name: "referencia",
         type: "text",
         form: "form",
-        defaultValue: ciclo.referencia
+        defaultValue: ciclo.referencia,
       },
       event: event,
       mode: "ios",
@@ -113,14 +113,43 @@ export class ProgramaAuditoriaPage implements OnInit {
     ciclo.referencia = info.data.item;
   }
 
-  
+  guardarPrograma() {
+    this.aperturaAuditoriaService
+      .RegisterProgramaAuditoria(this.currentPraprogramasdeauditorium)
+      .subscribe((x) => {
+        this.presentToast(x.message, "success");
+        if (x.state === 1) {
+          x.object.praciclosprogauditoria.forEach((x) => {
+            //copiamos los estaodos del ciclo al cronoramoa
+            x.praciclocronogramas[0].estado = x.estadoDescripcion;
+            //deseralizamos los cargos
+            if (x.pracicloparticipantes) {
+              x.pracicloparticipantes.forEach((yy) => {
+                yy._cargo = JSON.parse(yy.cargoDetalleWs);
+                if (yy._cargo["cod_tipoauditor"]) {
+                  yy._cargo.idCargoPuesto = yy._cargo["cod_tipoauditor"];
+                  yy._cargo.cargoPuesto = yy._cargo["descripcion"];
+                }
+                if (yy.participanteDetalleWs) {
+                  yy._personal = JSON.parse(yy.participanteDetalleWs);
+                }
+              });
+            }
+          });
+          this.currentPraprogramasdeauditorium = x.object;
+          this.currentCliente = JSON.parse(x.object.organizacionContentWs);
+          this.currentDatosServicio = JSON.parse(x.object.detalleServicioWs);
+          this.mode = this.currentDatosServicio.area;
+        }
+      });
+  }
 
-  async presentToast(text) {
+  async presentToast(text, color = "danger") {
     const toast = await this.toastCtrl.create({
       message: text,
       duration: 3000,
       position: "top",
-      color: "danger",
+      color: color,
     });
     toast.present();
   }

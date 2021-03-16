@@ -22,7 +22,7 @@
           Productos
         </ion-item>
       </ion-list-header>
-      <ion-item *ngFor="let product of productList">
+      <ion-item *ngFor="let product of productList; let i = index">
         <ion-icon
           name="pencil-sharp"
           slot="start"
@@ -45,12 +45,12 @@
           </p>
           <p>
             Sello {{ product.sello }} | Pais: {{ product.pais }} | Departamento:
-            {{ product.departamento }} | Ciudad: {{ product.ciudad }}
+            {{ product.estado }} | Ciudad: {{ product.ciudad }}
           </p>
           <p class="detail-paragraph">
             Fecha Emision Cert. {{ product.fechaEmisionPrimerCertificado }} |
             Fecha Vencimiento Cert.
-            {{ product.fechaVencimientoUltimoCertificado }} | Nro. Cert.
+            {{ product.fechaVencimientoCertificado }} | Nro. Cert.
             {{ product.numeroDeCertificacion }}
           </p>
         </div>

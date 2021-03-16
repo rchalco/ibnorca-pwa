@@ -80,7 +80,7 @@
                   *ngIf="mode === 'TCS'"
                 ></app-tcs-list-systems>
                 <ion-buttons slot="start" class="buttons-group">
-                  <ion-button size="small" fill="outline" color="success">
+                  <ion-button size="small" fill="outline" color="success" (click)="guardarPrograma()">
                     <ion-icon slot="start" name="save"></ion-icon>
                     Guardar
                   </ion-button>

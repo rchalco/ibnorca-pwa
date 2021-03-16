@@ -15,6 +15,7 @@ export class CicloParticipanteComponent implements OnInit {
   visibleAdd = "NO";
   ListaCargoItem: CargoItem[];
   currentCargo: CargoItem;
+  cantidadDias = 0;
   ListaPersonal: Personal[];
   currentPersonal: Personal;
   operacion = "";
@@ -76,7 +77,12 @@ export class CicloParticipanteComponent implements OnInit {
 
   seleccionarPersonal(event) {    
     this.currentPersonal = event.detail.value;
+    this.selectParticipante.dias = this.cantidadDias;
+    this.selectParticipante.cargoDetalleWs = JSON.stringify(this.currentCargo);
+    this.selectParticipante.idCargoWs = Number(this.currentCargo.idCargoPuesto);
     this.selectParticipante._cargo = this.currentCargo;
+    this.selectParticipante.idParticipanteWs = Number(this.currentPersonal.idCliente);
+    this.selectParticipante.participanteDetalleWs = JSON.stringify(this.currentPersonal);
     this.selectParticipante._personal = this.currentPersonal;
     this.visibleAdd = "NO";
     console.log(this.selectParticipante);

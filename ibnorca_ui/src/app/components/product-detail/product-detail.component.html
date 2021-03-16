@@ -26,7 +26,7 @@
     ></app-custom-input>
     <ion-item (click)="mostrarBuscadorNorma()">
       <ion-label> Norma : {{ pradireccionespaproducto.norma }} </ion-label>
-    </ion-item>    
+    </ion-item>
     <app-buscar-norma
       (selectNorma)="cambiarNorma($event)"
       *ngIf="showBuscadorNormas"
@@ -39,36 +39,46 @@
       [form]="form"
       [defaultValue]="pradireccionespaproducto.sello"
     ></app-custom-input>
-    <app-custom-input
-      label="PAIS"
-      name="pais"
-      type="text"
-      [formGruop]="ionicForm"
-      readonly="true"
-      [form]="form"
-      [defaultValue]="pradireccionespaproducto.pais"
-    ></app-custom-input>
-    <app-custom-input
-      label="Departamento"
-      name="estado"
-      type="text"
-      [formGruop]="ionicForm"
-      [form]="form"
-      readonly="true"
-      [defaultValue]="pradireccionespaproducto.estado"
-    ></app-custom-input>
-    <app-custom-input
-      label="Ciudad"
-      name="ciudad"
-      type="text"
-      [formGruop]="ionicForm"
-      [form]="form"
-      readonly="true"
-      [defaultValue]="pradireccionespaproducto.ciudad"
-    ></app-custom-input>
+    <div *ngIf="mode === 'default-pais'">
+      <app-custom-input
+        label="PAIS"
+        name="pais"
+        type="text"
+        [formGruop]="ionicForm"
+        readonly="true"
+        [form]="form"
+        [defaultValue]="pradireccionespaproducto.pais"
+        (click)="cambiarModoPais()"
+      ></app-custom-input>
+      <app-custom-input
+        label="Departamento"
+        name="estado"
+        type="text"
+        [formGruop]="ionicForm"
+        [form]="form"
+        readonly="true"
+        [defaultValue]="pradireccionespaproducto.estado"
+      ></app-custom-input>
+      <app-custom-input
+        label="Ciudad"
+        name="ciudad"
+        type="text"
+        [formGruop]="ionicForm"
+        [form]="form"
+        readonly="true"
+        [defaultValue]="pradireccionespaproducto.ciudad"
+      ></app-custom-input>
+    </div>
+    <app-param-paises
+      *ngIf="mode === 'edit-pais'"
+      [defaulValue]="pradireccionespaproducto.pais"
+      (selectLocalizacionEmit)="localizacionSeleccionda($event)"
+    ></app-param-paises>
     <section>
       <ion-button size="small" type="submit">Guardar</ion-button>
-      <ion-button size="small" color="secondary" (click)="cancelar()">Cancelar</ion-button>
+      <ion-button size="small" color="secondary" (click)="cancelar()"
+        >Cancelar</ion-button
+      >
     </section>
   </form>
 </div>

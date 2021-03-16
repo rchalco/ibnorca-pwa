@@ -129,4 +129,13 @@ export class AperturaAuditoriaService implements BaseService {
       { headers }
     );
   }
+
+  RegisterProgramaAuditoria(programa){
+    let url_query = url_apertura + "RegisterProgramaAuditoria";
+    return this.httpClient.post<ResponseObject<Praprogramasdeauditorium>>(
+      url_query,
+      JSON.stringify(programa),
+      { headers }
+    );
+  }
 }

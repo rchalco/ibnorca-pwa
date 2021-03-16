@@ -56,6 +56,11 @@
         </div>
       </ion-item>
     </ion-list>
-    <app-product-detail *ngIf="mode == 'EDIT'" [pradireccionespaproducto]="currentProduct" (guardarProductEmitter)="guardarProducto($event)"></app-product-detail>
+    <app-product-detail
+      *ngIf="mode == 'EDIT'"
+      [pradireccionespaproducto]="currentProduct"
+      (guardarProductEmitter)="guardarProducto($event)"
+      (cancelarProductEmitter)="cancelarProducto($event)"
+    ></app-product-detail>
   </div>
 </div>

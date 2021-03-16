@@ -7,8 +7,7 @@
   <ion-card *ngIf="currentCliente">
     <ion-card-header color="primary">
       <ion-card-subtitle
-        >NIT {{currentCliente.NIT}} /
-        {{currentPraprogramasdeauditorium.oficina}}</ion-card-subtitle
+        >ID CLIENTE: {{currentCliente.IdCliente}} </ion-card-subtitle
       >
       <ion-item color="primary">
         <ion-icon color="light" name="server-outline" slot="start"></ion-icon>
@@ -24,8 +23,7 @@
     <ion-card-content>
       <ion-row>
         <ion-col size="12">
-          <div class="container-detail-certificacion ion-content-small-font">
-            TIPO DE SERVICIO: PENDIENTE<br />
+          <div class="container-detail-certificacion ion-content-small-font">            
             CODIGO IAF: {{currentPraprogramasdeauditorium.codigoIafws}}<br />
           </div>
           <ion-slides pager="false" class="slide-full">
@@ -34,8 +32,16 @@
             >
               <div class="container-detail-auditoria">
                 <ion-item color="title-medium">
+
                   <ion-label class="title-medium-font"
-                    >AÑO {{ciclo.anio}} {{ciclo.referencia}}
+                    >
+                    <ion-icon
+                    name="pencil-sharp"
+                    slot="end"
+                    (click)="editarCiclo(ciclo, i)"
+                    class="big-icon"
+                  ></ion-icon>
+                  AÑO {{ciclo.anio}} {{ciclo.referencia}}
                   </ion-label>
                 </ion-item>
                 <ion-row>
@@ -62,12 +68,12 @@
                     ></app-ciclo-participante>
                   </ion-col>
                 </ion-row>
-                <app-tcp-list-products                  
+                <app-tcp-list-products
                   [productList]="ciclo.pradireccionespaproductos"
                   [nombreOrganizacion]="ciclo.nombreOrganizacionCertificado"
                   *ngIf="mode === 'TCP'"
                 ></app-tcp-list-products>
-                <app-tcs-list-systems                  
+                <app-tcs-list-systems
                   [nombreOrganizacion]="ciclo.nombreOrganizacionCertificado"
                   [direccionesSistema]="ciclo.pradireccionespasistemas"
                   [normasSistema]="ciclo.praciclonormassistemas"

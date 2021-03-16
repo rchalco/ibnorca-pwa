@@ -13,6 +13,7 @@ import { Norma } from "../interfaces/apertura_auditoria/Norma";
 import { Pais } from "../interfaces/General/Pais";
 import { Estado } from "../interfaces/General/Estado";
 import { Ciudad } from "../interfaces/General/Ciudad";
+import { NormaInternacional } from "../interfaces/apertura_auditoria/NormaInternacional";
 
 const headers = HEADERS_SERVICE;
 const url_apertura = URL_APERTURA;
@@ -66,6 +67,19 @@ export class AperturaAuditoriaService implements BaseService {
 
   BuscarNormas(Codigo) {
     let url_query = url_apertura + "BuscarNormas";
+    let dataRequest = {
+      Codigo: Codigo,
+    };
+
+    return this.httpClient.post<ResponseQuery<Norma>>(
+      url_query,
+      JSON.stringify(dataRequest),
+      { headers }
+    );
+  }
+
+  BuscarNormasInternacionales(Codigo) {
+    let url_query = url_apertura + "BuscarNormasInternacionales";
     let dataRequest = {
       Codigo: Codigo,
     };

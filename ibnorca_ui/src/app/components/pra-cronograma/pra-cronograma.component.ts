@@ -110,4 +110,26 @@ export class PraCronogramaComponent implements OnInit {
     console.log("Padre", info);
     this.currentPraciclocronogramas.fechaDeFinDeEjecucionAuditoria = info.data.item;    
   }
+
+
+  async mostrarDiasCronograma(event) {
+    const popover = await this.popoverController.create({
+      component: CustomInputComponent,
+      componentProps: {
+        formGruop: this.cronogramaForm,
+        label: "CANTIDAD DE DIAS",
+        name: "cantidad_dias",
+        type: "number",
+        form: "form",
+        defaultValue: Date(),
+      },
+      event: event,
+      mode: "ios",
+      backdropDismiss: false,
+    });
+    await popover.present();
+    const info = await popover.onDidDismiss();
+    console.log("Padre", info);
+    this.currentPraciclocronogramas.cantidadDeDiasTotal = info.data.item;    
+  }
 }

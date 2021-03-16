@@ -7,6 +7,7 @@
       [formControlName]="name"
       [type]="type"
       [readonly]="readonly"
+      (keyup.enter)="eventKeyEnter($event)"
     ></ion-input>
     <ion-datetime
       class="margin-top"

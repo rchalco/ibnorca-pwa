@@ -39,6 +39,7 @@ export class CustomInputComponent implements OnInit {
   currentDate = new Date();
   @Input() formatDate = "DD/MM/YYYY";
   @Input() maxDate = this.currentDate.getUTCFullYear() + 10;
+  @Output() eventKeyEnterEmiiter = new EventEmitter<any>();
 
   constructor(private popoverController: PopoverController) {
     console.log("maxDate", this.maxDate);
@@ -79,9 +80,11 @@ export class CustomInputComponent implements OnInit {
             }
 
             if (this._ionChange) {
-              this.popoverController.dismiss({
-                item: this.formGruop.controls[this.name]["valueDate"],
-              });
+              if(this.popoverController){
+                this.popoverController.dismiss({
+                  item: this.formGruop.controls[this.name]["valueDate"],
+                });
+              }              
               this._ionChange.emit(event);
             }
           },
@@ -104,5 +107,16 @@ export class CustomInputComponent implements OnInit {
 
   ExistsError(validator: ValidatorFn) {
     return validator(this.formGruop.controls[this.name]);
+  }
+
+  eventKeyEnter(event) {
+    if(this.popoverController){
+      this.popoverController.dismiss({
+        item: this.formGruop.controls[this.name]["value"],
+      });
+    }      
+    if(this.eventKeyEnterEmiiter){
+      this.eventKeyEnterEmiiter.emit(event);
+    }
   }
 }

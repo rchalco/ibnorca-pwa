@@ -17,6 +17,7 @@ export class ProductDetailComponent implements OnInit {
   showBuscadorNormas = false;
   @Input() pradireccionespaproducto: Pradireccionespaproducto;
   @Output() guardarProductEmitter= new EventEmitter<Pradireccionespaproducto>();
+  @Output() cancelarProductEmitter= new EventEmitter<Pradireccionespaproducto>();
   constructor(
     private toastController: ToastController,
     public formBuilder: FormBuilder
@@ -51,5 +52,11 @@ export class ProductDetailComponent implements OnInit {
   mostrarBuscadorNorma(){
     console.log("ingreso al evento");
     this.showBuscadorNormas = true;
+  }
+  cancelar(){
+    this.showBuscadorNormas = false;
+    if(this.cancelarProductEmitter){
+      this.cancelarProductEmitter.emit(this.pradireccionespaproducto);
+    }
   }
 }

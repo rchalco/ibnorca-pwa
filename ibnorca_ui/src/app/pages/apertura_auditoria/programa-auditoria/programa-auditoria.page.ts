@@ -13,7 +13,10 @@ import { DatePipe } from "@angular/common";
 import { ProductDetailComponent } from "src/app/components/product-detail/product-detail.component";
 import { SystemList } from "src/app/interfaces/apertura_auditoria/system_list";
 import { AperturaAuditoriaService } from "src/app/services/apertura-auditoria.service";
-import { Praprogramasdeauditorium } from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
+import {
+  Praciclosprogauditorium,
+  Praprogramasdeauditorium,
+} from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
 import { Cliente } from "src/app/interfaces/General/Cliente";
 import { DatosServicio } from "src/app/interfaces/apertura_auditoria/IBDatosServicio";
 import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
@@ -24,12 +27,13 @@ import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  //currentIdService = 14455;//TCO
-  currentIdService = 5915;  //TCS
+  currentIdService = 14455; //TCO
+  //currentIdService = 5915;  //TCS
   currentPraprogramasdeauditorium: Praprogramasdeauditorium;
   currentDatosServicio: DatosServicio;
   currentCliente: Cliente;
   mode = "TCS";
+  programaForm: FormGroup;
 
   constructor(
     public modalController: ModalController,
@@ -80,11 +84,36 @@ export class ProgramaAuditoriaPage implements OnInit {
           );
         }
       });
+    this.programaForm = this.formBuilder.group({});
   }
 
   async mostrarSitios() {
     console.log("llamando a mostrar sitios");
   }
+
+  async editarCiclo(ciclo, index) {
+    console.log("editamos ciclo", ciclo);
+    const popover = await this.popoverController.create({
+      component: CustomInputComponent,
+      componentProps: {
+        formGruop: this.programaForm,
+        label: "Referencia",
+        name: "referencia",
+        type: "text",
+        form: "form",
+        defaultValue: ciclo.referencia
+      },
+      event: event,
+      mode: "ios",
+      backdropDismiss: false,
+    });
+    await popover.present();
+    const info = await popover.onDidDismiss();
+    console.log("Padre", info);
+    ciclo.referencia = info.data.item;
+  }
+
+  
 
   async presentToast(text) {
     const toast = await this.toastCtrl.create({

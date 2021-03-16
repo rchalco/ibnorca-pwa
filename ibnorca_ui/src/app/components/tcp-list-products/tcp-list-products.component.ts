@@ -45,4 +45,7 @@ export class TcpListProductsComponent implements OnInit {
     this.mode = "LIST";
     this.productList[this.currentIndex] = event;
   }
+  cancelarProducto(event){
+    this.mode = "LIST";
+  }
 }

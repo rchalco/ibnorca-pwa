@@ -10,20 +10,32 @@ import { AperturaAuditoriaService } from "src/app/services/apertura-auditoria.se
 export class BuscarNormaComponent implements OnInit {
   listaNormas: Norma[];
   currentNorma: Norma;
+  tipoNorma = "nacional";
   @Output() public selectNorma: EventEmitter<Norma> = new EventEmitter<Norma>();;
 
   constructor(private aperturaAuditoriaService: AperturaAuditoriaService) {}
 
-  ngOnInit() {}
+    ngOnInit() {}
 
   buscar(event) {
     let codigoNorma = event.detail.value;
     if (codigoNorma.length > 3) {
-      console.log("buscamos la norma");
-      this.aperturaAuditoriaService.BuscarNormas(codigoNorma).subscribe((x) => {
-        console.log(x);
-        this.listaNormas = x.listEntities;
-      });
+      
+      if(this.tipoNorma == "nacional"){
+        console.log("buscamos la norma nacional");
+        this.aperturaAuditoriaService.BuscarNormas(codigoNorma).subscribe((x) => {
+          console.log(x);
+          this.listaNormas = x.listEntities;
+        });
+      }
+      else{
+        console.log("buscamos la norma intenacional");
+        this.aperturaAuditoriaService.BuscarNormasInternacionales(codigoNorma).subscribe((x) => {
+          console.log(x);
+          this.listaNormas = x.listEntities;
+        });
+      }
+      
     }
   }
   seleccionarNorma(event) {

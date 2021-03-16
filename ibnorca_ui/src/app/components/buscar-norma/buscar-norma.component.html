@@ -1,13 +1,22 @@
 <ion-header translucent>
   <ion-toolbar>
+    <ion-radio-group [(ngModel)]="tipoNorma">
+      <ion-item>
+        <ion-label>Nacional</ion-label>
+        <ion-radio slot="start" color="success" value="nacional"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Internacional</ion-label>
+        <ion-radio slot="start" color="success" value="internacional"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
     <ion-searchbar
       placeholder="Código de Norma"
       animated="true"
       (ionChange)="buscar($event)"
     ></ion-searchbar>
-  </ion-toolbar>
+  </ion-toolbar>  
 </ion-header>
-
 <ion-list>
   <ion-item>
     <ion-select

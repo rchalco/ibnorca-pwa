@@ -130,6 +130,6 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.currentPraciclocronogramas.cantidadDeDiasTotal = info.data.item;    
+    this.currentPraciclocronogramas.diasInsitu = info.data.item;    
   }
 }

@@ -65,11 +65,11 @@ export class ProductDetailComponent implements OnInit {
     this.mode = "edit-pais";
   }
   localizacionSeleccionda(localizacion: Localizacion) {
+    ConvertFormToObject.convert(this.ionicForm, this.pradireccionespaproducto);
     this.pradireccionespaproducto.pais = localizacion.pais.paisNombre;
     this.pradireccionespaproducto.estado = localizacion.estado.estNombre;
     this.pradireccionespaproducto.ciudad = localizacion.ciudad.nomCiudad;
-    //ConvertObjectToForm.convert(this.ionicForm, this.pradireccionespaproducto);
-    ConvertFormToObject.convert(this.ionicForm, this.pradireccionespaproducto);
+    ConvertObjectToForm.convert(this.ionicForm, this.pradireccionespaproducto);
     this.mode = "default-pais";
   }  
 }

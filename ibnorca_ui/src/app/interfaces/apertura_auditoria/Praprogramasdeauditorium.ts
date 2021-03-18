@@ -53,6 +53,7 @@ export class Praciclocronograma {
   usuarioRegistro: string;
   fechaDesde: string | null;
   fechaHasta: string | null;
+  estado: string| null;
   idPrAcicloProgAuditoriaNavigation: Praciclosprogauditorium;
 }
 

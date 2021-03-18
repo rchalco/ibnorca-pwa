@@ -4,8 +4,10 @@
     <ion-datetime
       display-format="H:mm"
       picker-format="H:mm"
-      [(ngModel)]="horarioIni"
-      name="horarioIni"
+      cancelText="Cancelar"
+      doneText="Confirmar"
+      [ngModel]="horarioIni"
+      (ionChange)="selectionarHorarioIni($event)"
     ></ion-datetime>
   </ion-item>
   <ion-item>
@@ -13,9 +15,10 @@
     <ion-datetime
       display-format="H:mm"
       picker-format="H:mm"
-      [(ngModel)]="horarioFin"
-      name="horarioFin"
-      (ionChange)="selectionarHorario()"
+      cancelText="Cancelar"
+      doneText="Confirmar"
+      [ngModel]="horarioFin"
+      (ionChange)="selectionarHorarioFin($event)"
     ></ion-datetime>
   </ion-item>
 </ion-ilst>

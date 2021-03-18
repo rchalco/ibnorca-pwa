@@ -1,0 +1,20 @@
+<ion-list>
+  <ion-item>
+    <ion-select
+      interface="alert"
+      placeholder="Organismo"
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarOrganismo($event)"
+      [value]="currentNorma"
+    >
+      <ion-select-option
+        *ngFor="let organismo of listaOrganismos"
+        [value]="organismo"
+        class="cargo-select"        
+        >{{ norma.Descripcion }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>

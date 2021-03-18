@@ -11,7 +11,7 @@ export class BuscarNormaComponent implements OnInit {
   listaNormas: Norma[];
   currentNorma: Norma;
   tipoNorma = "nacional";
-  @Output() public selectNorma: EventEmitter<Norma> = new EventEmitter<Norma>();;
+  @Output() public selectNorma: EventEmitter<Norma> = new EventEmitter<Norma>();
 
   constructor(private aperturaAuditoriaService: AperturaAuditoriaService) {}
 

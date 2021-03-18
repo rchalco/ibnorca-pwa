@@ -16,6 +16,7 @@ import { Ciudad } from "../interfaces/General/Ciudad";
 import { LoadingController, ToastController } from "@ionic/angular";
 import { of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
+import { Clasificador } from "../interfaces/General/Clasificador";
 
 const headers = HEADERS_SERVICE;
 const url_apertura = URL_APERTURA;
@@ -241,4 +242,22 @@ export class AperturaAuditoriaService extends BaseService {
       );
     }
   }
+
+  BuscarOrganismosCertificadores() {
+    let url_query = url_apertura + "BuscarOrganismosCertificadores";
+    let dataRequest = {
+    };
+    this.presentLoader();
+    return this.httpClient
+      .post<ResponseQuery<Clasificador>>(url_query, JSON.stringify(dataRequest), {
+        headers,
+      })
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada GenerarDesignacion");
+          this.dismissLoader();
+        })
+      );
+  }
+
 }

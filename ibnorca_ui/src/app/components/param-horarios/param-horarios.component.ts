@@ -9,8 +9,8 @@ import { PopoverController } from "@ionic/angular";
 export class ParamHorariosComponent implements OnInit {
   @Input() horario: string;
   @Output() seleccionarHorarioEmit = new EventEmitter<string>();
-  horarioIni: Date = new Date();
-  horarioFin: Date = new Date();
+  horarioIni = new Date();
+  horarioFin = new Date();
 
   constructor(private popoverController: PopoverController) {}
 
@@ -27,7 +27,12 @@ export class ParamHorariosComponent implements OnInit {
     }
   }
 
-  selectionarHorario() {
+  selectionarHorarioIni(event) {
+    console.log("hora ini", event);
+    this.horarioIni = new Date(event.detail.value);
+  }
+  selectionarHorarioFin(event) {
+    this.horarioFin = new Date(event.detail.value);
     console.log("horarioIni", this.horarioIni);
     console.log("horarioFin", this.horarioFin);
     let horarioFormat =

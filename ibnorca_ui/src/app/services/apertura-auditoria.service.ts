@@ -13,19 +13,24 @@ import { Norma } from "../interfaces/apertura_auditoria/Norma";
 import { Pais } from "../interfaces/General/Pais";
 import { Estado } from "../interfaces/General/Estado";
 import { Ciudad } from "../interfaces/General/Ciudad";
-import { NormaInternacional } from "../interfaces/apertura_auditoria/NormaInternacional";
+import { LoadingController, ToastController } from "@ionic/angular";
+import { of } from "rxjs";
+import { catchError, finalize } from "rxjs/operators";
 
 const headers = HEADERS_SERVICE;
 const url_apertura = URL_APERTURA;
-
 @Injectable({
   providedIn: "root",
 })
-export class AperturaAuditoriaService implements BaseService {
+export class AperturaAuditoriaService extends BaseService {
   constructor(
-    private databaseService: DatabaseService,
-    private httpClient: HttpClient
-  ) {}
+    public databaseService: DatabaseService,
+    public httpClient: HttpClient,
+    public loadingController: LoadingController,
+    public toastController: ToastController
+  ) {
+    super(databaseService, httpClient, loadingController, toastController);
+  }
 
   ObtenerProgramaAuditoria(IdServicio) {
     let url_query = url_apertura + "ObtenerProgramaAuditoria";
@@ -33,35 +38,54 @@ export class AperturaAuditoriaService implements BaseService {
       IdServicio: IdServicio,
       Usuario: usuario.currentUser.nick,
     };
-
-    return this.httpClient.post<ResponseObject<Praprogramasdeauditorium>>(
-      url_query,
-      JSON.stringify(dataRequest),
-      { headers }
-    );
+    this.presentLoader();
+    return this.httpClient
+      .post<ResponseObject<Praprogramasdeauditorium>>(
+        url_query,
+        JSON.stringify(dataRequest),
+        { headers }
+      )
+      .pipe(
+        finalize(() => {
+          console.log("**se termino la llamada ObtenerProgramaAuditoria");
+          this.dismissLoader();
+        })
+      );
   }
 
   ObtenerCargos() {
     let url_query = url_apertura + "ObtenerCargos";
     let dataRequest = {};
 
+    this.presentLoader();
     return this.httpClient.post<ResponseQuery<CargoItem>>(
       url_query,
       JSON.stringify(dataRequest),
       { headers }
+    ).pipe(
+      finalize(() => {
+        console.log("se termino la llamada ObtenerCargos");
+        this.dismissLoader();
+      })
     );
   }
 
   ObtenerParticipanteXCargos(IdCargoCalificado) {
-    let url_query = url_apertura + "BuscarPersonalCargos";
+    let url_query = url_apertura + "BuscarPersonalCargos ObtenerParticipanteXCargos";
     let dataRequest = {
       IdCargoCalificado: IdCargoCalificado,
     };
 
+    this.presentLoader();
     return this.httpClient.post<ResponseQuery<Personal>>(
       url_query,
       JSON.stringify(dataRequest),
       { headers }
+    ).pipe(
+      finalize(() => {
+        console.log("se termino la llamada");
+        this.dismissLoader();
+      })
     );
   }
 
@@ -71,10 +95,16 @@ export class AperturaAuditoriaService implements BaseService {
       Codigo: Codigo,
     };
 
+    this.presentLoader();
     return this.httpClient.post<ResponseQuery<Norma>>(
       url_query,
       JSON.stringify(dataRequest),
       { headers }
+    ).pipe(
+      finalize(() => {
+        console.log("se termino la llamada BuscarNormas");
+        this.dismissLoader();
+      })
     );
   }
 
@@ -84,10 +114,16 @@ export class AperturaAuditoriaService implements BaseService {
       Codigo: Codigo,
     };
 
+    this.presentLoader();
     return this.httpClient.post<ResponseQuery<Norma>>(
       url_query,
       JSON.stringify(dataRequest),
       { headers }
+    ).pipe(
+      finalize(() => {
+        console.log("se termino la llamada BuscarNormasInternacionales");
+        this.dismissLoader();
+      })
     );
   }
 
@@ -97,10 +133,16 @@ export class AperturaAuditoriaService implements BaseService {
       pais: pais,
     };
 
+    this.presentLoader();
     return this.httpClient.post<ResponseQuery<Pais>>(
       url_query,
       JSON.stringify(dataRequest),
       { headers }
+    ).pipe(
+      finalize(() => {
+        console.log("se termino la llamada BuscarPais");
+        this.dismissLoader();
+      })
     );
   }
 
@@ -110,10 +152,16 @@ export class AperturaAuditoriaService implements BaseService {
       IdPais: IdPais,
     };
 
+    this.presentLoader();
     return this.httpClient.post<ResponseQuery<Estado>>(
       url_query,
       JSON.stringify(dataRequest),
       { headers }
+    ).pipe(
+      finalize(() => {
+        console.log("se termino la llamada BuscarEstado");
+        this.dismissLoader();
+      })
     );
   }
 
@@ -123,19 +171,74 @@ export class AperturaAuditoriaService implements BaseService {
       IdEstado: IdEstado,
     };
 
-    return this.httpClient.post<ResponseQuery<Ciudad>>(
+    this.presentLoader();
+     return this.httpClient.post<ResponseQuery<Ciudad>>(
       url_query,
       JSON.stringify(dataRequest),
       { headers }
+    ).pipe(
+      finalize(() => {
+        console.log("se termino la llamada BuscarCiudad");
+        this.dismissLoader();
+      })
     );
   }
 
-  RegisterProgramaAuditoria(programa){
+  RegisterProgramaAuditoria(programa) {
     let url_query = url_apertura + "RegisterProgramaAuditoria";
+   
+    this.presentLoader();   
     return this.httpClient.post<ResponseObject<Praprogramasdeauditorium>>(
       url_query,
       JSON.stringify(programa),
       { headers }
+    ).pipe(
+      finalize(() => {
+        console.log("se termino la llamada RegisterProgramaAuditoria");
+        this.dismissLoader();
+      })
     );
+  }
+
+  GenerarDesignacion(IdCiclo, Plantilla) {
+    let url_query = url_apertura + "GenerarDesignacion";
+    let dataRequest = {
+      IdCiclo: IdCiclo,
+      pathPlantilla: Plantilla,
+    };
+    this.presentLoader();
+    return this.httpClient
+      .post<ResponseQuery<Ciudad>>(url_query, JSON.stringify(dataRequest), {
+        headers,
+      })
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada GenerarDesignacion");
+          this.dismissLoader();
+        })
+      );
+  }
+
+  ObtenerArchivoDesignacion(fileName) {
+    let url_query =
+      url_apertura + "ObtenerArchivoDesignacion?fileName=" + fileName;
+
+    this.httpClient
+      .get(url_query, {
+        responseType: "arraybuffer",
+        headers: headers,
+      })
+      .subscribe((response) => this.downLoadFile(response, "application/pdf"));
+  }
+
+  downLoadFile(data: any, type: string) {
+    let blob = new Blob([data], { type: type });
+    let url = window.URL.createObjectURL(blob);
+    let pwa = window.open(url);
+    if (!pwa || pwa.closed || typeof pwa.closed == "undefined") {
+      alert(
+        "Por favor deshabilite los bloqueadores de descarga para continuar."
+      );
+    }
   }
 }

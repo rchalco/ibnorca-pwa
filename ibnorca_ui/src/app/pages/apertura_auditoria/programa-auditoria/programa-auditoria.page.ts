@@ -27,8 +27,8 @@ import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  currentIdService = 11037; //TCP
-  //currentIdService = 5915;  //TCS
+  //currentIdService = 11037; //TCP
+  currentIdService = 5915;  //TCS
   currentPraprogramasdeauditorium: Praprogramasdeauditorium;
   currentDatosServicio: DatosServicio;
   currentCliente: Cliente;
@@ -141,6 +141,19 @@ export class ProgramaAuditoriaPage implements OnInit {
           this.currentDatosServicio = JSON.parse(x.object.detalleServicioWs);
           this.mode = this.currentDatosServicio.area;
         }
+      });
+  }
+
+  VerDesignacion(ciclo: Praciclosprogauditorium) {
+    this.aperturaAuditoriaService
+      .GenerarDesignacion(
+        ciclo.idPrAcicloProgAuditoria,
+        "REG-PRO-TCS-03-01 Designación auditoria TCS Ver 1.0.doc"
+      )
+      .subscribe((x) => {
+        console.log(x);
+        //this.presentToast(x.message);
+        this.aperturaAuditoriaService.ObtenerArchivoDesignacion(x.message);
       });
   }
 

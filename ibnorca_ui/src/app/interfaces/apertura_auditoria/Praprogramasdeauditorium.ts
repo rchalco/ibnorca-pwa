@@ -1,7 +1,6 @@
 import { Cargo } from "./cargo";
 import { CargoItem } from "./cargo_item";
 import { Personal } from "./personal";
-
 export class Praprogramasdeauditorium {
   idPrAprogramaAuditoria: number;
   idparamArea: number | null;
@@ -16,6 +15,7 @@ export class Praprogramasdeauditorium {
   idparamTipoServicio: number | null;
   codigoIafws: string;
   numeroAnios: number | null;
+  organismoCertificador: string;
   usuarioRegistro: string;
   fechaDesde: string | null;
   fechaHasta: string | null;
@@ -43,15 +43,17 @@ export class Praciclosprogauditorium {
 export class Praciclocronograma {
   idCiclosCronogramas: number;
   idPrAcicloProgAuditoria: number | null;
-  cantidadDeDiasTotal: number | null;
-  mesProgramado: Date | null;
-  mesReprogramado: Date | null;
-  fechaInicioDeEjecucionDeAuditoria: Date | null;
-  fechaDeFinDeEjecucionAuditoria: Date | null;
+  diasInsitu: number | null;
+  diasRemoto: number | null;
+  horarioTrabajo: string;
+  mesProgramado: string | null;
+  mesReprogramado: string | null;
+  fechaInicioDeEjecucionDeAuditoria: string | null;
+  fechaDeFinDeEjecucionAuditoria: string | null;
   usuarioRegistro: string;
-  fechaDesde: Date | null;
-  fechaHasta: Date | null;
-  estado: string;
+  fechaDesde: string | null;
+  fechaHasta: string | null;
+  idPrAcicloProgAuditoriaNavigation: Praciclosprogauditorium;
 }
 
 export class Praciclonormassistema {

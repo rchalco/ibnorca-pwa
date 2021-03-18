@@ -20,6 +20,7 @@ import { PraCronogramaComponent } from "./pra-cronograma/pra-cronograma.componen
 import { BuscarNormaComponent } from "./buscar-norma/buscar-norma.component";
 import { PraDireccionSistemaComponent } from "./pra-direccion-sistema/pra-direccion-sistema.component";
 import { ParamPaisesComponent } from "./param-paises/param-paises.component";
+import { PraEditNormaSistemaComponent } from "./pra-edit-norma-sistema/pra-edit-norma-sistema.component";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ParamPaisesComponent } from "./param-paises/param-paises.component";
     BuscarNormaComponent,
     PraDireccionSistemaComponent,
     ParamPaisesComponent,
+    PraEditNormaSistemaComponent,
   ],
   imports: [
     CommonModule,
@@ -67,6 +69,7 @@ import { ParamPaisesComponent } from "./param-paises/param-paises.component";
     BuscarNormaComponent,
     PraDireccionSistemaComponent,
     ParamPaisesComponent,
+    PraEditNormaSistemaComponent
   ],
 })
 export class ComponentsModule {}

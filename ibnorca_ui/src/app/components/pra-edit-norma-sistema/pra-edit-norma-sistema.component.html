@@ -1,13 +1,12 @@
 <div class="container-product">
-  <form [formGroup]="ionicForm" (ngSubmit)="guardarProduct()" #form="ngForm">
-    <app-custom-input
-      label="Norma"
-      name="norma"
-      type="text"
-      [formGruop]="ionicForm"
-      [form]="form"
-      [defaultValue]="praciclonormassistema.norma"
-    ></app-custom-input>
+  <form [formGroup]="ionicForm" (ngSubmit)="guardarNorma()" #form="ngForm">
+    <ion-item (click)="mostrarBuscadorNorma()">
+      <ion-label> Norma : {{ praciclonormassistema.norma }} </ion-label>
+    </ion-item>
+    <app-buscar-norma
+      (selectNorma)="cambiarNorma($event)"
+      *ngIf="showBuscadorNormas"
+    ></app-buscar-norma>
     <app-custom-input
       label="Alcance"
       name="alcance"

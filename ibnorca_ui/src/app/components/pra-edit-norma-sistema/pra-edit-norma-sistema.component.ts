@@ -27,7 +27,7 @@ export class PraEditNormaSistemaComponent implements OnInit {
 
   guardarNorma() {
     ConvertFormToObject.convert(this.ionicForm, this.praciclonormassistema);
-    this.presentToast("Producto guardado correctamente").then((resul) => {
+    this.presentToast("Norma guardada correctamente").then((resul) => {
       if (this.guardarNormaEmitter) {
         this.guardarNormaEmitter.emit(this.praciclonormassistema);
       }
@@ -39,6 +39,17 @@ export class PraEditNormaSistemaComponent implements OnInit {
       this.cancelarNormaEmitter.emit(this.praciclonormassistema);
     }
   }
+
+  mostrarBuscadorNorma(){
+    console.log("ingreso al evento");
+    this.showBuscadorNormas = true;
+  }
+
+  cambiarNorma(norma) {
+    console.log("cambiarNorma", norma);
+    this.praciclonormassistema.norma = norma.codigoNorma;
+    this.showBuscadorNormas = false;
+  }
   async presentToast(mensaje) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -46,4 +57,7 @@ export class PraEditNormaSistemaComponent implements OnInit {
     });
     toast.present();
   }
+
+ 
+
 }

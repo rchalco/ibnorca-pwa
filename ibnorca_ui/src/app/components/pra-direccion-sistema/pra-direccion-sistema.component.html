@@ -1,6 +1,14 @@
 <div class="container-product">
   <form [formGroup]="ionicForm" (ngSubmit)="guardarDireccion()" #form="ngForm">
     <app-custom-input
+      label="Oficina"
+      name="nombre"
+      type="text"
+      [formGruop]="ionicForm"
+      [form]="form"
+      [defaultValue]="pradireccionespasistema.nombre"
+    ></app-custom-input>
+    <app-custom-input
       label="Direccion"
       name="direccion"
       type="text"
@@ -21,7 +29,7 @@
       ></app-custom-input>
       <app-custom-input
         label="Departamento"
-        name="estado"
+        name="departamento"
         type="text"
         [formGruop]="ionicForm"
         [form]="form"
@@ -54,9 +62,10 @@
     ></app-custom-input>    
     <section>
       <ion-button size="small" type="submit">Guardar</ion-button>
-      <ion-button size="small" (click)="cancelarDireccion()" color="secondary"
+      <ion-button size="small" (click)="cancelar()" color="secondary"
         >Cancelar</ion-button
       >
+     
     </section>
   </form>
 </div>

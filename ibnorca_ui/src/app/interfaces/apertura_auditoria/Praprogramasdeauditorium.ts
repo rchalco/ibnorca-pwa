@@ -107,6 +107,7 @@ export class Pradireccionespaproducto {
 export class Pradireccionespasistema {
   idDireccionPasistema: number;
   idPrAcicloProgAuditoria: number | null;
+  nombre: string;  
   direccion: string;  
   pais: string;
   departamento: string;

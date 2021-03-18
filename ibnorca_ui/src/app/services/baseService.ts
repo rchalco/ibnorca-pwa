@@ -3,7 +3,7 @@ import { LoadingController } from "@ionic/angular";
 import { ToastController } from "@ionic/angular";
 import { DatabaseService } from "./database.service";
 export class BaseService {
-  isLoading = false;
+  static isLoading = false;
 
   constructor(
     public databaseService: DatabaseService,
@@ -13,7 +13,7 @@ export class BaseService {
   ) {}
 
   public async presentLoader() {
-    this.isLoading = true;
+    BaseService.isLoading = true;
     return await this.loadingController
       .create({
         // duration: 5000,
@@ -22,7 +22,7 @@ export class BaseService {
       .then((a) => {
         a.present().then(() => {
           console.log("presented");
-          if (!this.isLoading) {
+          if (!BaseService.isLoading) {
             a.dismiss().then(() => console.log("abort presenting"));
           }
         });
@@ -30,7 +30,7 @@ export class BaseService {
   }
 
   public async dismissLoader() {
-    this.isLoading = false;
+    BaseService.isLoading = false;
     return await this.loadingController
       .dismiss()
       .then(() => console.log("dismissed"))

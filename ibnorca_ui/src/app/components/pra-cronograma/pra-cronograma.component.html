@@ -5,9 +5,21 @@
   </ion-item>
   <ion-card-content class="ion-content-small-font">
     <div class="item-cronograma">
-      <span class="label-cronograma">CANTIDAD DE DIAS TOTAL: </span>
-      <span class="data-cronograma" class="box-click edit-item" (click)="mostrarDiasCronograma($event)">
-        {{ currentPraciclocronogramas.cantidadDeDiasTotal }}
+      <span class="label-cronograma">DIAS INSITU: </span>
+      <span class="data-cronograma" class="box-click edit-item" (click)="mostrarDiasInsituCronograma($event)">
+        {{ currentPraciclocronogramas.diasInsitu }}
+      </span>
+    </div>
+    <div class="item-cronograma">
+      <span class="label-cronograma">DIAS REMOTO: </span>
+      <span class="data-cronograma" class="box-click edit-item" (click)="mostrarDiasRemotoCronograma($event)">
+        {{ currentPraciclocronogramas.diasRemoto }}
+      </span>
+    </div>
+    <div class="item-cronograma">
+      <span class="label-cronograma">HORARIO: </span>
+      <span class="data-cronograma" class="box-click edit-item" (click)="mostrarHorarioCronograma($event)">
+        {{ currentPraciclocronogramas.horarioTrabajo }}
       </span>
     </div>
     <div class="item-cronograma">

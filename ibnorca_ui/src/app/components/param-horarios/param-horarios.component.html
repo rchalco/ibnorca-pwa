@@ -1,0 +1,21 @@
+<ion-ilst>
+  <ion-item>
+    <ion-label>Inicio</ion-label>
+    <ion-datetime
+      display-format="H:mm"
+      picker-format="H:mm"
+      [(ngModel)]="horarioIni"
+      name="horarioIni"
+    ></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Fin</ion-label>
+    <ion-datetime
+      display-format="H:mm"
+      picker-format="H:mm"
+      [(ngModel)]="horarioFin"
+      name="horarioFin"
+      (ionChange)="selectionarHorario()"
+    ></ion-datetime>
+  </ion-item>
+</ion-ilst>

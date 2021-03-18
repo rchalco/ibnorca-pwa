@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { PopoverController } from "@ionic/angular";
 import { CustomInputComponent } from "../custom-input/custom-input.component";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
+import { ParamHorariosComponent } from "../param-horarios/param-horarios.component";
 
 @Component({
   selector: "app-pra-cronograma",
@@ -44,7 +45,7 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.currentPraciclocronogramas.mesProgramado = info.data.item;    
+    this.currentPraciclocronogramas.mesProgramado = info.data.item;
   }
 
   async mostrarMesesReprogamado(event) {
@@ -66,7 +67,7 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.currentPraciclocronogramas.mesReprogramado = info.data.item;    
+    this.currentPraciclocronogramas.mesReprogramado = info.data.item;
   }
 
   async mostrarFechaEjecucion(event) {
@@ -87,7 +88,8 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.currentPraciclocronogramas.fechaInicioDeEjecucionDeAuditoria = info.data.item;    
+    this.currentPraciclocronogramas.fechaInicioDeEjecucionDeAuditoria =
+      info.data.item;
   }
 
   async mostrarFechaFin(event) {
@@ -108,11 +110,11 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.currentPraciclocronogramas.fechaDeFinDeEjecucionAuditoria = info.data.item;    
+    this.currentPraciclocronogramas.fechaDeFinDeEjecucionAuditoria =
+      info.data.item;
   }
 
-
-  async mostrarDiasCronograma(event) {
+  async mostrarDiasInsituCronograma(event) {
     const popover = await this.popoverController.create({
       component: CustomInputComponent,
       componentProps: {
@@ -130,6 +132,47 @@ export class PraCronogramaComponent implements OnInit {
     await popover.present();
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
-    this.currentPraciclocronogramas.diasInsitu = info.data.item;    
+    this.currentPraciclocronogramas.diasInsitu = info.data.item;
   }
+
+  async mostrarDiasRemotoCronograma(event) {
+    const popover = await this.popoverController.create({
+      component: CustomInputComponent,
+      componentProps: {
+        formGruop: this.cronogramaForm,
+        label: "CANTIDAD DE DIAS",
+        name: "cantidad_dias",
+        type: "number",
+        form: "form",
+        defaultValue: Date(),
+      },
+      event: event,
+      mode: "ios",
+      backdropDismiss: false,
+    });
+    await popover.present();
+    const info = await popover.onDidDismiss();
+    console.log("Padre", info);
+    this.currentPraciclocronogramas.diasRemoto = info.data.item;
+  }
+
+  
+  async mostrarHorarioCronograma(event) {
+    const popover = await this.popoverController.create({
+      component: ParamHorariosComponent,
+      componentProps: {
+        horario: this.currentPraciclocronogramas.horarioTrabajo
+      },
+      event: event,
+      mode: "ios",
+      backdropDismiss: false,
+    });
+    await popover.present();
+    const info = await popover.onDidDismiss();
+    console.log("Padre", info);
+    this.currentPraciclocronogramas.horarioTrabajo = info.data.item;
+  }
+
+
+  
 }

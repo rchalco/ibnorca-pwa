@@ -15,10 +15,10 @@ import { Localizacion } from "src/app/interfaces/General/Localizacion";
 })
 export class PraDireccionSistemaComponent implements OnInit {
   ionicForm: FormGroup;
+  showBuscadorNormas = false;
   @Input() pradireccionespasistema: Pradireccionespasistema;
-  @Output() guardarProductEmitter = new EventEmitter<Pradireccionespasistema>();
-  @Output()
-  cancelarDireccionEmitter = new EventEmitter<Pradireccionespasistema>();
+  @Output() guardarDireccionEmitter = new EventEmitter<Pradireccionespasistema>();
+  @Output() cancelarDireccionEmitter = new EventEmitter<Pradireccionespasistema>();
   mode: string = "default-pais";
   constructor(
     private toastController: ToastController,
@@ -37,14 +37,16 @@ export class PraDireccionSistemaComponent implements OnInit {
     toast.present();
   }
   guardarDireccion() {
+    console.log("Guardar Direcc");
     ConvertFormToObject.convert(this.ionicForm, this.pradireccionespasistema);
     this.presentToast("Dirección guardada correctamente").then((resul) => {
-      if (this.guardarProductEmitter) {
-        this.guardarProductEmitter.emit(this.pradireccionespasistema);
+      if (this.guardarDireccionEmitter) {
+        this.guardarDireccionEmitter.emit(this.pradireccionespasistema);
       }
     });
   }
-  cancelarDireccion() {
+  cancelar() {
+    console.log("Cancelar Direcc");
     if (this.cancelarDireccionEmitter) {
       this.cancelarDireccionEmitter.emit(this.pradireccionespasistema);
     }
@@ -52,7 +54,11 @@ export class PraDireccionSistemaComponent implements OnInit {
   cambiarModoPais() {
     this.mode = "edit-pais";
   }
+
+  
+
   localizacionSeleccionda(localizacion: Localizacion) {
+    ConvertFormToObject.convert(this.ionicForm, this.pradireccionespasistema);
     this.pradireccionespasistema.pais = localizacion.pais.paisNombre;
     this.pradireccionespasistema.departamento = localizacion.estado.estNombre;
     this.pradireccionespasistema.ciudad = localizacion.ciudad.nomCiudad;

@@ -16,23 +16,23 @@
           <ion-icon
             name="add-circle"
             slot="end"
-            (click)="editar(item, i)"
+            (click)="adicionarNorma(item, i)"
             class="big-icon"
           ></ion-icon>
           Normas y Alcances
         </ion-item>
       </ion-list-header>
-      <ion-item *ngFor="let norma of normasSistema">
+      <ion-item *ngFor="let norma of normasSistema ; let i = index">
         <ion-icon
           name="pencil-sharp"
           slot="start"
-          (click)="editar(item, i)"
+          (click)="editarNorma(norma, i)"
           class="big-icon"
         ></ion-icon>
         <ion-icon
           name="trash"
           slot="start"
-          (click)="eliminar(i)"
+          (click)="eliminarNorma(i)"
           class="big-icon"
         ></ion-icon>
         <div class="norma-block">
@@ -53,23 +53,23 @@
           <ion-icon
             name="add-circle"
             slot="end"
-            (click)="editar(item, i)"
+            (click)="adicionarDireccion(item, i)"
             class="big-icon"
           ></ion-icon>
           Programación de direcciones
         </ion-item>
       </ion-list-header>
-      <ion-item *ngFor="let direccion of direccionesSistema">
+      <ion-item *ngFor="let direccion of direccionesSistema; let i = index">
         <ion-icon
           name="pencil-sharp"
           slot="start"
-          (click)="editar(direccion, i)"
+          (click)="editarDireccion(direccion, i)"
           class="big-icon"
         ></ion-icon>
         <ion-icon
           name="trash"
           slot="start"
-          (click)="eliminar(i)"
+          (click)="eliminarDireccion(i)"
           class="big-icon"
         ></ion-icon>
         <div class="direccion-block">
@@ -86,8 +86,17 @@
       </ion-item>
     </ion-list>
     <app-pra-direccion-sistema
-      *ngIf="mode === 'edit'"
+      *ngIf="mode === 'EDIT'"
       [pradireccionespasistema]="currentdireccionesSistema"
+      (guardarDireccionEmitter)="guardarDireccion($event)"
+      (cancelarDireccionEmitter)="cancelarDireccion($event)"
     ></app-pra-direccion-sistema>
+    <app-pra-edit-norma-sistema
+      *ngIf="mode === 'EDIT1'"
+      [praciclonormassistema]="currentnormaSistema"
+      (guardarNormaEmitter)="guardarNorma($event)"
+      (cancelarNormaEmitter)="cancelarNorma($event)"
+    ></app-pra-edit-norma-sistema>
+    
   </div>
 </div>

@@ -14,7 +14,7 @@ export class ParamOrganismosCertificadoresComponent implements OnInit {
   @Input() defaultValue: String;
   @Output()
   seleccionarOrganismoEmitter: EventEmitter<Clasificador> = new EventEmitter<Clasificador>();
-
+  descripcion: string;
   constructor(
     private aperturaAuditoriaService: AperturaAuditoriaService,
     private popoverController: PopoverController
@@ -38,12 +38,21 @@ export class ParamOrganismosCertificadoresComponent implements OnInit {
 
   seleccionarOrganismo(event) {
     
+    this.descripcion = "";
+    event.detail.value.forEach(x => {
+      if (this.descripcion == "")
+        this.descripcion = x.abrev;
+      else
+        this.descripcion = this.descripcion+ ","+ x.abrev;
+      
+    });
+    console.log("datos", this.descripcion);
     if (this.seleccionarOrganismoEmitter) {
       this.seleccionarOrganismoEmitter.emit(event);
     }
     if (this.popoverController) {
       this.popoverController.dismiss({
-        item: event.detail.value.descripcion,
+        item: this.descripcion,
       });
     }
   }

@@ -6,7 +6,8 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./master-elaboracion-auditoria.page.scss"],
 })
 export class MasterElaboracionAuditoriaPage implements OnInit {
-  select_component = "lista_verif";//"plan_auditoria"
+  //select_component = "lista_verif";
+  select_component = "plan_auditoria"
 
   constructor() {}
 

@@ -57,7 +57,6 @@ export class Praciclocronograma {
   estado: string| null;
   idPrAcicloProgAuditoriaNavigation: Praciclosprogauditorium;
 }
-
 export class Praciclonormassistema {
   idCicloNormaSistema: number;
   idPrAcicloProgAuditoria: number | null;
@@ -71,7 +70,6 @@ export class Praciclonormassistema {
   fechaDesde: string | null;
   fechaHasta: string | null;
 }
-
 export class Pracicloparticipante {
   idCicloParticipante: number;
   idPrAcicloProgAuditoria: number | null;
@@ -81,11 +79,11 @@ export class Pracicloparticipante {
   cargoDetalleWs: string;
   usuarioRegistro: string;
   fechaDesde: string | null;
-  dias: number | null;
+  diasInsistu: number | null;
+  diasRemoto: number | null;
   _cargo: CargoItem;
   _personal: Personal;
 }
-
 export class Pradireccionespaproducto {
   idDireccionPaproducto: number;
   idPrAcicloProgAuditoria: number | null;

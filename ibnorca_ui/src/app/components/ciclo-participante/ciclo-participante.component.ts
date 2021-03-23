@@ -14,17 +14,15 @@ export class CicloParticipanteComponent implements OnInit {
   @Input() currentPracicloparticipantes: Pracicloparticipante[];
   visibleAdd = "NO";
   ListaCargoItem: CargoItem[];
-  currentCargo: CargoItem;
-  cantidadDias = 0;
-  ListaPersonal: Personal[];
-  currentPersonal: Personal;
+  ListaPersonal: Personal[]; 
   operacion = "";
   selectParticipante: Pracicloparticipante;
   currentIndex = 0;
   constructor(private aperturaAuditoriaService: AperturaAuditoriaService) {}
 
   ngOnInit() {
-    this.ObtenerCargos();
+    this.selectParticipante = new Pracicloparticipante();
+    this.ObtenerCargos();    
   }
 
   adicionarParticipante() {
@@ -36,11 +34,10 @@ export class CicloParticipanteComponent implements OnInit {
   editar(item, index) {
     this.currentIndex = index;
     this.selectParticipante = item;
-    this.currentCargo = this.ListaCargoItem.filter(
+    this.selectParticipante._cargo = this.ListaCargoItem.filter(
       (x) => x.idCargoPuesto === this.selectParticipante._cargo.idCargoPuesto
-    )[0];
-    this.ObtenerPersonalXIdCargo(this.currentCargo.idCargoPuesto);
-    this.currentPersonal = this.selectParticipante._personal;    
+    )[0];    
+    this.ObtenerPersonalXIdCargos(this.selectParticipante._cargo.idCargoPuesto);    
     this.visibleAdd = "SI";
     this.operacion = "UPD";
   }
@@ -59,11 +56,19 @@ export class CicloParticipanteComponent implements OnInit {
 
   ObtenerPersonalXCargos(event) {    
     let IdCargo = event.detail.value.idCargoPuesto;
-    this.currentCargo = event.detail.value;
+    this.selectParticipante._cargo = event.detail.value;
     this.aperturaAuditoriaService
       .ObtenerParticipanteXCargos(IdCargo)
       .subscribe((resul) => {
-        this.ListaPersonal = resul.listEntities;
+        this.ListaPersonal = resul.listEntities;        
+      });
+  }
+
+  ObtenerPersonalXIdCargos(idCargo) {  
+    this.aperturaAuditoriaService
+      .ObtenerParticipanteXCargos(idCargo)
+      .subscribe((resul) => {
+        this.ListaPersonal = resul.listEntities;        
       });
   }
 
@@ -76,14 +81,11 @@ export class CicloParticipanteComponent implements OnInit {
   }
 
   seleccionarPersonal(event) {    
-    this.currentPersonal = event.detail.value;
-    this.selectParticipante.dias = this.cantidadDias;
-    this.selectParticipante.cargoDetalleWs = JSON.stringify(this.currentCargo);
-    this.selectParticipante.idCargoWs = Number(this.currentCargo.idCargoPuesto);
-    this.selectParticipante._cargo = this.currentCargo;
-    this.selectParticipante.idParticipanteWs = Number(this.currentPersonal.idCliente);
-    this.selectParticipante.participanteDetalleWs = JSON.stringify(this.currentPersonal);
-    this.selectParticipante._personal = this.currentPersonal;
+    this.selectParticipante._personal = event.detail.value;    
+    this.selectParticipante.cargoDetalleWs = JSON.stringify(this.selectParticipante._cargo);
+    this.selectParticipante.idCargoWs = Number(this.selectParticipante._cargo.idCargoPuesto);    
+    this.selectParticipante.idParticipanteWs = Number(this.selectParticipante._personal.idCliente);
+    this.selectParticipante.participanteDetalleWs = JSON.stringify(this.selectParticipante._personal);    
     this.visibleAdd = "NO";
     console.log(this.selectParticipante);
     if (this.operacion == "UPD") {
@@ -94,8 +96,6 @@ export class CicloParticipanteComponent implements OnInit {
     if (this.operacion == "ADD") {
       this.currentPracicloparticipantes.push(this.selectParticipante);
     }
-    this.currentPersonal = null;
-    this.currentCargo = null;
   }
   cancelar(){
     this.visibleAdd = "NO";

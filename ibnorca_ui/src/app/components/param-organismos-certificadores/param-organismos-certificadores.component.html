@@ -8,6 +8,7 @@
       cancelText="Cancelar"
       (ionChange)="seleccionarOrganismo($event)"
       [value]="currentOrganismo"
+      multiple="true"
     >
       <ion-select-option
         *ngFor="let organismo of listaOrganismos"

@@ -39,7 +39,7 @@
       [form]="form"
       [defaultValue]="pradireccionespaproducto.sello"
     ></app-custom-input>
-    <div *ngIf="mode === 'default-pais'">
+    <!-- <div *ngIf="mode === 'default-pais'">
       <app-custom-input
         label="PAIS"
         name="pais"
@@ -68,7 +68,7 @@
         readonly="true"
         [defaultValue]="pradireccionespaproducto.ciudad"
       ></app-custom-input>
-    </div>
+    </div> -->
     <app-param-paises
       *ngIf="mode === 'edit-pais'"
       [defaulValue]="pradireccionespaproducto.pais"

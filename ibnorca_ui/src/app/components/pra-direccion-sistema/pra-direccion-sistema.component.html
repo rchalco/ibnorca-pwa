@@ -1,13 +1,13 @@
 <div class="container-product">
   <form [formGroup]="ionicForm" (ngSubmit)="guardarDireccion()" #form="ngForm">
-    <app-custom-input
+    <!-- <app-custom-input
       label="Oficina"
       name="nombre"
       type="text"
       [formGruop]="ionicForm"
       [form]="form"
       [defaultValue]="pradireccionespasistema.nombre"
-    ></app-custom-input>
+    ></app-custom-input> -->
     <app-custom-input
       label="Direccion"
       name="direccion"
@@ -16,7 +16,7 @@
       [form]="form"
       [defaultValue]="pradireccionespasistema.direccion"
     ></app-custom-input>
-    <div *ngIf="mode === 'default-pais'">
+    <!-- <div *ngIf="mode === 'default-pais'">
       <app-custom-input
         label="PAIS"
         name="pais"
@@ -50,7 +50,7 @@
       *ngIf="mode === 'edit-pais'"
       [defaulValue]="pradireccionespasistema.pais"
       (selectLocalizacionEmit) = "localizacionSeleccionda($event)"
-    ></app-param-paises>
+    ></app-param-paises> -->
     <app-custom-input
       label="Dias"
       name="dias"

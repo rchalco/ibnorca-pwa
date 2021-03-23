@@ -7,13 +7,13 @@
       okText="Ok"
       cancelText="Cancelar"
       (ionChange)="seleccionarOrganismo($event)"
-      [value]="currentNorma"
+      [value]="currentOrganismo"
     >
       <ion-select-option
         *ngFor="let organismo of listaOrganismos"
         [value]="organismo"
         class="cargo-select"        
-        >{{ norma.Descripcion }}
+        >{{ organismo.descripcion }}
       </ion-select-option>
     </ion-select>
   </ion-item>

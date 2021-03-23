@@ -72,7 +72,7 @@ export class AperturaAuditoriaService extends BaseService {
   }
 
   ObtenerParticipanteXCargos(IdCargoCalificado) {
-    let url_query = url_apertura + "BuscarPersonalCargos ObtenerParticipanteXCargos";
+    let url_query = url_apertura + "BuscarPersonalCargos";
     let dataRequest = {
       IdCargoCalificado: IdCargoCalificado,
     };
@@ -229,10 +229,12 @@ export class AperturaAuditoriaService extends BaseService {
         responseType: "arraybuffer",
         headers: headers,
       })
-      .subscribe((response) => this.downLoadFile(response, "application/pdf"));
+      //.subscribe((response) => this.downLoadFile(response, "application/pdf"));
+      .subscribe((response) => this.downLoadFileWord(response, "Desginacion.doc"));
   }
 
   downLoadFile(data: any, type: string) {
+    
     let blob = new Blob([data], { type: type });
     let url = window.URL.createObjectURL(blob);
     let pwa = window.open(url);
@@ -241,6 +243,17 @@ export class AperturaAuditoriaService extends BaseService {
         "Por favor deshabilite los bloqueadores de descarga para continuar."
       );
     }
+  }
+
+  downLoadFileWord(data: any, fileName: string) {
+    
+    var blob = new Blob([data], { type: 'application/octet-stream' });
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    // set the name of the file
+    link.download = fileName;
+    // clicking the anchor element will download the file
+    link.click();
   }
 
   BuscarOrganismosCertificadores() {

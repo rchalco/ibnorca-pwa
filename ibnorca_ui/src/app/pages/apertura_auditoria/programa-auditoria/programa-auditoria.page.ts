@@ -20,6 +20,7 @@ import {
 import { Cliente } from "src/app/interfaces/General/Cliente";
 import { DatosServicio } from "src/app/interfaces/apertura_auditoria/IBDatosServicio";
 import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
+import { ParamOrganismosCertificadoresComponent } from "src/app/components/param-organismos-certificadores/param-organismos-certificadores.component";
 
 @Component({
   selector: "app-programa-auditoria",
@@ -27,7 +28,7 @@ import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  //currentIdService = 11037; //TCP
+  //currentIdService = 12061; //TCP
   currentIdService = 5915;  //TCS
   currentPraprogramasdeauditorium: Praprogramasdeauditorium;
   currentDatosServicio: DatosServicio;
@@ -40,8 +41,7 @@ export class ProgramaAuditoriaPage implements OnInit {
     public formBuilder: FormBuilder,
     private popoverController: PopoverController,
     public datepipe: DatePipe,
-    private aperturaAuditoriaService: AperturaAuditoriaService,
-    private toastCtrl: ToastController
+    private aperturaAuditoriaService: AperturaAuditoriaService
   ) {}
 
   ngOnInit() {
@@ -79,9 +79,7 @@ export class ProgramaAuditoriaPage implements OnInit {
 
           this.mode = this.currentDatosServicio.area;
         } else {
-          this.presentToast(
-            "No se puede rescartar la informacion: " + resul.message
-          );
+          this.aperturaAuditoriaService.showMessageResponse(resul);
         }
       });
     this.programaForm = this.formBuilder.group({});
@@ -117,7 +115,7 @@ export class ProgramaAuditoriaPage implements OnInit {
     this.aperturaAuditoriaService
       .RegisterProgramaAuditoria(this.currentPraprogramasdeauditorium)
       .subscribe((x) => {
-        this.presentToast(x.message, "success");
+        this.aperturaAuditoriaService.showMessageResponse(x);
         if (x.state === 1) {
           x.object.praciclosprogauditoria.forEach((x) => {
             //copiamos los estaodos del ciclo al cronoramoa
@@ -157,13 +155,22 @@ export class ProgramaAuditoriaPage implements OnInit {
       });
   }
 
-  async presentToast(text, color = "danger") {
-    const toast = await this.toastCtrl.create({
-      message: text,
-      duration: 3000,
-      position: "top",
-      color: color,
+
+
+  async mostrarOrganismo(){
+    console.log("mostramos las organizaciones");
+    const popover = await this.popoverController.create({
+      component: ParamOrganismosCertificadoresComponent,
+      componentProps: {
+        defaultValue: this.currentPraprogramasdeauditorium.organismoCertificador
+      },
+      event: event,
+      mode: "ios",
+      backdropDismiss: false,
     });
-    toast.present();
+    await popover.present();
+    const info = await popover.onDidDismiss();
+    console.log("Padre", info);
+    this.currentPraprogramasdeauditorium.organismoCertificador = info.data.item;
   }
 }

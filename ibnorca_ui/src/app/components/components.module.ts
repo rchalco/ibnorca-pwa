@@ -21,6 +21,7 @@ import { BuscarNormaComponent } from "./buscar-norma/buscar-norma.component";
 import { PraDireccionSistemaComponent } from "./pra-direccion-sistema/pra-direccion-sistema.component";
 import { ParamPaisesComponent } from "./param-paises/param-paises.component";
 import { PraEditNormaSistemaComponent } from "./pra-edit-norma-sistema/pra-edit-norma-sistema.component";
+import { ParamOrganismosCertificadoresComponent } from "./param-organismos-certificadores/param-organismos-certificadores.component";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { PraEditNormaSistemaComponent } from "./pra-edit-norma-sistema/pra-edit-
     PraDireccionSistemaComponent,
     ParamPaisesComponent,
     PraEditNormaSistemaComponent,
+    ParamOrganismosCertificadoresComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +71,8 @@ import { PraEditNormaSistemaComponent } from "./pra-edit-norma-sistema/pra-edit-
     BuscarNormaComponent,
     PraDireccionSistemaComponent,
     ParamPaisesComponent,
-    PraEditNormaSistemaComponent
+    PraEditNormaSistemaComponent,
+    ParamOrganismosCertificadoresComponent
   ],
 })
 export class ComponentsModule {}

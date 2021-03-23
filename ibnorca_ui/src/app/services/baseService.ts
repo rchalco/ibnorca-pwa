@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { LoadingController } from "@ionic/angular";
 import { ToastController } from "@ionic/angular";
 import { DatabaseService } from "./database.service";
+
 export class BaseService {
   static isLoading = false;
 
@@ -16,7 +17,7 @@ export class BaseService {
     BaseService.isLoading = true;
     return await this.loadingController
       .create({
-        // duration: 5000,
+        duration: 5000,
         message: "Procesando...",
       })
       .then((a) => {
@@ -35,5 +36,28 @@ export class BaseService {
       .dismiss()
       .then(() => console.log("dismissed"))
       .catch((error) => console.log("error en dismiss loader", error));
+  }
+
+  async showMessageResponse(response) {
+    let color = "success";
+    switch (response["state"]) {
+      case 1:
+        color = "success";
+        break;
+      case 2:
+        color = "warning";
+        break;
+      case 3:
+        color = "danger";
+        break;
+    }
+
+    const toast = await this.toastController.create({
+      message: response["message"],
+      duration: 3000,
+      position: "top",
+      color: color,
+    });
+    toast.present();
   }
 }

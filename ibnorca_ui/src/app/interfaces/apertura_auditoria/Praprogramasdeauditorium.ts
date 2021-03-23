@@ -29,6 +29,7 @@ export class Praciclosprogauditorium {
   idparamEstadosProgAuditoria: number | null;
   estadoDescripcion: string;
   anio: number | null;
+  organismoCertificador: string;
   idparamTipoAuditoria: number | null;
   usuarioRegistro: string;
   fechaDesde: string | null;

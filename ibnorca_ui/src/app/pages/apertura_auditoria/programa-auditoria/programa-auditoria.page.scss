@@ -44,3 +44,19 @@ ion-card-content {
   margin-left: 3px;
   cursor: grab;
 }
+.box-click {
+  min-width: 100px;
+  min-height: 20px;
+  border-bottom: solid;
+  border-color: #778e8f;
+  border-width: 1px;
+  padding: 2px;
+  margin-left: 3px;
+  display: inline-block;
+}
+.edit-item {
+  cursor: grab;
+}
+.edit-item:hover {
+  background-color: #9dd8dc;
+}

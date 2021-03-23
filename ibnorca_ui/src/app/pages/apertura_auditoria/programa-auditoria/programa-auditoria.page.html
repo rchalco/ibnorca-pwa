@@ -7,8 +7,8 @@
   <ion-card *ngIf="currentCliente">
     <ion-card-header color="primary">
       <ion-card-subtitle
-        >ID CLIENTE: {{currentCliente.IdCliente}} </ion-card-subtitle
-      >
+        >ID CLIENTE: {{currentCliente.IdCliente}}
+      </ion-card-subtitle>
       <ion-item color="primary">
         <ion-icon color="light" name="server-outline" slot="start"></ion-icon>
         <ion-label>CLIENTE: {{currentCliente.NombreRazon}}</ion-label>
@@ -23,8 +23,12 @@
     <ion-card-content>
       <ion-row>
         <ion-col size="12">
-          <div class="container-detail-certificacion ion-content-small-font">            
+          <div class="container-detail-certificacion ion-content-small-font">
             CODIGO IAF: {{currentPraprogramasdeauditorium.codigoIafws}}<br />
+            Organismo Certificador:
+            <span class="box-click edit-item" (click)="mostrarOrganismo()"
+              >{{currentPraprogramasdeauditorium.organismoCertificador}}</span
+            >
           </div>
           <ion-slides pager="false" class="slide-full">
             <ion-slide
@@ -32,16 +36,14 @@
             >
               <div class="container-detail-auditoria">
                 <ion-item color="title-medium">
-
-                  <ion-label class="title-medium-font"
-                    >
+                  <ion-label class="title-medium-font">
                     <ion-icon
-                    name="pencil-sharp"
-                    slot="end"
-                    (click)="editarCiclo(ciclo, i)"
-                    class="big-icon"
-                  ></ion-icon>
-                  AÑO {{ciclo.anio}} {{ciclo.referencia}}
+                      name="pencil-sharp"
+                      slot="end"
+                      (click)="editarCiclo(ciclo, i)"
+                      class="big-icon"
+                    ></ion-icon>
+                    AÑO {{ciclo.anio}} {{ciclo.referencia}}
                   </ion-label>
                 </ion-item>
                 <ion-row>
@@ -80,11 +82,21 @@
                   *ngIf="mode === 'TCS'"
                 ></app-tcs-list-systems>
                 <ion-buttons slot="start" class="buttons-group">
-                  <ion-button size="small" fill="outline" color="success" (click)="guardarPrograma()">
+                  <ion-button
+                    size="small"
+                    fill="outline"
+                    color="success"
+                    (click)="guardarPrograma()"
+                  >
                     <ion-icon slot="start" name="save"></ion-icon>
                     Guardar
                   </ion-button>
-                  <ion-button size="small" fill="outline" color="tertiary" (click)="VerDesignacion(ciclo)">
+                  <ion-button
+                    size="small"
+                    fill="outline"
+                    color="tertiary"
+                    (click)="VerDesignacion(ciclo)"
+                  >
                     <ion-icon slot="start" name="document"></ion-icon>
                     Ver Designacion
                   </ion-button>

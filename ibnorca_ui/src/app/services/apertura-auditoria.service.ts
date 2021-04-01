@@ -14,7 +14,7 @@ import { Pais } from "../interfaces/General/Pais";
 import { Estado } from "../interfaces/General/Estado";
 import { Ciudad } from "../interfaces/General/Ciudad";
 import { LoadingController, ToastController } from "@ionic/angular";
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
 import { catchError, finalize } from "rxjs/operators";
 import { Clasificador } from "../interfaces/General/Clasificador";
 
@@ -50,6 +50,10 @@ export class AperturaAuditoriaService extends BaseService {
         finalize(() => {
           console.log("**se termino la llamada ObtenerProgramaAuditoria");
           this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
         })
       );
   }
@@ -59,16 +63,20 @@ export class AperturaAuditoriaService extends BaseService {
     let dataRequest = {};
 
     this.presentLoader();
-    return this.httpClient.post<ResponseQuery<CargoItem>>(
-      url_query,
-      JSON.stringify(dataRequest),
-      { headers }
-    ).pipe(
-      finalize(() => {
-        console.log("se termino la llamada ObtenerCargos");
-        this.dismissLoader();
+    return this.httpClient
+      .post<ResponseQuery<CargoItem>>(url_query, JSON.stringify(dataRequest), {
+        headers,
       })
-    );
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada ObtenerCargos");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
   }
 
   ObtenerParticipanteXCargos(IdCargoCalificado) {
@@ -78,16 +86,20 @@ export class AperturaAuditoriaService extends BaseService {
     };
 
     this.presentLoader();
-    return this.httpClient.post<ResponseQuery<Personal>>(
-      url_query,
-      JSON.stringify(dataRequest),
-      { headers }
-    ).pipe(
-      finalize(() => {
-        console.log("se termino la llamada");
-        this.dismissLoader();
+    return this.httpClient
+      .post<ResponseQuery<Personal>>(url_query, JSON.stringify(dataRequest), {
+        headers,
       })
-    );
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
   }
 
   BuscarNormas(Codigo) {
@@ -97,16 +109,20 @@ export class AperturaAuditoriaService extends BaseService {
     };
 
     this.presentLoader();
-    return this.httpClient.post<ResponseQuery<Norma>>(
-      url_query,
-      JSON.stringify(dataRequest),
-      { headers }
-    ).pipe(
-      finalize(() => {
-        console.log("se termino la llamada BuscarNormas");
-        this.dismissLoader();
+    return this.httpClient
+      .post<ResponseQuery<Norma>>(url_query, JSON.stringify(dataRequest), {
+        headers,
       })
-    );
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada BuscarNormas");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
   }
 
   BuscarNormasInternacionales(Codigo) {
@@ -116,16 +132,20 @@ export class AperturaAuditoriaService extends BaseService {
     };
 
     this.presentLoader();
-    return this.httpClient.post<ResponseQuery<Norma>>(
-      url_query,
-      JSON.stringify(dataRequest),
-      { headers }
-    ).pipe(
-      finalize(() => {
-        console.log("se termino la llamada BuscarNormasInternacionales");
-        this.dismissLoader();
+    return this.httpClient
+      .post<ResponseQuery<Norma>>(url_query, JSON.stringify(dataRequest), {
+        headers,
       })
-    );
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada BuscarNormasInternacionales");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
   }
 
   BuscarPais(pais) {
@@ -135,16 +155,20 @@ export class AperturaAuditoriaService extends BaseService {
     };
 
     this.presentLoader();
-    return this.httpClient.post<ResponseQuery<Pais>>(
-      url_query,
-      JSON.stringify(dataRequest),
-      { headers }
-    ).pipe(
-      finalize(() => {
-        console.log("se termino la llamada BuscarPais");
-        this.dismissLoader();
+    return this.httpClient
+      .post<ResponseQuery<Pais>>(url_query, JSON.stringify(dataRequest), {
+        headers,
       })
-    );
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada BuscarPais");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
   }
 
   BuscarEstado(IdPais) {
@@ -154,16 +178,20 @@ export class AperturaAuditoriaService extends BaseService {
     };
 
     this.presentLoader();
-    return this.httpClient.post<ResponseQuery<Estado>>(
-      url_query,
-      JSON.stringify(dataRequest),
-      { headers }
-    ).pipe(
-      finalize(() => {
-        console.log("se termino la llamada BuscarEstado");
-        this.dismissLoader();
+    return this.httpClient
+      .post<ResponseQuery<Estado>>(url_query, JSON.stringify(dataRequest), {
+        headers,
       })
-    );
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada BuscarEstado");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
   }
 
   BuscarCiudad(IdEstado) {
@@ -173,32 +201,42 @@ export class AperturaAuditoriaService extends BaseService {
     };
 
     this.presentLoader();
-     return this.httpClient.post<ResponseQuery<Ciudad>>(
-      url_query,
-      JSON.stringify(dataRequest),
-      { headers }
-    ).pipe(
-      finalize(() => {
-        console.log("se termino la llamada BuscarCiudad");
-        this.dismissLoader();
+    return this.httpClient
+      .post<ResponseQuery<Ciudad>>(url_query, JSON.stringify(dataRequest), {
+        headers,
       })
-    );
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada BuscarCiudad");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
   }
 
   RegisterProgramaAuditoria(programa) {
     let url_query = url_apertura + "RegisterProgramaAuditoria";
-   
-    this.presentLoader();   
-    return this.httpClient.post<ResponseObject<Praprogramasdeauditorium>>(
-      url_query,
-      JSON.stringify(programa),
-      { headers }
-    ).pipe(
-      finalize(() => {
-        console.log("se termino la llamada RegisterProgramaAuditoria");
-        this.dismissLoader();
-      })
-    );
+
+    this.presentLoader();
+    return this.httpClient
+      .post<ResponseObject<Praprogramasdeauditorium>>(
+        url_query,
+        JSON.stringify(programa),
+        { headers }
+      )
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada RegisterProgramaAuditoria");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
   }
 
   GenerarDesignacion(IdCiclo, Plantilla) {
@@ -216,6 +254,10 @@ export class AperturaAuditoriaService extends BaseService {
         finalize(() => {
           console.log("se termino la llamada GenerarDesignacion");
           this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
         })
       );
   }
@@ -230,11 +272,12 @@ export class AperturaAuditoriaService extends BaseService {
         headers: headers,
       })
       //.subscribe((response) => this.downLoadFile(response, "application/pdf"));
-      .subscribe((response) => this.downLoadFileWord(response, "Desginacion.doc"));
+      .subscribe((response) =>
+        this.downLoadFileWord(response, "Desginacion.doc")
+      );
   }
 
   downLoadFile(data: any, type: string) {
-    
     let blob = new Blob([data], { type: type });
     let url = window.URL.createObjectURL(blob);
     let pwa = window.open(url);
@@ -246,9 +289,8 @@ export class AperturaAuditoriaService extends BaseService {
   }
 
   downLoadFileWord(data: any, fileName: string) {
-    
-    var blob = new Blob([data], { type: 'application/octet-stream' });
-    var link = document.createElement('a');
+    var blob = new Blob([data], { type: "application/octet-stream" });
+    var link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     // set the name of the file
     link.download = fileName;
@@ -258,13 +300,16 @@ export class AperturaAuditoriaService extends BaseService {
 
   BuscarOrganismosCertificadores() {
     let url_query = url_apertura + "BuscarOrganismosCertificadores";
-    let dataRequest = {
-    };
+    let dataRequest = {};
     this.presentLoader();
     return this.httpClient
-      .post<ResponseQuery<Clasificador>>(url_query, JSON.stringify(dataRequest), {
-        headers,
-      })
+      .post<ResponseQuery<Clasificador>>(
+        url_query,
+        JSON.stringify(dataRequest),
+        {
+          headers,
+        }
+      )
       .pipe(
         finalize(() => {
           console.log("se termino la llamada GenerarDesignacion");
@@ -272,5 +317,4 @@ export class AperturaAuditoriaService extends BaseService {
         })
       );
   }
-
 }

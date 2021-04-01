@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { ElaboracionAuditoriaService } from "src/app/services/elaboracion-auditoria.service";
 
 @Component({
   selector: "app-master-elaboracion-auditoria",
@@ -6,12 +8,27 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./master-elaboracion-auditoria.page.scss"],
 })
 export class MasterElaboracionAuditoriaPage implements OnInit {
-  //select_component = "lista_verif";
-  select_component = "plan_auditoria"
+  select_component = "plan_auditoria";
+  idCicloAuditoria = 0;
 
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private elaboracionAuditoriaService: ElaboracionAuditoriaService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      console.log(params);
+      if (params.idCicloAuditoria) {
+        this.idCicloAuditoria = params.idCicloAuditoria;
+        console.log("Id de ciclo", this.idCicloAuditoria);
+      } else {
+        this.elaboracionAuditoriaService.showMessageError(
+          "No se recibio ningun parametro de Id de Ciclo de auditoria"
+        );
+      }
+    });
+  }
 
   segmentChanged(event) {
     /*if (event.detail.value === 'todos') {

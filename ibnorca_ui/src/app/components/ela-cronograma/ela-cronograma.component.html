@@ -1,0 +1,63 @@
+<div class="container-product">
+  <form
+    [formGroup]="ionicFormHorario"
+    (ngSubmit)="guardarCronograma()"
+    #form="ngForm"
+  >
+    <app-custom-input
+      label="Fecha"
+      name="fechaInicio"
+      type="datetime"
+      [formGruop]="ionicFormHorario"
+      [form]="form"
+      [defaultValue]="currentElacronogama.fechaInicio"
+    ></app-custom-input>
+    <app-custom-input
+      label="Horario"
+      name="direccion"
+      type="text"
+      [formGruop]="ionicFormHorario"
+      [form]="form"
+      [defaultValue]="currentElacronogama.horario"
+    ></app-custom-input>
+    <app-custom-input
+      label="Requisitos"
+      name="marca"
+      type="text"
+      [formGruop]="ionicFormHorario"
+      [form]="form"
+      [defaultValue]="currentElacronogama.requisitosEsquema"
+    ></app-custom-input>
+    <app-custom-input
+      label="Persona Entrevsitada"
+      name="marca"
+      type="text"
+      [formGruop]="ionicFormHorario"
+      [form]="form"
+      [defaultValue]="currentElacronogama.personaEntrevistadaCargo"
+    ></app-custom-input>
+    <ion-select
+      interface="alert"
+      placeholder="Participante"
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarParticipante($event)"
+      multiple="true"
+      [value]="selectedParticipantes"
+    >
+      <ion-select-option
+        *ngFor="let norma of listaParticipantes"
+        [value]="norma"
+        class="cargo-select"
+        >{{ norma.codigoNorma }} - {{ norma.nombreNorma }}
+      </ion-select-option>
+    </ion-select>
+    <section>
+      <ion-button size="small" type="submit">Guardar</ion-button>
+      <ion-button size="small" color="secondary" (click)="cancelar()"
+        >Cancelar</ion-button
+      >
+    </section>
+  </form>
+</div>

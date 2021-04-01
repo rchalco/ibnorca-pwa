@@ -12,9 +12,11 @@ import { AperturaAuditoriaService } from "src/app/services/apertura-auditoria.se
 })
 export class CicloParticipanteComponent implements OnInit {
   @Input() currentPracicloparticipantes: Pracicloparticipante[];
+  @Input() allowEdit: boolean = true;
+
   visibleAdd = "NO";
   ListaCargoItem: CargoItem[];
-  ListaPersonal: Personal[]; 
+  ListaPersonal: Personal[];
   operacion = "";
   selectParticipante: Pracicloparticipante;
   currentIndex = 0;
@@ -22,7 +24,7 @@ export class CicloParticipanteComponent implements OnInit {
 
   ngOnInit() {
     this.selectParticipante = new Pracicloparticipante();
-    this.ObtenerCargos();    
+    this.ObtenerCargos();
   }
 
   adicionarParticipante() {
@@ -36,8 +38,8 @@ export class CicloParticipanteComponent implements OnInit {
     this.selectParticipante = item;
     this.selectParticipante._cargo = this.ListaCargoItem.filter(
       (x) => x.idCargoPuesto === this.selectParticipante._cargo.idCargoPuesto
-    )[0];    
-    this.ObtenerPersonalXIdCargos(this.selectParticipante._cargo.idCargoPuesto);    
+    )[0];
+    this.ObtenerPersonalXIdCargos(this.selectParticipante._cargo.idCargoPuesto);
     this.visibleAdd = "SI";
     this.operacion = "UPD";
   }
@@ -54,38 +56,46 @@ export class CicloParticipanteComponent implements OnInit {
     });
   }
 
-  ObtenerPersonalXCargos(event) {    
+  ObtenerPersonalXCargos(event) {
     let IdCargo = event.detail.value.idCargoPuesto;
     this.selectParticipante._cargo = event.detail.value;
     this.aperturaAuditoriaService
       .ObtenerParticipanteXCargos(IdCargo)
       .subscribe((resul) => {
-        this.ListaPersonal = resul.listEntities;        
+        this.ListaPersonal = resul.listEntities;
       });
   }
 
-  ObtenerPersonalXIdCargos(idCargo) {  
+  ObtenerPersonalXIdCargos(idCargo) {
     this.aperturaAuditoriaService
       .ObtenerParticipanteXCargos(idCargo)
       .subscribe((resul) => {
-        this.ListaPersonal = resul.listEntities;        
+        this.ListaPersonal = resul.listEntities;
       });
   }
 
   ObtenerPersonalXIdCargo(IdCargo) {
     this.aperturaAuditoriaService
       .ObtenerParticipanteXCargos(IdCargo)
-      .subscribe((resul) => {    
+      .subscribe((resul) => {
         this.ListaPersonal = resul.listEntities;
       });
   }
 
-  seleccionarPersonal(event) {    
-    this.selectParticipante._personal = event.detail.value;    
-    this.selectParticipante.cargoDetalleWs = JSON.stringify(this.selectParticipante._cargo);
-    this.selectParticipante.idCargoWs = Number(this.selectParticipante._cargo.idCargoPuesto);    
-    this.selectParticipante.idParticipanteWs = Number(this.selectParticipante._personal.idCliente);
-    this.selectParticipante.participanteDetalleWs = JSON.stringify(this.selectParticipante._personal);    
+  seleccionarPersonal(event) {
+    this.selectParticipante._personal = event.detail.value;
+    this.selectParticipante.cargoDetalleWs = JSON.stringify(
+      this.selectParticipante._cargo
+    );
+    this.selectParticipante.idCargoWs = Number(
+      this.selectParticipante._cargo.idCargoPuesto
+    );
+    this.selectParticipante.idParticipanteWs = Number(
+      this.selectParticipante._personal.idCliente
+    );
+    this.selectParticipante.participanteDetalleWs = JSON.stringify(
+      this.selectParticipante._personal
+    );
     this.visibleAdd = "NO";
     console.log(this.selectParticipante);
     if (this.operacion == "UPD") {
@@ -97,7 +107,8 @@ export class CicloParticipanteComponent implements OnInit {
       this.currentPracicloparticipantes.push(this.selectParticipante);
     }
   }
-  cancelar(){
+
+  cancelar() {
     this.visibleAdd = "NO";
   }
 }

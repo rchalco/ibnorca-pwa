@@ -3,45 +3,49 @@
     <ion-item color="medium" color="title-small">
       <ion-icon name="people" slot="start"></ion-icon>
       <ion-label>PARTICIPANTES</ion-label>
+      <ion-icon
+        name="add-circle"
+        slot="start"
+        (click)="adicionarParticipante()"
+        *ngIf="allowEdit === true"
+        class="bigger-icon"
+      ></ion-icon>
     </ion-item>
     <ion-card-content
       class="ion-content-small-font"
       *ngIf="visibleAdd === 'NO'"
     >
-      <ion-fab horizontal="end" vertical="end" slot="fixed">
-        <ion-fab-button color="success" size="small" (click)="adicionarParticipante()">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
       <ion-row *ngFor="let item of currentPracicloparticipantes; let i = index">
-        <ion-col>
+        <ion-col size="4">
           <ion-label>
             <ion-icon
               name="pencil-sharp"
               slot="start"
               (click)="editar(item, i)"
               class="big-icon"
+              *ngIf="allowEdit === true"
             ></ion-icon>
             <ion-icon
               name="trash"
               slot="start"
               (click)="eliminar(i)"
               class="big-icon"
+              *ngIf="allowEdit === true"
             ></ion-icon>
             {{ item._cargo.cargoPuesto }}
           </ion-label>
         </ion-col>
-        <ion-col>
+        <ion-col size="6">
           <ion-label *ngIf="item._personal">
             {{ item._personal.nombreCompleto }}
           </ion-label>
         </ion-col>
-        <ion-col>
+        <ion-col size="1">
           <ion-label *ngIf="item._personal">
             {{ item.diasInsistu }}
           </ion-label>
         </ion-col>
-        <ion-col>
+        <ion-col size="1">
           <ion-label *ngIf="item._personal">
             {{ item.diasRemoto }}
           </ion-label>
@@ -55,7 +59,11 @@
     >
       <ion-list>
         <ion-item>
-          <ion-icon name="arrow-undo" class="big-icon"  (click)="cancelar()"></ion-icon>
+          <ion-icon
+            name="arrow-undo"
+            class="big-icon"
+            (click)="cancelar()"
+          ></ion-icon>
         </ion-item>
         <ion-item>
           <ion-select
@@ -73,17 +81,25 @@
               class="cargo-select"
               >{{ cargo.cargoPuesto }}</ion-select-option
             >
-            
           </ion-select>
-          
         </ion-item>
         <ion-item>
-          <ion-label position="fixed">Dias Insitu</ion-label> 
-          <ion-input type="number" placeholder="0"   [(ngModel)]="selectParticipante.diasInsistu" name="cantidadDias"></ion-input>
+          <ion-label position="fixed">Dias Insitu</ion-label>
+          <ion-input
+            type="number"
+            placeholder="0"
+            [(ngModel)]="selectParticipante.diasInsistu"
+            name="cantidadDias"
+          ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="fixed">Dias Remoto</ion-label> 
-          <ion-input type="number" placeholder="0"   [(ngModel)]="selectParticipante.diasRemoto" name="cantidadDias"></ion-input>
+          <ion-label position="fixed">Dias Remoto</ion-label>
+          <ion-input
+            type="number"
+            placeholder="0"
+            [(ngModel)]="selectParticipante.diasRemoto"
+            name="cantidadDias"
+          ></ion-input>
         </ion-item>
         <ion-item>
           <ion-select

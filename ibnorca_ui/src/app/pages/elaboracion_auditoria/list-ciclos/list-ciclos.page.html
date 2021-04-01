@@ -1,0 +1,31 @@
+<app-custom-header
+  title="Lista de Audiorias Pendientes"
+  icon_name="clipboard"
+></app-custom-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let ciclo of listCiclos; let i = index">
+      <ion-icon
+        name="pencil-sharp"
+        slot="start"
+        (click)="navMasterPlanAuditoria(ciclo.idCicloAuditoria)"
+        class="big-icon"
+      ></ion-icon>
+      <div class="norma-block">
+        <h2>Cliente: {{ ciclo.nombreCliente }}</h2>
+        <p>
+          Tipo Auditoría
+          <span class="sub-title">{{ ciclo.referenciaCiclo }}</span>
+          | Codigo Servicio
+          <span class="sub-title">{{ ciclo.codigoServicio }}</span>
+          | Id Ciclo
+          <span class="sub-title">{{ ciclo.idCicloAuditoria }}</span>
+        </p>
+        <p class="detail-paragraph">
+          Fecha Auditoria {{ ciclo.fechaAuditoria }} | Responsable {{
+          ciclo.responsable }}
+        </p>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

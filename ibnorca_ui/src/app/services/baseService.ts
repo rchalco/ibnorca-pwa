@@ -38,7 +38,7 @@ export class BaseService {
       .catch((error) => console.log("error en dismiss loader", error));
   }
 
-  async showMessageResponse(response) {
+  public async showMessageResponse(response) {
     let color = "success";
     switch (response["state"]) {
       case 1:
@@ -57,6 +57,16 @@ export class BaseService {
       duration: 3000,
       position: "top",
       color: color,
+    });
+    toast.present();
+  }
+
+  public async showMessageError(message) {  
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: "top",
+      color: "danger",
     });
     toast.present();
   }

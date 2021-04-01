@@ -25,7 +25,8 @@ export class TcsListSystemsComponent implements OnInit {
   @Input() nombreOrganizacion: string;
   @Input() direccionesSistema: Pradireccionespasistema[] = [];
   @Input() normasSistema: Praciclonormassistema[] = [];
-  
+  @Input() allowHorario: boolean = false;
+  @Input() allowDelete: boolean = true;
   currentdireccionesSistema: Pradireccionespasistema;
   currentnormaSistema: Praciclonormassistema;
 
@@ -55,6 +56,12 @@ export class TcsListSystemsComponent implements OnInit {
     this.currentdireccionesSistema = item; 
     this.currentIndex = i;
   }
+
+  editarHorario(item, i) {    
+    this.mode = "EDIT_HORARIO";
+    this.operacion = "UPD";
+  }
+
   eliminarDireccion(index) {
     console.log("evento eliminar", index);
     this.direccionesSistema.splice(index, 1);
@@ -96,6 +103,13 @@ export class TcsListSystemsComponent implements OnInit {
   eliminarNorma(index) {
     console.log("evento eliminar norma", index);
     this.normasSistema.splice(index, 1);
+  }
+
+  cancelarCronogramaEmitter(event) {
+    this.mode = "list";
+  }
+  guardarCronogramaEmitter(event) {
+    this.mode = "list";
   }
   
 }

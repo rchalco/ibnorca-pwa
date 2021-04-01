@@ -28,8 +28,8 @@ import { ParamOrganismosCertificadoresComponent } from "src/app/components/param
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  currentIdService = 12061; //TCP
-  //currentIdService = 5915;  //TCS
+  //currentIdService = 12061; //TCP
+  currentIdService = 5915;  //TCS
   currentPraprogramasdeauditorium: Praprogramasdeauditorium;
   currentDatosServicio: DatosServicio;
   currentCliente: Cliente;

@@ -1,0 +1,62 @@
+.ciclo-header {
+    background-color: #3bb8bd;
+    color: #e626d6;
+    font-weight: 300;
+    font-size: 16px;
+  }
+  .slider .slider-pager {
+    color: blue;
+  }
+  .slide-full {
+    width: 100% !important;
+  }
+  
+  .avatar {
+    width: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  ion-card-content {
+    text-align: left;
+  }
+  
+  .ion-content-small-font {
+    font-family: "Calibri Light";
+    font-size: 12px;
+    color: #093537;
+  }
+  .container-detail-auditoria{
+      width: 100%;
+  }
+  .container-detail-certificacion{
+      margin-bottom: 15px;
+  }
+  .buttons-group{
+      margin-top:5px;
+  }
+  .title-medium-font{
+      font-family: "Courier New";
+      font-weight: bold;
+  }
+  .big-icon {
+    font-size: 1.2em;
+    margin-left: 3px;
+    cursor: grab;
+  }
+  .box-click {
+    min-width: 100px;
+    min-height: 20px;
+    border-bottom: solid;
+    border-color: #778e8f;
+    border-width: 1px;
+    padding: 2px;
+    margin-left: 3px;
+    display: inline-block;
+  }
+  .edit-item {
+    cursor: grab;
+  }
+  .edit-item:hover {
+    background-color: #9dd8dc;
+  }

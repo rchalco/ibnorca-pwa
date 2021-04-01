@@ -22,6 +22,9 @@ import { PraDireccionSistemaComponent } from "./pra-direccion-sistema/pra-direcc
 import { ParamPaisesComponent } from "./param-paises/param-paises.component";
 import { PraEditNormaSistemaComponent } from "./pra-edit-norma-sistema/pra-edit-norma-sistema.component";
 import { ParamOrganismosCertificadoresComponent } from "./param-organismos-certificadores/param-organismos-certificadores.component";
+import { ElaCronogramaComponent } from "./ela-cronograma/ela-cronograma.component";
+import { ElaEditHallazagoComponent } from "./ela-edit-hallazago/ela-edit-hallazago.component";
+import { ElaRegistroHallazgosComponent } from "./ela-registro-hallazgos/ela-registro-hallazgos.component";
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { ParamOrganismosCertificadoresComponent } from "./param-organismos-certi
     PraDireccionSistemaComponent,
     ParamPaisesComponent,
     PraEditNormaSistemaComponent,
-    ParamOrganismosCertificadoresComponent
+    ParamOrganismosCertificadoresComponent,
+    ElaCronogramaComponent,
+    ElaEditHallazagoComponent,
+    ElaRegistroHallazgosComponent
   ],
   imports: [
     CommonModule,
@@ -72,7 +78,10 @@ import { ParamOrganismosCertificadoresComponent } from "./param-organismos-certi
     PraDireccionSistemaComponent,
     ParamPaisesComponent,
     PraEditNormaSistemaComponent,
-    ParamOrganismosCertificadoresComponent
+    ParamOrganismosCertificadoresComponent,
+    ElaCronogramaComponent,
+    ElaEditHallazagoComponent,
+    ElaRegistroHallazgosComponent
   ],
 })
 export class ComponentsModule {}

@@ -1,0 +1,58 @@
+<div class="container-product">
+  <form
+    [formGroup]="ionicFormHallazgo"
+    (ngSubmit)="guardarHallazgo()"
+    #form="ngForm"
+  >
+    <ion-select
+      interface="alert"
+      placeholder="Tipo"
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+    >
+      <ion-select-option
+        *ngFor="let tipo of ltiposObervacion"
+        [value]="tipoObservacion"
+        class="cargo-select"
+      >
+        {{ tipo }}
+      </ion-select-option>
+    </ion-select>
+    <app-custom-input
+      label="Proceso"
+      name="proceso"
+      type="text"
+      [formGruop]="ionicFormHallazgo"
+      [form]="form"
+    ></app-custom-input>
+
+    <ion-select
+      interface="alert"
+      placeholder="Normas"
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+    >
+      <ion-select-option
+        *ngFor="let norma of lNormas"
+        [value]="norma"
+        class="cargo-select"
+      >
+        {{ norma }}
+      </ion-select-option>
+    </ion-select>
+
+    <ion-item>
+      <ion-label position="floating">Hallazagos</ion-label>
+      <ion-textarea clearOnEdit="true" rows="10" cols="20"></ion-textarea>
+    </ion-item>
+
+    <section>
+      <ion-button size="small" type="submit">Guardar</ion-button>
+      <ion-button size="small" color="secondary" (click)="cancelarHallazo()"
+        >Cancelar</ion-button
+      >
+    </section>
+  </form>
+</div>

@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./pages/apertura_auditoria/programa-auditoria/programa-auditoria.module').then( m => m.ProgramaAuditoriaPageModule),
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     pathMatch: 'full'
   },
   {
@@ -19,10 +19,6 @@ const routes: Routes = [
   {
     path: 'programa-auditoria',
     loadChildren: () => import('./pages/apertura_auditoria/programa-auditoria/programa-auditoria.module').then( m => m.ProgramaAuditoriaPageModule)
-  },  
-  {
-    path: 'plan-auditoria',
-    loadChildren: () => import('./pages/elaboracion_auditoria/plan-auditoria/plan-auditoria.module').then( m => m.PlanAuditoriaPageModule)
   },
   {
     path: 'master-elaboracion-auditoria',
@@ -39,6 +35,14 @@ const routes: Routes = [
   {
     path: 'myke',
     loadChildren: () => import('./pages/test/myke/myke.module').then( m => m.MykePageModule)
+  },
+  {
+    path: 'list-ciclos',
+    loadChildren: () => import('./pages/elaboracion_auditoria/list-ciclos/list-ciclos.module').then( m => m.ListCiclosPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   }
 ];
 

@@ -3,17 +3,21 @@
     <ion-segment-button value="plan_auditoria">
       <ion-label>Plan Auditoria</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="lista_verif">
-      <ion-label>Lista Verif. Apertura</ion-label>
+    <ion-segment-button value="list_hallazgo">
+      <ion-label>Registro de Hallazgos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Documentacion">
+      <ion-label>Documentación</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-toolbar>
 <ion-content>
-  <app-lista-verificacion-apertura
-    *ngIf="select_component === 'lista_verif'"
-  ></app-lista-verificacion-apertura>
-
   <app-plan-auditoria
     *ngIf="select_component === 'plan_auditoria'"
-  ></app-plan-auditoria>
+    [idCicloAuditoria] = "idCicloAuditoria"
+  ></app-plan-auditoria>  
+
+  <app-ela-registro-hallazgos
+    *ngIf="select_component === 'list_hallazgo'"    
+  ></app-ela-registro-hallazgos>  
 </ion-content>

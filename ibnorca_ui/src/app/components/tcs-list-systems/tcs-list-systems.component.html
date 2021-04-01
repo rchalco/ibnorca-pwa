@@ -21,8 +21,27 @@
           ></ion-icon>
           Normas y Alcances
         </ion-item>
+        <ion-item>
+          <ion-select
+            interface="alert"
+            placeholder="Cambios"
+            class="cargo-select"
+            okText="Ok"
+            cancelText="Cancelar"
+            [value]="currentNorma"
+          >
+            <ion-select-option
+              *ngFor="
+                let data of ['amplicacion redaccion alcance', 'reduccion redaccion alcance', 'N/A']
+              "
+              [value]="norma"
+              class="cargo-select"
+              >{{ data }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-list-header>
-      <ion-item *ngFor="let norma of normasSistema ; let i = index">
+      <ion-item *ngFor="let norma of normasSistema; let i = index">
         <ion-icon
           name="pencil-sharp"
           slot="start"
@@ -58,6 +77,23 @@
           ></ion-icon>
           Programación de direcciones
         </ion-item>
+        <ion-select
+          interface="alert"
+          placeholder="Cambios"
+          class="cargo-select"
+          okText="Ok"
+          cancelText="Cancelar"
+          [value]="currentNorma"
+        >
+          <ion-select-option
+            *ngFor="
+              let data of ['Ampliacion Sitios', 'Reduccion Sitios', 'N/A']
+            "
+            [value]="norma"
+            class="cargo-select"
+            >{{ data }}
+          </ion-select-option>
+        </ion-select>
       </ion-list-header>
       <ion-item *ngFor="let direccion of direccionesSistema; let i = index">
         <ion-icon
@@ -71,6 +107,7 @@
           slot="start"
           (click)="eliminarDireccion(i)"
           class="big-icon"
+          *ngIf="allowDelete"
         ></ion-icon>
         <div class="direccion-block">
           <!-- <h2>{{ direccion.nombre }} - Diás Insitu: {{ direccion.dias }}</h2> -->
@@ -83,6 +120,27 @@
             Pais: {{ direccion.pais }} | Departamento:
             {{ direccion.departamento }} | Ciudad: {{ direccion.ciudad }}
           </p> -->
+          <div *ngIf="allowHorario === true" class="horario-block">
+            <p *ngFor="let a of [1, 1, 1, 1]">
+              <ion-icon
+                name="pencil-sharp"
+                slot="start"
+                (click)="editarHorario()"
+                class="big-icon"
+              ></ion-icon>
+              Fecha: <span class="sub-title-horario">03/03/2021</span> | Hora:
+              <span class="sub-title-horario">15:00</span> | Requisito:
+              <span class="sub-title-horario"
+                >Se debe presentar los diagramas de proceso
+              </span>
+              | Equipo:
+              <span class="sub-title-horario">
+                Auditos lider, auditor, auditor en formacion</span
+              >
+              | Responsable:
+              <span class="sub-title-horario">Jaime Centellas</span>
+            </p>
+          </div>
         </div>
       </ion-item>
     </ion-list>
@@ -98,6 +156,10 @@
       (guardarNormaEmitter)="guardarNorma($event)"
       (cancelarNormaEmitter)="cancelarNorma($event)"
     ></app-pra-edit-norma-sistema>
-    
+    <app-ela-cronograma
+      *ngIf="mode === 'EDIT_HORARIO'"
+      (guardarCronogramaEmitter)="guardarCronogramaEmitter($event)"
+      (cancelarCronogramaEmitter)="cancelarCronogramaEmitter($event)"
+    ></app-ela-cronograma>
   </div>
 </div>

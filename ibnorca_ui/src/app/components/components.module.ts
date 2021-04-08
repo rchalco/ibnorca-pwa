@@ -25,6 +25,9 @@ import { ParamOrganismosCertificadoresComponent } from "./param-organismos-certi
 import { ElaCronogramaComponent } from "./ela-cronograma/ela-cronograma.component";
 import { ElaEditHallazagoComponent } from "./ela-edit-hallazago/ela-edit-hallazago.component";
 import { ElaRegistroHallazgosComponent } from "./ela-registro-hallazgos/ela-registro-hallazgos.component";
+import { ElaObjetivosComponent } from "./ela-objetivos/ela-objetivos.component";
+import { ElaRegistroAreapreocupacionComponent } from "./ela-registro-areapreocupacion/ela-registro-areapreocupacion.component";
+import { ParamDocumentosComponent } from "./param-documentos/param-documentos.component";
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { ElaRegistroHallazgosComponent } from "./ela-registro-hallazgos/ela-regi
     ParamOrganismosCertificadoresComponent,
     ElaCronogramaComponent,
     ElaEditHallazagoComponent,
-    ElaRegistroHallazgosComponent
+    ElaRegistroHallazgosComponent,
+    ElaObjetivosComponent,
+    ElaRegistroAreapreocupacionComponent,
+    ParamDocumentosComponent
   ],
   imports: [
     CommonModule,
@@ -81,7 +87,10 @@ import { ElaRegistroHallazgosComponent } from "./ela-registro-hallazgos/ela-regi
     ParamOrganismosCertificadoresComponent,
     ElaCronogramaComponent,
     ElaEditHallazagoComponent,
-    ElaRegistroHallazgosComponent
+    ElaRegistroHallazgosComponent,
+    ElaObjetivosComponent,
+    ElaRegistroAreapreocupacionComponent,
+    ParamDocumentosComponent
   ],
 })
 export class ComponentsModule {}

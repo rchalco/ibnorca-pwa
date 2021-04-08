@@ -1,0 +1,41 @@
+<ion-list *ngIf="mode === 'LIST'">
+  <ion-list-header class="title-normas">
+    <ion-item>
+      <ion-icon
+        name="add-circle"
+        slot="end"
+        (click)="adicionarHallazgo(item, i)"
+        class="big-icon"
+      ></ion-icon>
+      Registro Areas de Preocupación
+    </ion-item>
+  </ion-list-header>
+  <ion-item *ngFor="let hallazgos of [1,1,1,1,1,1,1,1]; let i = index">
+    <ion-icon
+      name="pencil-sharp"
+      slot="start"
+      (click)="editarHallazgo(hallazgos, i)"
+      class="big-icon"
+    ></ion-icon>
+    <ion-icon
+      name="trash"
+      slot="start"
+      (click)="eliminarHallazgo(i)"
+      class="big-icon"
+    ></ion-icon>
+    <div class="norma-block">
+      <h2>Area: ADP 1: 4.1 Comprensión de la organización y su contexto</h2>
+      <p>
+        Descripción:
+        <span class="sub-title"
+          >Si bien la organización ha realizado un análisis FODA ..... </span
+        >
+      </p>
+    </div>
+  </ion-item>
+</ion-list>
+<app-ela-edit-hallazago
+  *ngIf="mode === 'EDIT'"  
+  (guardarHallazgoEmitter)="guardarHallazgo($event)"
+  (cancelarHallazgoEmitter)="cancelarHallazo($event)"
+></app-ela-edit-hallazago>

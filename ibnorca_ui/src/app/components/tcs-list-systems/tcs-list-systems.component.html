@@ -21,18 +21,22 @@
           ></ion-icon>
           Normas y Alcances
         </ion-item>
-        <ion-item>
+        <ion-item *ngIf="isAuditor">
           <ion-select
             interface="alert"
             placeholder="Cambios"
             class="cargo-select"
             okText="Ok"
             cancelText="Cancelar"
-            [value]="currentNorma"
+            [value]="currentNormaCambios"
           >
             <ion-select-option
               *ngFor="
-                let data of ['amplicacion redaccion alcance', 'reduccion redaccion alcance', 'N/A']
+                let data of [
+                  'amplicacion redaccion alcance',
+                  'reduccion redaccion alcance',
+                  'N/A'
+                ]
               "
               [value]="norma"
               class="cargo-select"
@@ -77,23 +81,25 @@
           ></ion-icon>
           Programación de direcciones
         </ion-item>
-        <ion-select
-          interface="alert"
-          placeholder="Cambios"
-          class="cargo-select"
-          okText="Ok"
-          cancelText="Cancelar"
-          [value]="currentNorma"
-        >
-          <ion-select-option
-            *ngFor="
-              let data of ['Ampliacion Sitios', 'Reduccion Sitios', 'N/A']
-            "
-            [value]="norma"
+        <ion-item *ngIf="isAuditor">
+          <ion-select
+            interface="alert"
+            placeholder="Cambios"
             class="cargo-select"
-            >{{ data }}
-          </ion-select-option>
-        </ion-select>
+            okText="Ok"
+            cancelText="Cancelar"
+            [value]="currentDireccionesCambios"
+          >
+            <ion-select-option
+              *ngFor="
+                let data of ['Ampliacion Sitios', 'Reduccion Sitios', 'N/A']
+              "
+              [value]="norma"
+              class="cargo-select"
+              >{{ data }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
       </ion-list-header>
       <ion-item *ngFor="let direccion of direccionesSistema; let i = index">
         <ion-icon

@@ -27,6 +27,8 @@ export class TcsListSystemsComponent implements OnInit {
   @Input() normasSistema: Praciclonormassistema[] = [];
   @Input() allowHorario: boolean = false;
   @Input() allowDelete: boolean = true;
+  @Input() isAuditor: boolean = false;
+
   currentdireccionesSistema: Pradireccionespasistema;
   currentnormaSistema: Praciclonormassistema;
 

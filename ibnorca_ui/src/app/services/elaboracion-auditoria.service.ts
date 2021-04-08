@@ -9,9 +9,11 @@ import {
   URL_APERTURA,
   URL_ELABORACION,
 } from "src/environments/environment";
+import { Elalistaspredefinida } from "../interfaces/elaboracion_auditoria/Elalistaspredefinida";
 import { Paramitemselect } from "../interfaces/elaboracion_auditoria/list-item-select";
 import { PlanAuditoriaDTO } from "../interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 import { ResumeCicloDTO } from "../interfaces/elaboracion_auditoria/ResumeCicloDTO";
+import { Paramdocumento } from "../interfaces/General/Paramdocumento";
 import { usuario } from "../interfaces/seguridad/usuario";
 import { ResponseObject } from "../interfaces/wraper/ResponseObject";
 import { ResponseQuery } from "../interfaces/wraper/ResponseQuery";
@@ -82,6 +84,31 @@ export class ElaboracionAuditoriaService extends BaseService {
       );
   }
 
+  GetListasPredefinidas() {
+    let url_query = url_elaboracion + "GetListasPredefinidas";
+    let dataRequest = {
+    
+    };
+    this.presentLoader();
+
+    return this.httpClient
+      .post<ResponseQuery<Elalistaspredefinida>>(
+        url_query,
+        JSON.stringify(dataRequest),
+        { headers }
+      )
+      .pipe(
+        finalize(() => {
+          console.log("**se termino la llamada GetListasPredefinidas");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
+  }
+
   GetListasVerificacion(IdLista) {
     let url_query = url_elaboracion + "GetListasVerificacion";
     let dataRequest = {
@@ -89,6 +116,19 @@ export class ElaboracionAuditoriaService extends BaseService {
     };
 
     return this.httpClient.post<ResponseQuery<Paramitemselect>>(
+      url_query,
+      JSON.stringify(dataRequest),
+      { headers }
+    );
+  }
+
+  GetListasDocumetos(area) {
+    let url_query = url_elaboracion + "GetListasDocumetos";
+    let dataRequest = {
+      area: area,
+    };
+
+    return this.httpClient.post<ResponseQuery<Paramdocumento>>(
       url_query,
       JSON.stringify(dataRequest),
       { headers }

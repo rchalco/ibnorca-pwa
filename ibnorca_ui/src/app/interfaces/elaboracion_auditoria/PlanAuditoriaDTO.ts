@@ -29,11 +29,9 @@ export class Elaauditorium {
   usuarioRegistro: string;
   elacronogamas: Elacronogama[];
 }
-
 export class Elacronogama {
   idElAcronograma: number;
   idelaauditoria: number | null;
-  idCicloParticipante: number | null;
   idDireccionPaproducto: number | null;
   idDireccionPasistema: number | null;
   fechaInicio: string | null;
@@ -43,4 +41,7 @@ export class Elacronogama {
   personaEntrevistadaCargo: string;
   usuarioRegistro: string;
   fechaRegistro: string | null;
+  procesoArea: string;
+  auditor: string;
+  cargo: string;
 }

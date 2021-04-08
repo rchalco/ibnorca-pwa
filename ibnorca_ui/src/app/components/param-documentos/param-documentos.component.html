@@ -1,0 +1,8 @@
+<ion-list>
+  <ion-item *ngFor="let item of listDocumentos; let i = index">
+    <ion-icon name="cloud-download" slot="end" class="icon"></ion-icon>
+    <ion-label>
+      {{ i + 1 }} - {{ item.nombrePlantilla }} {{ item.descripcion }}
+    </ion-label>
+  </ion-item>
+</ion-list>

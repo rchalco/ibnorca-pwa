@@ -9,6 +9,9 @@ import { Elahallazgo } from 'src/app/interfaces/elaboracion_auditoria/PlanAudito
 export class ElaRegistroHallazgosComponent implements OnInit {
   @Input() listaHallazgos: Elahallazgo[];
   mode = "LIST";
+  operacion = "";
+  currentHallazgo: Elahallazgo;
+  currentIndex = -1;
   constructor() { }
 
   ngOnInit() {
@@ -16,14 +19,26 @@ export class ElaRegistroHallazgosComponent implements OnInit {
       this.listaHallazgos = new Array<Elahallazgo>();
     }
   }
-  editarHallazgo(){
+  editarHallazgo(i){
     this.mode = "EDIT";
+    this.operacion = "UPD";
+    console.log("Guardar Hallazgo",this.listaHallazgos[i]);
+    this.currentHallazgo = this.listaHallazgos[i];
+    this.currentIndex = i;
+
   }
-  guardarHallazgo(){
+  guardarHallazgo(event){
     this.mode = "LIST";
+    if (this.operacion === "UPD") this.listaHallazgos[this.currentIndex] = event;
+    else this.listaHallazgos.push(event);
+
   }
   cancelarHallazo(){
     this.mode = "LIST";
   }
-
+  adicionarHallazgo() {
+    this.mode = "EDIT";
+    this.operacion = "ADD";
+    this.currentHallazgo = new Elahallazgo();
+  }
 }

@@ -4,17 +4,17 @@
       <ion-icon
         name="add-circle"
         slot="end"
-        (click)="adicionarHallazgo(item, i)"
+        (click)="adicionarHallazgo()"
         class="big-icon"
       ></ion-icon>
       Registro de Hallazgos
     </ion-item>
   </ion-list-header>
-  <ion-item *ngFor="let hallazgos of [1,1,1,1,1,1,1,1]; let i = index">
+  <ion-item *ngFor="let hallazgos of listaHallazgos; let i = index">
     <ion-icon
       name="pencil-sharp"
       slot="start"
-      (click)="editarHallazgo(hallazgos, i)"
+      (click)="editarHallazgo(i)"
       class="big-icon"
     ></ion-icon>
     <ion-icon
@@ -24,29 +24,35 @@
       class="big-icon"
     ></ion-icon>
     <div class="norma-block">
-      <h2>Tipo: NCM, Normas: ISO 27000, ISO 3442</h2>
-      <h3>Proceso: P01 Gestión y desarrollo</h3>
+      <h2>
+        Tipo: {{ hallazgos.tipo }} [Normas: {{ hallazgos.normas }}]
+      </h2>
+      <h3>Proceso: {{ hallazgos.proceso }}</h3>
       <p>
         Hallazgo:
         <span class="sub-title"
-          >A tomar en consideración: - en el caso de las auditorías
+          >
+          {{ hallazgos.hallazgo }}
+          <!-- A tomar en consideración: - en el caso de las auditorías
           multisitio, la columna F permite vincular los resultados con el
           "sitio". llene la hoja de Excel "sitios" para que sólo tenga que
           introducir los nombres de los sitios una vez y pueda encontrarlos en
           forma de menú desplegable en la columna "sitio en cuestión" para
           cada auditoría. Para auditorías de un solo sitio, oculte esta
           columna. Ocultar las columnas de las normas que no necesita y así
-          hacer el informe más legible para el cliente.</span
+          hacer el informe más legible para el cliente. -->
+          </span
         >
       </p>
       <p class="detail-paragraph">
-        Sitio. Of. LaPaz | Fecha 21/03/2021 | Auditor: Jorge Perez
+        Sitio.{{ hallazgos.sitio }} | Fecha {{ hallazgos.fecha }} | Auditor: {{ hallazgos.usuario }}
       </p>
     </div>
   </ion-item>
 </ion-list>
 <app-ela-edit-hallazago
   *ngIf="mode === 'EDIT'"  
+  [elahallazgo] = "currentHallazgo"
   (guardarHallazgoEmitter)="guardarHallazgo($event)"
   (cancelarHallazgoEmitter)="cancelarHallazo($event)"
 ></app-ela-edit-hallazago>

@@ -50,7 +50,9 @@
       </ion-row>
       <app-tcp-list-products
         [productList]="currentPlanAuditoriaDTO.pradireccionespaproducto"
+        [addCronograma]="true"
         *ngIf="mode === 'TCP'"
+        [listaParticipantes] = "listaParticipantes"
       ></app-tcp-list-products>
       <app-tcs-list-systems
         [direccionesSistema]="currentPlanAuditoriaDTO.pradireccionespasistema"

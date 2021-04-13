@@ -41,8 +41,8 @@
             {{ product.norma }}]
           </h2>
           <p>
-            Dirección <span class="sub-title">{{ product.direccion }}</span>
-            | Sello {{ product.sello }}
+            Dirección <span class="sub-title">{{ product.direccion }}</span> |
+            Sello {{ product.sello }}
           </p>
           <!-- <p>
             Sello {{ product.sello }} | Pais: {{ product.pais }} | Departamento:
@@ -50,10 +50,14 @@
           </p> -->
           <p class="detail-paragraph">
             Fecha Emision Cert. {{ product.fechaEmisionPrimerCertificado }} |
-            Fecha Vencimiento Cert.
-            {{ product.fechaVencimientoCertificado }} | Nro. Cert.
+            Fecha Vencimiento Cert. {{ product.fechaVencimientoCertificado }} |
+            Nro. Cert.
             {{ product.numeroDeCertificacion }}
-          </p>
+          </p>          
+          <app-ela-cronograma-list
+            *ngIf="addCronograma"
+            [listaParticipantes] = "listaParticipantes"
+          ></app-ela-cronograma-list>
         </div>
       </ion-item>
     </ion-list>

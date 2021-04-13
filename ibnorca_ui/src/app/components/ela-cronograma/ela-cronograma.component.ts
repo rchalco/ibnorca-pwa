@@ -1,7 +1,11 @@
-import { Elaauditorium, Elacronogama } from "./../../interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
+import {
+  Elaauditorium,
+  Elacronogama,
+} from "./../../interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ToastController } from "@ionic/angular";
+import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
 
 @Component({
   selector: "app-ela-cronograma",
@@ -10,9 +14,10 @@ import { ToastController } from "@ionic/angular";
 })
 export class ElaCronogramaComponent implements OnInit {
   @Input() currentElacronogama: Elacronogama;
-  @Output() guardarCronogramaEmitter= new EventEmitter<Elacronogama>();
-  @Output() cancelarCronogramaEmitter= new EventEmitter<Elacronogama>();
-  
+  @Output() guardarCronogramaEmitter = new EventEmitter<Elacronogama>();
+  @Output() cancelarCronogramaEmitter = new EventEmitter<Elacronogama>();
+  @Input() listaParticipantes: Personal[];
+
   ionicFormHorario: FormGroup;
   constructor(
     private toastController: ToastController,
@@ -24,20 +29,19 @@ export class ElaCronogramaComponent implements OnInit {
     this.ionicFormHorario = this.formBuilder.group({});
   }
 
-  seleccionarParticipante(event){
-
+  seleccionarParticipante(event) {
+    console.log("se selecciono particiapante", event);
   }
 
-  cancelar(){    
-    if(this.cancelarCronogramaEmitter){
+  cancelar() {
+    if (this.cancelarCronogramaEmitter) {
       this.cancelarCronogramaEmitter.emit(this.currentElacronogama);
     }
   }
 
-  guardarCronograma(){
-    if(this.guardarCronogramaEmitter){
+  guardarCronograma() {
+    if (this.guardarCronogramaEmitter) {
       this.guardarCronogramaEmitter.emit(this.currentElacronogama);
     }
   }
-
 }

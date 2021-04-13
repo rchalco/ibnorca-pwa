@@ -20,18 +20,20 @@
 <ion-content>
   <app-plan-auditoria
     *ngIf="select_component === 'plan_auditoria'"
-    [idCicloAuditoria] = "idCicloAuditoria"
-  ></app-plan-auditoria>  
+    [idCicloAuditoria]="idCicloAuditoria"
+  ></app-plan-auditoria>
 
   <app-ela-registro-hallazgos
-    *ngIf="select_component === 'list_hallazgo'"    
-  ></app-ela-registro-hallazgos>  
+    *ngIf="select_component === 'list_hallazgo'"
+  ></app-ela-registro-hallazgos>
 
   <app-ela-objetivos
-  *ngIf="select_component === 'list_contenido'">
+    *ngIf="select_component === 'list_contenido'"
+    [area]="area"
+  >
   </app-ela-objetivos>
 
-  <app-ela-registro-areapreocupacion  *ngIf="select_component === 'list_areas'">
+  <app-ela-registro-areapreocupacion *ngIf="select_component === 'list_areas'">
   </app-ela-registro-areapreocupacion>
 
   <app-param-documentos *ngIf="select_component === 'list_documentos'">

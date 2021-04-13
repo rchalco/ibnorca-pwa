@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { ElaboracionAuditoriaService } from "src/app/services/elaboracion-auditoria.service";
 import { Elalistaspredefinida } from "../../interfaces/elaboracion_auditoria/Elalistaspredefinida";
 
@@ -9,15 +9,31 @@ import { Elalistaspredefinida } from "../../interfaces/elaboracion_auditoria/Ela
 })
 export class ElaObjetivosComponent implements OnInit {
   listContenido: Elalistaspredefinida[];
-
+  listSubtitulos: Elalistaspredefinida[];
+  @Input() area: string = "";
   constructor(
     private elaboracionAuditoriaService: ElaboracionAuditoriaService
-  ) {}
+  ) {
+    this.listSubtitulos = new Array<Elalistaspredefinida>();
+  }
 
   ngOnInit() {
-    this.elaboracionAuditoriaService.GetListasPredefinidas().subscribe((x) => {
-      this.listContenido = x.listEntities;
-    });
+    this.area = "TCS";
+    this.elaboracionAuditoriaService
+      .GetListasPredefinidas(this.area)
+      .subscribe((x) => {
+        this.listContenido = x.listEntities;
+        console.log("this.listContenido", this.listContenido);
+        this.listContenido.forEach((contenido) => {
+          if (
+            this.listSubtitulos.filter(
+              (hh) => hh.nemotico === contenido.nemotico
+            ).length === 0
+          ) {
+            this.listSubtitulos.push(contenido);
+          }
+        });
+      });
   }
 
   ListByCategoria(nemotico) {

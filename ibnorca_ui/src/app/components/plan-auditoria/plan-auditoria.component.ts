@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { PopoverController } from "@ionic/angular";
+import { CargoItem } from "src/app/interfaces/apertura_auditoria/cargo_item";
+import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
 import { ProductList } from "src/app/interfaces/apertura_auditoria/product_list";
 import { PlanAuditoriaDTO } from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 import { ElaboracionAuditoriaService } from "src/app/services/elaboracion-auditoria.service";
@@ -27,15 +29,20 @@ export class PlanAuditoriaComponent implements OnInit {
     private elaboracionAuditoriaService: ElaboracionAuditoriaService
   ) {}
 
+  listaParticipantes: Personal[];
+
   ngOnInit() {
+    this.listaParticipantes = new Array<Personal>();
     this.elaboracionAuditoriaService
       .ObtenerPlanAuditoria(this.idCicloAuditoria)
       .subscribe((x) => {
-        console.log("resul service", x);
+        console.log("resul service plan", x);
         this.currentPlanAuditoriaDTO = x.object;
         if (x.state != 1) {
           this.elaboracionAuditoriaService.showMessageError(x.message);
         } else {
+          console.log(this.currentPlanAuditoriaDTO.pracicloparticipante);
+
           this.currentPlanAuditoriaDTO.pracicloparticipante.forEach((yy) => {
             yy._cargo = JSON.parse(yy.cargoDetalleWs);
             if (yy._cargo["cod_tipoauditor"]) {
@@ -44,8 +51,11 @@ export class PlanAuditoriaComponent implements OnInit {
             }
             if (yy.participanteDetalleWs) {
               yy._personal = JSON.parse(yy.participanteDetalleWs);
+              this.listaParticipantes.push(yy._personal);
             }
           });
+
+          console.log("listaParticipantes", this.listaParticipantes);
           this.mode =
             this.currentPlanAuditoriaDTO.pradireccionespaproducto.length > 0
               ? "TCP"

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { ModalController, PopoverController } from "@ionic/angular";
+import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
 import { Pradireccionespaproducto } from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
 @Component({
   selector: "app-tcp-list-products",
@@ -10,6 +11,13 @@ import { Pradireccionespaproducto } from "src/app/interfaces/apertura_auditoria/
 export class TcpListProductsComponent implements OnInit {
   @Input() productList: Pradireccionespaproducto[] = [];
   @Input() nombreOrganizacion: string;
+  @Input() addCronograma: boolean = false;
+  @Input() listaParticipantes: Personal[];
+  @Input() idEnlace: {
+    idDireccionPAProducto: 0;
+    idDireccionPASistema: 0;
+  };
+
   mode = "LIST";
   operacion = "";
   currentProduct: Pradireccionespaproducto;

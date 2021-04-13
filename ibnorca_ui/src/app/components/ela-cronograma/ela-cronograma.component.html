@@ -7,7 +7,7 @@
     <app-custom-input
       label="Fecha"
       name="fechaInicio"
-      type="datetime"
+      type="date"
       [formGruop]="ionicFormHorario"
       [form]="form"
       [defaultValue]="currentElacronogama.fechaInicio"
@@ -36,23 +36,34 @@
       [form]="form"
       [defaultValue]="currentElacronogama.personaEntrevistadaCargo"
     ></app-custom-input>
-    <ion-select
-      interface="alert"
-      placeholder="Participante"
-      class="cargo-select"
-      okText="Ok"
-      cancelText="Cancelar"
-      (ionChange)="seleccionarParticipante($event)"
-      multiple="true"
-      [value]="selectedParticipantes"
-    >
-      <ion-select-option
-        *ngFor="let norma of listaParticipantes"
-        [value]="norma"
+    <app-custom-input
+      label="Proceso/Area"
+      name="marca"
+      type="text"
+      [formGruop]="ionicFormHorario"
+      [form]="form"
+      [defaultValue]="currentElacronogama.procesoArea"
+    ></app-custom-input>
+    <ion-item>
+      <ion-label position="floating">Participante</ion-label>
+      <ion-select
+        interface="alert"
+        placeholder="Participante"
         class="cargo-select"
-        >{{ norma.codigoNorma }} - {{ norma.nombreNorma }}
-      </ion-select-option>
-    </ion-select>
+        okText="Ok"
+        cancelText="Cancelar"
+        (ionChange)="seleccionarParticipante($event)"
+        multiple="true"
+        [value]="selectedParticipantes"
+      >
+        <ion-select-option
+          *ngFor="let participante of listaParticipantes"
+          [value]="participante"
+          class="cargo-select"
+          >{{ participante.nombreCompleto }} 
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
     <section>
       <ion-button size="small" type="submit">Guardar</ion-button>
       <ion-button size="small" color="secondary" (click)="cancelar()"

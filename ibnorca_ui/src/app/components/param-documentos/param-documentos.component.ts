@@ -15,7 +15,7 @@ export class ParamDocumentosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.elaboracionAuditoriaService.GetListasDocumetos(this.area).subscribe(
+    this.elaboracionAuditoriaService.GetListasDocumetos(this.area, "ELABORACION").subscribe(
       x => {
         this.listDocumentos = x.listEntities;
       }

@@ -84,10 +84,10 @@ export class ElaboracionAuditoriaService extends BaseService {
       );
   }
 
-  GetListasPredefinidas() {
+  GetListasPredefinidas(area) {
     let url_query = url_elaboracion + "GetListasPredefinidas";
     let dataRequest = {
-    
+      area: area,
     };
     this.presentLoader();
 
@@ -122,10 +122,11 @@ export class ElaboracionAuditoriaService extends BaseService {
     );
   }
 
-  GetListasDocumetos(area) {
+  GetListasDocumetos(area, proceso) {
     let url_query = url_elaboracion + "GetListasDocumetos";
     let dataRequest = {
       area: area,
+      proceso: proceso,
     };
 
     return this.httpClient.post<ResponseQuery<Paramdocumento>>(

@@ -1,61 +1,13 @@
 <ion-list>
-  <ion-list-header lines="full">
-    <ion-text color="primary">
-      <h3>I. OBJETIVOS</h3>
-    </ion-text>
-  </ion-list-header>
-  <ion-item *ngFor="let contenido of ListByCategoria('PLAN_OBJETIVOS')">
-    <ion-input [(ngModel)]="contenido.decripcion"></ion-input>
-    <ion-checkbox slot="end" [(ngModel)]="contenido['select']"></ion-checkbox>
-  </ion-item>
-
-  <ion-list-header lines="full">
-    <ion-text color="primary">
-      <h3>II. INFORME CRITERIOS</h3>
-    </ion-text>
-  </ion-list-header>
-  <ion-item *ngFor="let contenido of ListByCategoria('IE1_CRITERIOS')">
-    <ion-input [(ngModel)]="contenido.decripcion"></ion-input>
-    <ion-checkbox slot="end" [(ngModel)]="contenido['select']"></ion-checkbox>
-  </ion-item>
-
-  <ion-list-header lines="full">
-    <ion-text color="primary">
-      <h3>III. INFORME COMENTARIOS</h3>
-    </ion-text>
-  </ion-list-header>
-  <ion-item *ngFor="let contenido of ListByCategoria('IE1_COMENTARIOS')">
-    <ion-input [(ngModel)]="contenido.decripcion"></ion-input>
-    <ion-checkbox slot="end" [(ngModel)]="contenido['select']"></ion-checkbox>
-  </ion-item>
-
-  <ion-list-header lines="full">
-    <ion-text color="primary">
-      <h3>IV. INFORME RESULTADOS</h3>
-    </ion-text>
-  </ion-list-header>
-  <ion-item *ngFor="let contenido of ListByCategoria('IE1_RESULTADOS')">
-    <ion-input [(ngModel)]="contenido.decripcion"></ion-input>
-    <ion-checkbox slot="end" [(ngModel)]="contenido['select']"></ion-checkbox>
-  </ion-item>
-
-  <ion-list-header lines="full">
-    <ion-text color="primary">
-      <h3>V. INFORME CONCLUSIONES</h3>
-    </ion-text>
-  </ion-list-header>
-  <ion-item *ngFor="let contenido of ListByCategoria('IE1_CONCLUSIONES')">
-    <ion-input [(ngModel)]="contenido.decripcion"></ion-input>
-    <ion-checkbox slot="end" [(ngModel)]="contenido['select']"></ion-checkbox>
-  </ion-item>
-
-  <ion-list-header lines="full">
-    <ion-text color="primary">
-      <h3>VI. MOTIVO DE CERTIFICACION</h3>
-    </ion-text>
-  </ion-list-header>
-  <ion-item *ngFor="let contenido of ListByCategoria('DATOCERT_MOTIVO')">
-    <ion-input [(ngModel)]="contenido.decripcion"></ion-input>
-    <ion-checkbox slot="end" [(ngModel)]="contenido['select']"></ion-checkbox>
-  </ion-item>
+  <div *ngFor="let subtitulo of listSubtitulos; let i = index">
+    <ion-list-header lines="full">
+      <ion-text color="primary">
+        <h3>{{ i + 1 }}. {{ subtitulo.titulo }}</h3>
+      </ion-text>
+    </ion-list-header>
+    <ion-item *ngFor="let contenido of ListByCategoria(subtitulo.nemotico)">
+      <ion-input [(ngModel)]="contenido.decripcion"></ion-input>
+      <ion-checkbox slot="end" [(ngModel)]="contenido['select']"></ion-checkbox>
+    </ion-item>
+  </div>  
 </ion-list>

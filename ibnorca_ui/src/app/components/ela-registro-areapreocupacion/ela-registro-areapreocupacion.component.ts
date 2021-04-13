@@ -11,5 +11,11 @@ export class ElaRegistroAreapreocupacionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+  guardarAreaDePreocupacion(){
+    this.mode = "LIST";
+  }
+  cancelarAreaDePreocupacion(){
+    this.mode = "LIST";
+  }
 
 }

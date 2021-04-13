@@ -34,8 +34,8 @@
     </div>
   </ion-item>
 </ion-list>
-<app-ela-edit-hallazago
+<app-ela-edit-areapreocupacion
   *ngIf="mode === 'EDIT'"  
-  (guardarHallazgoEmitter)="guardarHallazgo($event)"
-  (cancelarHallazgoEmitter)="cancelarHallazo($event)"
-></app-ela-edit-hallazago>
+  (guardarHallazgoEmitter)="guardarAreaDePreocupacion($event)"
+  (cancelarHallazgoEmitter)="cancelarAreaDePreocupacion($event)"
+></app-ela-edit-areapreocupacion>

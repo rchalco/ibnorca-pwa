@@ -14,7 +14,7 @@
     ></app-custom-input>
     <app-custom-input
       label="Horario"
-      name="horario"
+      name="direccion"
       type="text"
       [formGruop]="ionicFormHorario"
       [form]="form"
@@ -22,15 +22,15 @@
     ></app-custom-input>
     <app-custom-input
       label="Requisitos"
-      name="requisitosEsquema"
+      name="marca"
       type="text"
       [formGruop]="ionicFormHorario"
       [form]="form"
       [defaultValue]="currentElacronogama.requisitosEsquema"
     ></app-custom-input>
     <app-custom-input
-      label="Persona Entrevsitada"
-      name="personaEntrevistadaCargo"
+      label="Persona Entrevistada"
+      name="marca"
       type="text"
       [formGruop]="ionicFormHorario"
       [form]="form"
@@ -38,7 +38,7 @@
     ></app-custom-input>
     <app-custom-input
       label="Proceso/Area"
-      name="procesoArea"
+      name="marca"
       type="text"
       [formGruop]="ionicFormHorario"
       [form]="form"
@@ -64,6 +64,9 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
+    <p class="detail-paragraph">
+      Fecha 21/03/2021 | Usuario: Rubén | Auditor: Jorge | Cargo: Jefe de Producción 
+    </p>
     <section>
       <ion-button size="small" type="submit">Guardar</ion-button>
       <ion-button size="small" color="secondary" (click)="cancelar()"

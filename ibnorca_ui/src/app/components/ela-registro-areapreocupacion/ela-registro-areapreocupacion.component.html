@@ -31,11 +31,14 @@
           >Si bien la organización ha realizado un análisis FODA ..... </span
         >
       </p>
+      <p class="detail-paragraph">
+        Fecha 21/03/2021 | Auditor: Jorge Perez
+      </p>
     </div>
   </ion-item>
 </ion-list>
-<app-ela-edit-hallazago
+<app-ela-edit-areapreocupacion
   *ngIf="mode === 'EDIT'"  
-  (guardarHallazgoEmitter)="guardarHallazgo($event)"
-  (cancelarHallazgoEmitter)="cancelarHallazo($event)"
-></app-ela-edit-hallazago>
+  (guardarHallazgoEmitter)="guardarAreaDePreocupacion($event)"
+  (cancelarHallazgoEmitter)="cancelarAreaDePreocupacion($event)"
+></app-ela-edit-areapreocupacion>

@@ -1,13 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ToastController } from "@ionic/angular";
+import { Elahallazgo } from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 
 @Component({
   selector: "app-ela-edit-hallazago",
   templateUrl: "./ela-edit-hallazago.component.html",
   styleUrls: ["./ela-edit-hallazago.component.scss"],
 })
-export class ElaEditHallazagoComponent implements OnInit {
+export class ElaEditHallazagoComponent implements OnInit {  
   @Output() guardarHallazgoEmitter = new EventEmitter<any>();
   @Output() cancelarHallazgoEmitter = new EventEmitter<any>();
 
@@ -28,6 +29,7 @@ export class ElaEditHallazagoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    
     this.ionicFormHallazgo = this.formBuilder.group({});
   }
   editarHallazgo() {}

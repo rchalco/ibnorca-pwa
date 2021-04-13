@@ -17,6 +17,12 @@
       (click)="editarCronograma(i)"
       class="big-icon"
     ></ion-icon>
+    <ion-icon
+      name="trash"
+      slot="start"
+      (click)="eliminarCronograma(i)"
+      class="big-icon"
+    ></ion-icon>
     <div>
       Fecha:
       <span class="sub-title-horario">{{ cronograma.fechaInicio }}</span> |
@@ -36,4 +42,6 @@
   *ngIf="mode === 'EDIT'"
   [currentElacronogama]="currentCrongrama"
   [listaParticipantes]="listaParticipantes"
+  (guardarCronogramaEmitter) = "guardarCronograma($event)"
+  (cancelarCronogramaEmitter) = "cancelarCronograma()"
 ></app-ela-cronograma>

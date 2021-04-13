@@ -20,8 +20,7 @@ interface Oficina {
 })
 export class PlanAuditoriaComponent implements OnInit {
   mode = "TCP";
-  @Input() idCicloAuditoria = 0;
-  currentPlanAuditoriaDTO: PlanAuditoriaDTO;
+  @Input() currentPlanAuditoriaDTO: PlanAuditoriaDTO;
   constructor(
     public formBuilder: FormBuilder,
     private popoverController: PopoverController,
@@ -33,35 +32,18 @@ export class PlanAuditoriaComponent implements OnInit {
 
   ngOnInit() {
     this.listaParticipantes = new Array<Personal>();
-    this.elaboracionAuditoriaService
-      .ObtenerPlanAuditoria(this.idCicloAuditoria)
-      .subscribe((x) => {
-        console.log("resul service plan", x);
-        this.currentPlanAuditoriaDTO = x.object;
-        if (x.state != 1) {
-          this.elaboracionAuditoriaService.showMessageError(x.message);
-        } else {
-          console.log(this.currentPlanAuditoriaDTO.pracicloparticipante);
-
-          this.currentPlanAuditoriaDTO.pracicloparticipante.forEach((yy) => {
-            yy._cargo = JSON.parse(yy.cargoDetalleWs);
-            if (yy._cargo["cod_tipoauditor"]) {
-              yy._cargo.idCargoPuesto = yy._cargo["cod_tipoauditor"];
-              yy._cargo.cargoPuesto = yy._cargo["descripcion"];
-            }
-            if (yy.participanteDetalleWs) {
-              yy._personal = JSON.parse(yy.participanteDetalleWs);
-              this.listaParticipantes.push(yy._personal);
-            }
-          });
-
-          console.log("listaParticipantes", this.listaParticipantes);
-          this.mode =
-            this.currentPlanAuditoriaDTO.pradireccionespaproducto.length > 0
-              ? "TCP"
-              : "TCS";
-        }
-      });
+    this.currentPlanAuditoriaDTO.pracicloparticipante.forEach((yy) => {
+      yy._cargo = JSON.parse(yy.cargoDetalleWs);
+      if (yy._cargo["cod_tipoauditor"]) {
+        yy._cargo.idCargoPuesto = yy._cargo["cod_tipoauditor"];
+        yy._cargo.cargoPuesto = yy._cargo["descripcion"];
+      }
+      if (yy.participanteDetalleWs) {
+        yy._personal = JSON.parse(yy.participanteDetalleWs);
+        this.listaParticipantes.push(yy._personal);
+      }
+    });
+    this.mode = this.currentPlanAuditoriaDTO.area;
   }
 
   adicionarCronograma() {}

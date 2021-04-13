@@ -15,6 +15,7 @@ export class PlanAuditoriaDTO {
   pradireccionespaproducto: Pradireccionespaproducto[];
   pradireccionespasistema: Pradireccionespasistema[];
   nombreClienteCertificado: string;
+  area: string;
 }
 export class Designacion {
   codigoServicio: string;
@@ -26,9 +27,48 @@ export class Elaauditorium {
   idelaAuditoria: number;
   idPrAcicloProgAuditoria: number | null;
   fechaRegistro: string | null;
-  usuarioRegistro: string;
+  usuarioRegistro: string;  
+  elaadps: Elaadp[];
+  elacontenidoauditoria: Elacontenidoauditorium[];
   elacronogamas: Elacronogama[];
+  elahallazgos: Elahallazgo[];
 }
+
+export class Elaadp {
+  idelaadp: number;
+  idelaAuditoria: number | null;
+  area: string;
+  descripcion: string;
+  fecha: string;
+  usuario: string;
+  idelaAuditoriaNavigation: Elaauditorium;
+}
+
+export class Elacontenidoauditorium {
+  idelaContenidoauditoria: number;
+  idelaAuditoria: number | null;
+  label: string;
+  nemotico: string;
+  titulo: string;
+  contenido: string;
+  categoria: string;
+  area: string;
+  seleccionado: number | null;
+  endocumento: number | null;
+}
+
+export class Elahallazgo {
+  idelahallazgo: number;
+  idelaAuditoria: number | null;
+  tipo: string;
+  normas: string;
+  proceso: string;
+  hallazgo: string;
+  sitio: string;
+  fecha: string | null;
+  usuario: string;
+}
+
 export class Elacronogama {
   idElAcronograma: number;
   idelaauditoria: number | null;

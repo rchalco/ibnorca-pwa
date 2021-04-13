@@ -5,6 +5,7 @@ import {
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { PopoverController } from "@ionic/angular";
+import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
 
 @Component({
   selector: "app-tcs-list-systems",
@@ -28,6 +29,7 @@ export class TcsListSystemsComponent implements OnInit {
   @Input() allowHorario: boolean = false;
   @Input() allowDelete: boolean = true;
   @Input() isAuditor: boolean = false;
+  @Input() listaParticipantes: Personal[];
 
   currentdireccionesSistema: Pradireccionespasistema;
   currentnormaSistema: Praciclonormassistema;

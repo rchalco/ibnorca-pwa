@@ -42,6 +42,7 @@
         <ion-col size="6" size-lg="6" size-md="6" size-sm="12" size-xs="12">
           <app-ciclo-participante
             allowEdit="false"
+            *ngIf="currentPlanAuditoriaDTO"
             [currentPracicloparticipantes]="
               currentPlanAuditoriaDTO.pracicloparticipante
             "
@@ -51,8 +52,9 @@
       <app-tcp-list-products
         [productList]="currentPlanAuditoriaDTO.pradireccionespaproducto"
         [addCronograma]="true"
+        [allowDelete]="false"
         *ngIf="mode === 'TCP'"
-        [listaParticipantes] = "listaParticipantes"
+        [listaParticipantes]="listaParticipantes"
       ></app-tcp-list-products>
       <app-tcs-list-systems
         [direccionesSistema]="currentPlanAuditoriaDTO.pradireccionespasistema"
@@ -62,19 +64,8 @@
         [allowHorario]="true"
         [allowDelete]="false"
         [isAuditor]="true"
+        [listaParticipantes]="listaParticipantes"
       ></app-tcs-list-systems>
-      <hr />
-      <ion-buttons slot="start" class="buttons-group">
-        <ion-button
-          size="small"
-          fill="outline"
-          color="success"
-          (click)="guardarPrograma()"
-        >
-          <ion-icon slot="start" name="save"></ion-icon>
-          Guardar
-        </ion-button>
-      </ion-buttons>
     </ion-card-content>
   </ion-card>
 </ion-content>

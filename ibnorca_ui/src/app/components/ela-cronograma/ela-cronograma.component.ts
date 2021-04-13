@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ToastController } from "@ionic/angular";
 import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
+import { ConvertFormToObject } from "src/app/interfaces/cross-ui/ConvertFormToObject";
 
 @Component({
   selector: "app-ela-cronograma",
@@ -17,6 +18,7 @@ export class ElaCronogramaComponent implements OnInit {
   @Output() guardarCronogramaEmitter = new EventEmitter<Elacronogama>();
   @Output() cancelarCronogramaEmitter = new EventEmitter<Elacronogama>();
   @Input() listaParticipantes: Personal[];
+  selectedParticipantes = null;
 
   ionicFormHorario: FormGroup;
   constructor(
@@ -40,6 +42,11 @@ export class ElaCronogramaComponent implements OnInit {
   }
 
   guardarCronograma() {
+    ConvertFormToObject.convert(
+      this.ionicFormHorario,
+      this.currentElacronogama
+    );
+    console.log("seleccionarParticipante", this.seleccionarParticipante);
     if (this.guardarCronogramaEmitter) {
       this.guardarCronogramaEmitter.emit(this.currentElacronogama);
     }

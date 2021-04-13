@@ -13,10 +13,7 @@ export class TcpListProductsComponent implements OnInit {
   @Input() nombreOrganizacion: string;
   @Input() addCronograma: boolean = false;
   @Input() listaParticipantes: Personal[];
-  @Input() idEnlace: {
-    idDireccionPAProducto: 0;
-    idDireccionPASistema: 0;
-  };
+  @Input() allowDelete: boolean = true;
 
   mode = "LIST";
   operacion = "";
@@ -59,5 +56,13 @@ export class TcpListProductsComponent implements OnInit {
   }
   cancelarProducto(event) {
     this.mode = "LIST";
+  }
+
+  getLlaves(producto) {
+    let llave = {
+      idDireccionPaproducto: producto.idDireccionPaproducto,
+      idDireccionPasistema: null
+    };
+    return llave;
   }
 }

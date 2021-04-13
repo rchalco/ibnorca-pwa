@@ -29,15 +29,12 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
           .ObtenerPlanAuditoria(this.idCicloAuditoria)
           .subscribe((x) => {
             console.log("resul service master", x);
-            this.currentPlanAuditoriaDTO = x.object;
+            this.currentPlanAuditoriaDTO = x.object;            
             if (x.state != 1) {
               this.elaboracionAuditoriaService.showMessageError(x.message);
             } else {
               console.log(this.currentPlanAuditoriaDTO.pracicloparticipante);
-              this.area =
-                this.currentPlanAuditoriaDTO.pradireccionespaproducto.length > 0
-                  ? "TCP"
-                  : "TCS";
+              this.area = this.currentPlanAuditoriaDTO.area;
             }
           });
       } else {
@@ -49,11 +46,6 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
   }
 
   segmentChanged(event) {
-    /*if (event.detail.value === 'todos') {
-			this.publisherSelect = '';
-			return;
-		}
-		this.publisherSelect = event.detail.value;*/
     this.select_component = event.detail.value;
   }
 }

@@ -33,6 +33,7 @@
           name="trash"
           slot="start"
           (click)="eliminar(i)"
+          *ngIf="allowDelete"
           class="big-icon"
         ></ion-icon>
         <div class="norma-block">
@@ -57,6 +58,7 @@
           <app-ela-cronograma-list
             *ngIf="addCronograma"
             [listaParticipantes] = "listaParticipantes"
+            [llaves] = "getLlaves(product)"
           ></app-ela-cronograma-list>
         </div>
       </ion-item>

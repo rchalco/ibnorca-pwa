@@ -126,27 +126,10 @@
             Pais: {{ direccion.pais }} | Departamento:
             {{ direccion.departamento }} | Ciudad: {{ direccion.ciudad }}
           </p> -->
-          <div *ngIf="allowHorario === true" class="horario-block">
-            <p *ngFor="let a of [1, 1, 1, 1]">
-              <ion-icon
-                name="pencil-sharp"
-                slot="start"
-                (click)="editarHorario()"
-                class="big-icon"
-              ></ion-icon>
-              Fecha: <span class="sub-title-horario">03/03/2021</span> | Hora:
-              <span class="sub-title-horario">15:00</span> | Requisito:
-              <span class="sub-title-horario"
-                >Se debe presentar los diagramas de proceso
-              </span>
-              | Equipo:
-              <span class="sub-title-horario">
-                Auditos lider, auditor, auditor en formacion</span
-              >
-              | Responsable:
-              <span class="sub-title-horario">Jaime Centellas</span>
-            </p>
-          </div>
+          <app-ela-cronograma-list
+            *ngIf="addCronograma"
+            [listaParticipantes]="listaParticipantes"
+          ></app-ela-cronograma-list>
         </div>
       </ion-item>
     </ion-list>
@@ -162,10 +145,5 @@
       (guardarNormaEmitter)="guardarNorma($event)"
       (cancelarNormaEmitter)="cancelarNorma($event)"
     ></app-pra-edit-norma-sistema>
-    <app-ela-cronograma
-      *ngIf="mode === 'EDIT_HORARIO'"
-      (guardarCronogramaEmitter)="guardarCronogramaEmitter($event)"
-      (cancelarCronogramaEmitter)="cancelarCronogramaEmitter($event)"
-    ></app-ela-cronograma>
   </div>
 </div>

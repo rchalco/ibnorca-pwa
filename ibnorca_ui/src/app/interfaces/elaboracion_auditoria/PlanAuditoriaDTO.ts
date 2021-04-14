@@ -16,6 +16,7 @@ export class PlanAuditoriaDTO {
   pradireccionespasistema: Pradireccionespasistema[];
   nombreClienteCertificado: string;
   area: string;
+  normas: string[];
 }
 export class Designacion {
   codigoServicio: string;
@@ -27,7 +28,7 @@ export class Elaauditorium {
   idelaAuditoria: number;
   idPrAcicloProgAuditoria: number | null;
   fechaRegistro: string | null;
-  usuarioRegistro: string;  
+  usuarioRegistro: string;
   elaadps: Elaadp[];
   elacontenidoauditoria: Elacontenidoauditorium[];
   elacronogamas: Elacronogama[];
@@ -56,11 +57,11 @@ export class Elacontenidoauditorium {
   seleccionado: number | null;
   endocumento: number | null;
 }
-
 export class Elahallazgo {
   idelahallazgo: number;
   idelaAuditoria: number | null;
   tipo: string;
+  tipoNemotico: string;
   normas: string;
   proceso: string;
   hallazgo: string;

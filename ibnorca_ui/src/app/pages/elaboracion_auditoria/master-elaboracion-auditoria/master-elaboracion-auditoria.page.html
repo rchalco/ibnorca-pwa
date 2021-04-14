@@ -25,7 +25,7 @@
         <ion-icon slot="start" name="save"></ion-icon>
         Guardar
       </ion-button>
-    </ion-segment-button>    
+    </ion-segment-button>
   </ion-segment>
 </ion-toolbar>
 <ion-content>
@@ -36,11 +36,13 @@
 
   <app-ela-registro-hallazgos
     *ngIf="select_component === 'list_hallazgo'"
+    [listaHallazgos]="currentPlanAuditoriaDTO.elaauditorium.elahallazgos"
+    [lNormas] = "currentPlanAuditoriaDTO.normas"
   ></app-ela-registro-hallazgos>
 
   <app-ela-objetivos
     *ngIf="select_component === 'list_contenido'"
-    [listContenido] = "currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria"
+    [listContenido]="currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria"
     [area]="area"
   >
   </app-ela-objetivos>
@@ -48,8 +50,9 @@
   <app-ela-registro-areapreocupacion *ngIf="select_component === 'list_areas'">
   </app-ela-registro-areapreocupacion>
 
-  <app-param-documentos 
-  [area]="currentPlanAuditoriaDTO.area"
-  *ngIf="select_component === 'list_documentos'">
+  <app-param-documentos
+    [area]="currentPlanAuditoriaDTO.area"
+    *ngIf="select_component === 'list_documentos'"
+  >
   </app-param-documentos>
 </ion-content>

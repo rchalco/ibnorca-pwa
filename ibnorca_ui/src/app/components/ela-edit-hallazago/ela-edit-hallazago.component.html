@@ -11,15 +11,14 @@
       okText="Ok"
       cancelText="Cancelar"
       (ionChange)="seleccionarTipo($event)"
-      [value]="elahallazgo.tipo"
-      
+      [value]="tipoObservacion"
     >
       <ion-select-option
         *ngFor="let tipo of ltiposObervacion"
         [value]="tipo"
         class="cargo-select"
       >
-        {{ tipo }}
+        {{ tipo.descripcion }}
       </ion-select-option>
     </ion-select>
     <app-custom-input
@@ -29,6 +28,15 @@
       [formGruop]="ionicFormHallazgo"
       [form]="form"
       [defaultValue]="elahallazgo.proceso"
+    ></app-custom-input>
+
+    <app-custom-input
+      label="Sitio"
+      name="sitio"
+      type="text"
+      [formGruop]="ionicFormHallazgo"
+      [form]="form"
+      [defaultValue]="elahallazgo.sitio"
     ></app-custom-input>
 
     <ion-select
@@ -51,7 +59,13 @@
 
     <ion-item>
       <ion-label position="floating">Hallazagos</ion-label>
-      <ion-textarea clearOnEdit="true" rows="10" cols="20" [value]="elahallazgo.proceso" ></ion-textarea>
+      <ion-textarea
+        clearOnEdit="true"
+        rows="10"
+        (ionChange)="valorHallazagos($event)"
+        cols="20"        
+        [value]="elahallazgo.hallazgo"
+      ></ion-textarea>
     </ion-item>
 
     <section>

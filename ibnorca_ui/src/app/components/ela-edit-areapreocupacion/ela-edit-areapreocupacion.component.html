@@ -10,13 +10,13 @@
       class="cargo-select"
       okText="Ok"
       cancelText="Cancelar"
+      (ionChange)="tipoSelectChange($event)"
     >
       <ion-select-option
         *ngFor="let tipo of ltiposObervacion"
         [value]="tipoObservacion"
-        class="cargo-select"
-      >
-        {{ tipo }}
+        class="cargo-select"      >
+        {{ tip.descripciono }}
       </ion-select-option>
     </ion-select>
     <app-custom-input
@@ -45,7 +45,7 @@
 
     <ion-item>
       <ion-label position="floating">Hallazagos</ion-label>
-      <ion-textarea clearOnEdit="true" rows="10" cols="20"></ion-textarea>
+      <ion-textarea clearOnEdit="true" rows="10" cols="20" [(ngModel)]="currentHallazgo.hallazgo"></ion-textarea>
     </ion-item>
 
     <section>

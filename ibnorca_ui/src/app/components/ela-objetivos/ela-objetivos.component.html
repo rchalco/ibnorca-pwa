@@ -6,8 +6,11 @@
       </ion-text>
     </ion-list-header>
     <ion-item *ngFor="let contenido of ListByCategoria(subtitulo.nemotico)">
-      <ion-input [(ngModel)]="contenido.decripcion"></ion-input>
+      <ion-label position="floating" color="secondary">{{
+        contenido.label
+      }}</ion-label>
+      <ion-textarea [(ngModel)]="contenido.contenido" rows="4"></ion-textarea>
       <ion-checkbox slot="end" [(ngModel)]="contenido['select']"></ion-checkbox>
     </ion-item>
-  </div>  
+  </div>
 </ion-list>

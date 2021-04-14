@@ -18,7 +18,7 @@ export class ElaCronogramaComponent implements OnInit {
   @Output() guardarCronogramaEmitter = new EventEmitter<Elacronogama>();
   @Output() cancelarCronogramaEmitter = new EventEmitter<Elacronogama>();
   @Input() listaParticipantes: Personal[];
-  selectedParticipantes = null;
+  participantes = "";
 
   ionicFormHorario: FormGroup;
   constructor(
@@ -33,6 +33,11 @@ export class ElaCronogramaComponent implements OnInit {
 
   seleccionarParticipante(event) {
     console.log("se selecciono particiapante", event);
+    if (event.detail) {
+      event.detail.value.forEach((element) => {
+        this.participantes = this.participantes + element.nombreCompleto + ";";
+      });
+    }
   }
 
   cancelar() {
@@ -46,7 +51,8 @@ export class ElaCronogramaComponent implements OnInit {
       this.ionicFormHorario,
       this.currentElacronogama
     );
-    console.log("seleccionarParticipante", this.seleccionarParticipante);
+    this.currentElacronogama.auditor = this.participantes;
+    console.log("seleccionarParticipante", this.currentElacronogama);
     if (this.guardarCronogramaEmitter) {
       this.guardarCronogramaEmitter.emit(this.currentElacronogama);
     }

@@ -23,18 +23,21 @@
       (click)="eliminarCronograma(i)"
       class="big-icon"
     ></ion-icon>
-    <div>
+    <div class="row-cronogama">
       Fecha:
       <span class="sub-title-horario">{{ cronograma.fechaInicio }}</span> |
-      Hora: <span class="sub-title-horario">{{ cronograma.horario }}</span> |
+      Hora: <span class="sub-title-horario">{{ cronograma.horario }}</span>
+      <br />
       Requisito:
       <span class="paragraph-horario">{{ cronograma.requisitosEsquema }}</span>
-      | Responsable:
+      Responsable:
       <span class="paragraph-horario">{{
         cronograma.personaEntrevistadaCargo
       }}</span>
-      | Proceso:
+      Proceso:
       <span class="paragraph-horario">{{ cronograma.procesoArea }}</span>
+      Equipo:
+      <span class="paragraph-horario">{{ cronograma.auditor }}</span>
     </div>
   </ion-item>
 </ion-list>
@@ -42,6 +45,6 @@
   *ngIf="mode === 'EDIT'"
   [currentElacronogama]="currentCrongrama"
   [listaParticipantes]="listaParticipantes"
-  (guardarCronogramaEmitter) = "guardarCronograma($event)"
-  (cancelarCronogramaEmitter) = "cancelarCronograma()"
+  (guardarCronogramaEmitter)="guardarCronograma($event)"
+  (cancelarCronogramaEmitter)="cancelarCronograma()"
 ></app-ela-cronograma>

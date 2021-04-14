@@ -15,11 +15,22 @@
     <ion-segment-button value="list_documentos">
       <ion-label>Documentación</ion-label>
     </ion-segment-button>
+    <ion-segment-button value="list_documentos">
+      <ion-button
+        size="small"
+        fill="outline"
+        color="success"
+        (click)="guardarPrograma()"
+      >
+        <ion-icon slot="start" name="save"></ion-icon>
+        Guardar
+      </ion-button>
+    </ion-segment-button>    
   </ion-segment>
 </ion-toolbar>
 <ion-content>
   <app-plan-auditoria
-    *ngIf="select_component === 'plan_auditoria' && currentPlanAuditoriaDTO"    
+    *ngIf="select_component === 'plan_auditoria' && currentPlanAuditoriaDTO"
     [currentPlanAuditoriaDTO]="currentPlanAuditoriaDTO"
   ></app-plan-auditoria>
 
@@ -29,6 +40,7 @@
 
   <app-ela-objetivos
     *ngIf="select_component === 'list_contenido'"
+    [listContenido] = "currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria"
     [area]="area"
   >
   </app-ela-objetivos>
@@ -36,18 +48,8 @@
   <app-ela-registro-areapreocupacion *ngIf="select_component === 'list_areas'">
   </app-ela-registro-areapreocupacion>
 
-  <app-param-documentos *ngIf="select_component === 'list_documentos'">
+  <app-param-documentos 
+  [area]="currentPlanAuditoriaDTO.area"
+  *ngIf="select_component === 'list_documentos'">
   </app-param-documentos>
-  <hr />
-  <ion-buttons slot="start" class="buttons-group">
-    <ion-button
-      size="small"
-      fill="outline"
-      color="success"
-      (click)="guardarPrograma()"
-    >
-      <ion-icon slot="start" name="save"></ion-icon>
-      Guardar
-    </ion-button>
-  </ion-buttons>
 </ion-content>

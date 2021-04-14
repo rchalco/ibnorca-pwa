@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Paramdocumento } from "src/app/interfaces/General/Paramdocumento";
 import { ElaboracionAuditoriaService } from "src/app/services/elaboracion-auditoria.service";
 
@@ -9,7 +9,7 @@ import { ElaboracionAuditoriaService } from "src/app/services/elaboracion-audito
 })
 export class ParamDocumentosComponent implements OnInit {
   listDocumentos: Paramdocumento[];
-  area: string = "TCS";
+  @Input() area: string = "TCS";
   constructor(
     private elaboracionAuditoriaService: ElaboracionAuditoriaService
   ) {}

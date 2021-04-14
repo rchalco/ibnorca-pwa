@@ -17,6 +17,7 @@ export class ElaCronogramaListComponent implements OnInit {
   currentCrongrama: Elacronogama;
   currentCrongramaIndex = -1;
   mode = "LIST";
+  operation = "UPDATE";
 
   constructor() {}
 
@@ -28,12 +29,14 @@ export class ElaCronogramaListComponent implements OnInit {
   addCronograma() {
     this.currentCrongrama = new Elacronogama();
     this.mode = "EDIT";
+    this.operation = "ADD";
   }
 
   editarCronograma(index) {
     this.currentCrongrama = this.listCronograma[index];
     this.currentCrongramaIndex = index;
     this.mode = "EDIT";
+    this.operation = "UPDATE";
   }
 
   eliminarCronograma(index) {
@@ -44,11 +47,12 @@ export class ElaCronogramaListComponent implements OnInit {
     console.log("*** se guarda en lista", event);
     event.idDireccionPaproducto = this.llaves.idDireccionPaproducto;
     event.idDireccionPasistema = this.llaves.idDireccionPasistema;
-    if ((this.mode = "EDIT")) {
+    if (this.operation === "UPDATE") {
       this.listCronograma[this.currentCrongramaIndex] = event;
     } else {
       this.listCronograma.push(event);
     }
+    console.log("*** listCronograma", this.listCronograma);
     this.mode = "LIST";
   }
 

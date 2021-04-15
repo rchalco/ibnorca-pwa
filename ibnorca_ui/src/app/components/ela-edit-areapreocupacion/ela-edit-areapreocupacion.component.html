@@ -1,56 +1,32 @@
 <div class="container-product">
   <form
-    [formGroup]="ionicFormHallazgo"
-    (ngSubmit)="guardarHallazgo()"
+    [formGroup]="ionicFormAdp"
+    (ngSubmit)="guardarAreaDePreocupacion()"
     #form="ngForm"
   >
-    <ion-select
-      interface="alert"
-      placeholder="Tipo"
-      class="cargo-select"
-      okText="Ok"
-      cancelText="Cancelar"
-      (ionChange)="tipoSelectChange($event)"
-    >
-      <ion-select-option
-        *ngFor="let tipo of ltiposObervacion"
-        [value]="tipoObservacion"
-        class="cargo-select"      >
-        {{ tip.descripciono }}
-      </ion-select-option>
-    </ion-select>
     <app-custom-input
-      label="Proceso"
-      name="proceso"
+      label="Area"
+      name="area"
       type="text"
-      [formGruop]="ionicFormHallazgo"
+      [formGruop]="ionicFormAdp"
       [form]="form"
+      [defaultValue]="currentAdp.area"
     ></app-custom-input>
 
-    <ion-select
-      interface="alert"
-      placeholder="Normas"
-      class="cargo-select"
-      okText="Ok"
-      cancelText="Cancelar"
-    >
-      <ion-select-option
-        *ngFor="let norma of lNormas"
-        [value]="norma"
-        class="cargo-select"
-      >
-        {{ norma }}
-      </ion-select-option>
-    </ion-select>
-
     <ion-item>
-      <ion-label position="floating">Hallazagos</ion-label>
-      <ion-textarea clearOnEdit="true" rows="10" cols="20" [(ngModel)]="currentHallazgo.hallazgo"></ion-textarea>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea
+        clearOnEdit="true"
+        rows="10"
+        cols="20"
+        [value]="currentAdp.descripcion"
+        (ionChange)="valorDescripcion($event)"
+      ></ion-textarea>
     </ion-item>
 
     <section>
       <ion-button size="small" type="submit">Guardar</ion-button>
-      <ion-button size="small" color="secondary" (click)="cancelarHallazo()"
+      <ion-button size="small" color="secondary" (click)="cancelarAreaDePreocupacion()"
         >Cancelar</ion-button
       >
     </section>

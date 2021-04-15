@@ -84,6 +84,28 @@ export class ElaboracionAuditoriaService extends BaseService {
       );
   }
 
+  RegistrarPlanAuditoria(planAuditoriaDTO){
+    let url_query = url_elaboracion + "RegistrarPlanAuditoria";
+    let dataRequest = planAuditoriaDTO;
+    this.presentLoader();
+    return this.httpClient
+      .post<ResponseObject<PlanAuditoriaDTO>>(
+        url_query,
+        JSON.stringify(dataRequest),
+        { headers }
+      )
+      .pipe(
+        finalize(() => {
+          console.log("**se termino la llamada RegistrarPlanAuditoria");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          this.showMessageError("No se tiene comunicacion con el servidor");
+          return Observable.throw(new Error(error.status));
+        })
+      );
+  }
+
   GetListasPredefinidas(area) {
     let url_query = url_elaboracion + "GetListasPredefinidas";
     let dataRequest = {

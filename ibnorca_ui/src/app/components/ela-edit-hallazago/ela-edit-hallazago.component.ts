@@ -16,8 +16,8 @@ export class ElaEditHallazagoComponent implements OnInit {
   tipoObservacion = null;
 
   @Input() elahallazgo: Elahallazgo;
-  @Output() guardarHallazgoEmitter = new EventEmitter<any>();
-  @Output() cancelarHallazgoEmitter = new EventEmitter<any>();
+  @Output() guardarHallazgoEmitter = new EventEmitter<Elahallazgo>();
+  @Output() cancelarHallazgoEmitter = new EventEmitter<Elahallazgo>();
 
   ltiposObervacion = [
     { nemotico: "nCM", descripcion: "No-Conformidades Mayores" },

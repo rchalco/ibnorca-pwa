@@ -33,6 +33,7 @@
     "br-mask": "0.0.10",
     "electron-squirrel-startup": "^1.0.0",
     "g": "^2.0.1",
+    "ngx-cookie-service": "^11.0.2",
     "ngx-electron": "^2.2.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

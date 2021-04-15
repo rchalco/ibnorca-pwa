@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ToastController } from "@ionic/angular";
-import { Elahallazgo } from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
-import { ConvertFormToObject } from '../../interfaces/cross-ui/ConvertFormToObject';
+import {
+  Elaadp,
+  Elahallazgo,
+} from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
+import { usuario } from "src/app/interfaces/seguridad/usuario";
+import { ConvertFormToObject } from "../../interfaces/cross-ui/ConvertFormToObject";
 
 @Component({
   selector: "app-ela-edit-areapreocupacion",
@@ -10,20 +14,12 @@ import { ConvertFormToObject } from '../../interfaces/cross-ui/ConvertFormToObje
   styleUrls: ["./ela-edit-areapreocupacion.component.scss"],
 })
 export class ElaEditAreapreocupacionComponent implements OnInit {
-  @Output() guardarHallazgoEmitter = new EventEmitter<any>();
-  @Output() cancelarHallazgoEmitter = new EventEmitter<any>();
-  tipoObservacion = null;
-  @Input() currentHallazgo: Elahallazgo = new Elahallazgo();
-
-  ltiposObervacion = [
-    { nemotico: "nCM", descripcion: "No-Conformidades Mayores" },
-    { nemotico: "nCm", descripcion: "No-Conformidades Menores" },
-    { nemotico: "F", descripcion: "Fortaleza" },
-    { nemotico: "C", descripcion: "Conformidades" },
-  ];
+  @Output() guardarAdpEmitter = new EventEmitter<any>();
+  @Output() cancelarAdpEmitter = new EventEmitter<any>();
+  @Input() currentAdp: Elaadp = new Elaadp();
 
   @Input() lNormas = ["ISO:2007", "ISO:9001", "ISO:4427", "ISO:1334"];
-  ionicFormHallazgo: FormGroup;
+  ionicFormAdp: FormGroup;
 
   constructor(
     private toastController: ToastController,
@@ -31,31 +27,37 @@ export class ElaEditAreapreocupacionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.currentHallazgo) {
-      this.tipoObservacion = {
-        nemotico: this.currentHallazgo.tipoNemotico,
-        descripcion: this.currentHallazgo.tipo,
-      };
-    }
-    this.ionicFormHallazgo = this.formBuilder.group({});
+    this.ionicFormAdp = this.formBuilder.group({});
   }
-  editarHallazgo() {}
 
   cancelarAreaDePreocupacion() {
-    if (this.cancelarHallazgoEmitter) {
-      this.cancelarHallazgoEmitter.emit();
+    if (this.cancelarAdpEmitter) {
+      this.cancelarAdpEmitter.emit();
     }
   }
 
-  tipoSelectChange(event){
-    this.currentHallazgo.tipo = event.detail.value.descripcion;
-    this.currentHallazgo.tipoNemotico = event.detail.value.nemotico;
-  }
   guardarAreaDePreocupacion() {
-    ConvertFormToObject.convert(this.ionicFormHallazgo,this.currentHallazgo);
-    
-    if (this.guardarHallazgoEmitter) {
-      this.guardarHallazgoEmitter.emit(this.currentHallazgo);
+    ConvertFormToObject.convert(this.ionicFormAdp, this.currentAdp);
+    this.currentAdp.fecha = this.getStringFromDate(new Date());
+    this.currentAdp.usuario = usuario.currentUser.nick;
+    if (this.guardarAdpEmitter) {
+      this.guardarAdpEmitter.emit(this.currentAdp);
     }
+  }
+
+  valorDescripcion(event) {
+    this.currentAdp.descripcion = event.detail.value;
+  }
+
+  getStringFromDate(date: Date) {
+    return (
+      (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
+      "/" +
+      (date.getMonth() > 8
+        ? date.getMonth() + 1
+        : "0" + (date.getMonth() + 1)) +
+      "/" +
+      date.getFullYear()
+    );
   }
 }

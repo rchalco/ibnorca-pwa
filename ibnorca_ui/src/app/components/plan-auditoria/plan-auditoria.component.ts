@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { PopoverController } from "@ionic/angular";
@@ -21,6 +21,7 @@ interface Oficina {
 export class PlanAuditoriaComponent implements OnInit {
   mode = "TCP";
   @Input() currentPlanAuditoriaDTO: PlanAuditoriaDTO;
+  @Output() guardarCronogramaEmitter = new EventEmitter<any>();
   constructor(
     public formBuilder: FormBuilder,
     private popoverController: PopoverController,
@@ -46,5 +47,11 @@ export class PlanAuditoriaComponent implements OnInit {
     this.mode = this.currentPlanAuditoriaDTO.area;
   }
 
+  guardarCronograma(event) {
+    if (this.guardarCronogramaEmitter) {
+      this.guardarCronogramaEmitter.emit(event);
+    }
+  }
+  
   adicionarCronograma() {}
 }

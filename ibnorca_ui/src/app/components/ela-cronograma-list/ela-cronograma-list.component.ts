@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
 import { Elacronogama } from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 
@@ -10,6 +10,7 @@ import { Elacronogama } from "src/app/interfaces/elaboracion_auditoria/PlanAudit
 export class ElaCronogramaListComponent implements OnInit {
   @Input() listCronograma: Elacronogama[];
   @Input() listaParticipantes: Personal[];
+  @Output() guardarCronogramaEmitter = new EventEmitter<any>();
   @Input() llaves: {
     idDireccionPaproducto: null;
     idDireccionPasistema: null;
@@ -41,6 +42,15 @@ export class ElaCronogramaListComponent implements OnInit {
 
   eliminarCronograma(index) {
     this.listCronograma.splice(index, 1);
+    if (this.guardarCronogramaEmitter) {
+      this.guardarCronogramaEmitter.emit(
+        this.listCronograma.filter(
+          (x) =>
+            x.idDireccionPaproducto === this.llaves.idDireccionPaproducto &&
+            x.idDireccionPasistema === this.llaves.idDireccionPasistema
+        )
+      );
+    }
   }
 
   guardarCronograma(event) {
@@ -52,8 +62,24 @@ export class ElaCronogramaListComponent implements OnInit {
     } else {
       this.listCronograma.push(event);
     }
+    if (this.guardarCronogramaEmitter) {
+      this.guardarCronogramaEmitter.emit(
+        this.listCronograma.filter(
+          (x) =>
+            x.idDireccionPaproducto === this.llaves.idDireccionPaproducto &&
+            x.idDireccionPasistema === this.llaves.idDireccionPasistema
+        )
+      );
+    }
     console.log("*** listCronograma", this.listCronograma);
     this.mode = "LIST";
+  }
+  filtrarCronogramaPorLLaves() {
+    return this.listCronograma.filter(
+      (x) =>
+        x.idDireccionPaproducto === this.llaves.idDireccionPaproducto &&
+        x.idDireccionPasistema === this.llaves.idDireccionPasistema
+    );
   }
 
   cancelarCronograma() {

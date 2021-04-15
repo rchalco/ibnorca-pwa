@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { ModalController, PopoverController } from "@ionic/angular";
 import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
 import { Pradireccionespaproducto } from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
+import { Elacronogama } from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 @Component({
   selector: "app-tcp-list-products",
   templateUrl: "./tcp-list-products.component.html",
@@ -14,6 +15,8 @@ export class TcpListProductsComponent implements OnInit {
   @Input() addCronograma: boolean = false;
   @Input() listaParticipantes: Personal[];
   @Input() allowDelete: boolean = true;
+  @Input() listElacronogama: Elacronogama[];
+  @Output() guardarCronogramaEmitter = new EventEmitter<any>();
 
   mode = "LIST";
   operacion = "";
@@ -54,6 +57,12 @@ export class TcpListProductsComponent implements OnInit {
     if (this.operacion === "UPD") this.productList[this.currentIndex] = event;
     else this.productList.push(event);
   }
+
+  guardarCronograma(event) {
+    if (this.guardarCronogramaEmitter) {
+      this.guardarCronogramaEmitter.emit(event);
+    }
+  }
   cancelarProducto(event) {
     this.mode = "LIST";
   }
@@ -61,7 +70,7 @@ export class TcpListProductsComponent implements OnInit {
   getLlaves(producto) {
     let llave = {
       idDireccionPaproducto: producto.idDireccionPaproducto,
-      idDireccionPasistema: null
+      idDireccionPasistema: null,
     };
     return llave;
   }

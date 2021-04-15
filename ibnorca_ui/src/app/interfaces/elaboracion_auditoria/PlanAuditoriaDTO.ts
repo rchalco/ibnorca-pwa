@@ -42,7 +42,6 @@ export class Elaadp {
   descripcion: string;
   fecha: string;
   usuario: string;
-  idelaAuditoriaNavigation: Elaauditorium;
 }
 
 export class Elacontenidoauditorium {
@@ -69,7 +68,6 @@ export class Elahallazgo {
   fecha: string | null;
   usuario: string;
 }
-
 export class Elacronogama {
   idElAcronograma: number;
   idelaauditoria: number | null;

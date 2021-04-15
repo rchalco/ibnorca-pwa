@@ -55,6 +55,8 @@
         [allowDelete]="false"
         *ngIf="mode === 'TCP'"
         [listaParticipantes]="listaParticipantes"
+        [listElacronogama]="currentPlanAuditoriaDTO.elaauditorium.elacronogamas"
+        (guardarCronogramaEmitter)="guardarCronograma($event)"
       ></app-tcp-list-products>
       <app-tcs-list-systems
         [direccionesSistema]="currentPlanAuditoriaDTO.pradireccionespasistema"

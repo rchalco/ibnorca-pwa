@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Elahallazgo } from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 
 @Component({
@@ -9,6 +9,8 @@ import { Elahallazgo } from "src/app/interfaces/elaboracion_auditoria/PlanAudito
 export class ElaRegistroHallazgosComponent implements OnInit {
   @Input() listaHallazgos: Elahallazgo[];
   @Input() lNormas = ["ISO:2007", "ISO:9001", "ISO:4427", "ISO:1334"];
+  @Output() guardarHallazgoEmitter = new EventEmitter<any>();
+
   mode = "LIST";
   operacion = "";
   currentHallazgo: Elahallazgo;
@@ -36,6 +38,9 @@ export class ElaRegistroHallazgosComponent implements OnInit {
     if (this.operacion === "UPD")
       this.listaHallazgos[this.currentIndex] = event;
     else this.listaHallazgos.push(event);
+    if (this.guardarHallazgoEmitter) {
+      this.guardarHallazgoEmitter.emit(this.listaHallazgos);
+    }
   }
   cancelarHallazo() {
     this.mode = "LIST";

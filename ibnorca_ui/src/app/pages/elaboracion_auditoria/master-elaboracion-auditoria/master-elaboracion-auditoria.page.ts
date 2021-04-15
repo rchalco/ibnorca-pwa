@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { PlanAuditoriaDTO } from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
+import {
+  Elacronogama,
+  Elahallazgo,
+  PlanAuditoriaDTO,
+} from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 import { ElaboracionAuditoriaService } from "src/app/services/elaboracion-auditoria.service";
 
 @Component({
@@ -29,7 +33,7 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
           .ObtenerPlanAuditoria(this.idCicloAuditoria)
           .subscribe((x) => {
             console.log("resul service master", x);
-            this.currentPlanAuditoriaDTO = x.object;            
+            this.currentPlanAuditoriaDTO = x.object;
             if (x.state != 1) {
               this.elaboracionAuditoriaService.showMessageError(x.message);
             } else {
@@ -43,6 +47,61 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
         );
       }
     });
+  }
+
+  guardarCronograma(event) {
+    console.log("llego al lista de crongrma", event);
+    if (!this.currentPlanAuditoriaDTO.elaauditorium.elacronogamas) {
+      this.currentPlanAuditoriaDTO.elaauditorium.elacronogamas = new Array<Elacronogama>();
+    }
+    this.currentPlanAuditoriaDTO.elaauditorium.elacronogamas = this.currentPlanAuditoriaDTO.elaauditorium.elacronogamas.concat(
+      event
+    );
+    console.log("antes de enviar al registro", this.currentPlanAuditoriaDTO);
+    this.elaboracionAuditoriaService
+      .RegistrarPlanAuditoria(this.currentPlanAuditoriaDTO)
+      .subscribe((x) => {
+        console.log("resul  RegistrarPlanAuditoria", x);
+        this.elaboracionAuditoriaService.showMessageResponse(x);
+        // if (x.state === 1) {
+        //   this.currentPlanAuditoriaDTO = x.object;
+        // }
+      });
+  }
+
+  guardarHallazgo(event) {
+    console.log("llego al lista de hallazgo", event);
+    console.log("llego al lista de hallazgo", event[0]);
+    this.currentPlanAuditoriaDTO.elaauditorium.elahallazgos = event.filter(
+      (x) => 1 === 1
+    );
+    //this.currentPlanAuditoriaDTO.elaauditorium.elahallazgos = new Array();
+    // event.forEach((element) => {
+    //   let newElahallazgo = new Elahallazgo();
+    //   newElahallazgo.fecha = element.fecha;
+    //   newElahallazgo.hallazgo = element.hallazgo;
+    //   newElahallazgo.idelaAuditoria = element.idelaAuditoria;
+    //   newElahallazgo.idelahallazgo = element.idelahallazgo;
+    //   newElahallazgo.normas = element.normas;
+    //   newElahallazgo.proceso = element.proceso;
+    //   newElahallazgo.sitio = element.sitio;
+    //   newElahallazgo.tipo = element.tipo;
+    //   newElahallazgo.tipoNemotico = element.tipoNemotico;
+    //   newElahallazgo.usuario = element.usuario;
+
+    //   this.currentPlanAuditoriaDTO.elaauditorium.elahallazgos.push(newElahallazgo);
+    // });
+    //this.currentPlanAuditoriaDTO.elaauditorium.elahallazgos.concat(event);
+    console.log("antes de enviar al registro", this.currentPlanAuditoriaDTO);
+    this.elaboracionAuditoriaService
+      .RegistrarPlanAuditoria(this.currentPlanAuditoriaDTO)
+      .subscribe((x) => {
+        console.log("resul  RegistrarPlanAuditoria", x);
+        this.elaboracionAuditoriaService.showMessageResponse(x);
+        // if (x.state === 1) {
+        //   this.currentPlanAuditoriaDTO = x.object;
+        // }
+      });
   }
 
   segmentChanged(event) {

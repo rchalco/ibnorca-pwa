@@ -54,11 +54,13 @@
             Fecha Vencimiento Cert. {{ product.fechaVencimientoCertificado }} |
             Nro. Cert.
             {{ product.numeroDeCertificacion }}
-          </p>          
+          </p>
           <app-ela-cronograma-list
             *ngIf="addCronograma"
-            [listaParticipantes] = "listaParticipantes"
-            [llaves] = "getLlaves(product)"
+            [listaParticipantes]="listaParticipantes"
+            [llaves]="getLlaves(product)"
+            [listCronograma]="listElacronogama"
+            (guardarCronogramaEmitter)="guardarCronograma($event)"
           ></app-ela-cronograma-list>
         </div>
       </ion-item>

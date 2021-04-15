@@ -4,41 +4,40 @@
       <ion-icon
         name="add-circle"
         slot="end"
-        (click)="adicionarHallazgo(item, i)"
+        (click)="adicionarAdp()"
         class="big-icon"
       ></ion-icon>
       Registro Areas de Preocupación
     </ion-item>
   </ion-list-header>
-  <ion-item *ngFor="let hallazgos of [1,1,1,1,1,1,1,1]; let i = index">
+  <ion-item *ngFor="let adp of listaAdp; let i = index">
     <ion-icon
       name="pencil-sharp"
       slot="start"
-      (click)="editarHallazgo(hallazgos, i)"
+      (click)="editarAdp(i)"
       class="big-icon"
     ></ion-icon>
     <ion-icon
       name="trash"
       slot="start"
-      (click)="eliminarHallazgo(i)"
+      (click)="eliminarAdp(i)"
       class="big-icon"
     ></ion-icon>
     <div class="norma-block">
-      <h2>Area: ADP 1: 4.1 Comprensión de la organización y su contexto</h2>
+      <h2>Area: {{ adp.area }}</h2>
       <p>
         Descripción:
-        <span class="sub-title"
-          >Si bien la organización ha realizado un análisis FODA ..... </span
-        >
+        <span class="sub-title">{{ adp.descripcion }}</span>
       </p>
       <p class="detail-paragraph">
-        Fecha 21/03/2021 | Auditor: Jorge Perez
+        Fecha {{adp.fecha}} | Auditor: {{adp.usuario}}
       </p>
     </div>
   </ion-item>
 </ion-list>
 <app-ela-edit-areapreocupacion
-  *ngIf="mode === 'EDIT'"  
-  (guardarHallazgoEmitter)="guardarAreaDePreocupacion($event)"
-  (cancelarHallazgoEmitter)="cancelarAreaDePreocupacion($event)"
+  *ngIf="mode === 'EDIT'"
+  (guardarAdpEmitter)="guardarAreaDePreocupacion($event)"
+  (cancelarAdpEmitter)="cancelarAreaDePreocupacion($event)"
+  [currentAdp]="currentAdp"
 ></app-ela-edit-areapreocupacion>

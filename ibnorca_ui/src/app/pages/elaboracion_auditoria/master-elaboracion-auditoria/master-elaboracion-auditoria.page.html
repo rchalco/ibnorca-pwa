@@ -22,8 +22,8 @@
         color="success"
         (click)="guardarPrograma()"
       >
-        <ion-icon slot="start" name="save"></ion-icon>
-        Guardar
+        <ion-icon slot="start" name="caret-up-outline"></ion-icon>
+        Subir
       </ion-button>
     </ion-segment-button>
   </ion-segment>
@@ -32,12 +32,14 @@
   <app-plan-auditoria
     *ngIf="select_component === 'plan_auditoria' && currentPlanAuditoriaDTO"
     [currentPlanAuditoriaDTO]="currentPlanAuditoriaDTO"
+    (guardarCronogramaEmitter)="guardarCronograma($event)"
   ></app-plan-auditoria>
 
   <app-ela-registro-hallazgos
     *ngIf="select_component === 'list_hallazgo'"
     [listaHallazgos]="currentPlanAuditoriaDTO.elaauditorium.elahallazgos"
-    [lNormas] = "currentPlanAuditoriaDTO.normas"
+    [lNormas]="currentPlanAuditoriaDTO.normas"
+    (guardarHallazgoEmitter) = "guardarHallazgo($event)"
   ></app-ela-registro-hallazgos>
 
   <app-ela-objetivos

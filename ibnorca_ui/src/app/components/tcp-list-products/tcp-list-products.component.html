@@ -59,8 +59,9 @@
             *ngIf="addCronograma"
             [listaParticipantes]="listaParticipantes"
             [llaves]="getLlaves(product)"
-            [listCronograma]="listElacronogama"
+            [listCronograma]="product['listaCronograma']"
             (guardarCronogramaEmitter)="guardarCronograma($event)"
+            (eliminarCronogramaEmitter)="eliminarCronograma($event)"
           ></app-ela-cronograma-list>
         </div>
       </ion-item>

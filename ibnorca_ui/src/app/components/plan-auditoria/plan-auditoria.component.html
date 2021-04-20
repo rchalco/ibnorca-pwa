@@ -55,8 +55,8 @@
         [allowDelete]="false"
         *ngIf="mode === 'TCP'"
         [listaParticipantes]="listaParticipantes"
-        [listElacronogama]="currentPlanAuditoriaDTO.elaauditorium.elacronogamas"
         (guardarCronogramaEmitter)="guardarCronograma($event)"
+        (eliminarCronogramaEmitter) = "eliminarCronograma($event)"
       ></app-tcp-list-products>
       <app-tcs-list-systems
         [direccionesSistema]="currentPlanAuditoriaDTO.pradireccionespasistema"
@@ -64,9 +64,12 @@
         [nombreOrganizacion]="currentPlanAuditoriaDTO.nombreClienteCertificado"
         *ngIf="mode === 'TCS'"
         [allowHorario]="true"
+        [addCronograma]="true"
         [allowDelete]="false"
         [isAuditor]="true"
         [listaParticipantes]="listaParticipantes"
+        (guardarCronogramaEmitter)="guardarCronograma($event)"
+        (eliminarCronogramaEmitter) = "eliminarCronograma($event)"
       ></app-tcs-list-systems>
     </ion-card-content>
   </ion-card>

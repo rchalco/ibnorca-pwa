@@ -129,6 +129,10 @@
           <app-ela-cronograma-list
             *ngIf="addCronograma"
             [listaParticipantes]="listaParticipantes"
+            [llaves]="getLlaves(direccion)"
+            [listCronograma]="direccion['listaCronograma']"
+            (guardarCronogramaEmitter)="guardarCronograma($event)"
+            (eliminarCronogramaEmitter)="eliminarCronograma($event)"
           ></app-ela-cronograma-list>
         </div>
       </ion-item>

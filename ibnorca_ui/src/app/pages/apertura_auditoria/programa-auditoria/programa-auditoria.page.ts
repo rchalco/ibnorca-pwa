@@ -21,6 +21,7 @@ import { Cliente } from "src/app/interfaces/General/Cliente";
 import { DatosServicio } from "src/app/interfaces/apertura_auditoria/IBDatosServicio";
 import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
 import { ParamOrganismosCertificadoresComponent } from "src/app/components/param-organismos-certificadores/param-organismos-certificadores.component";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-programa-auditoria",
@@ -28,8 +29,9 @@ import { ParamOrganismosCertificadoresComponent } from "src/app/components/param
   styleUrls: ["./programa-auditoria.page.scss"],
 })
 export class ProgramaAuditoriaPage implements OnInit {
-  currentIdService = 14455; //TCP
+  //currentIdService = 14455; //TCP
   //currentIdService = 5915;  //TCS
+  currentIdService;
   currentPraprogramasdeauditorium: Praprogramasdeauditorium;
   currentDatosServicio: DatosServicio;
   currentCliente: Cliente;
@@ -41,47 +43,62 @@ export class ProgramaAuditoriaPage implements OnInit {
     public formBuilder: FormBuilder,
     private popoverController: PopoverController,
     public datepipe: DatePipe,
-    private aperturaAuditoriaService: AperturaAuditoriaService
+    private aperturaAuditoriaService: AperturaAuditoriaService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    ///TDO : convocacmos al servicio para obtner la informacion globla de los servicios TCS TCP
-    this.aperturaAuditoriaService
-      .ObtenerProgramaAuditoria(this.currentIdService)
-      .subscribe((resul) => {
-        console.log(resul);
-        if (resul.state === 1) {
-          this.currentPraprogramasdeauditorium = resul.object;
-          this.currentCliente = JSON.parse(resul.object.organizacionContentWs);
-          this.currentDatosServicio = JSON.parse(
-            resul.object.detalleServicioWs
-          );
+    this.route.queryParams.subscribe((params) => {
+      console.log(params);
+      if (params.currentIdService) {
+        this.currentIdService = params.currentIdService;
+        console.log("Id servicio", this.currentIdService);
+        ///TDO : convocacmos al servicio para obtner la informacion globla de los servicios TCS TCP
+        this.aperturaAuditoriaService
+          .ObtenerProgramaAuditoria(this.currentIdService)
+          .subscribe((resul) => {
+            console.log(resul);
+            if (resul.state === 1) {
+              this.currentPraprogramasdeauditorium = resul.object;
+              this.currentCliente = JSON.parse(
+                resul.object.organizacionContentWs
+              );
+              this.currentDatosServicio = JSON.parse(
+                resul.object.detalleServicioWs
+              );
 
-          this.currentPraprogramasdeauditorium.praciclosprogauditoria.forEach(
-            (x) => {
-              //copiamos los estaodos del ciclo al cronoramoa
-              x.praciclocronogramas[0].estado = x.estadoDescripcion;
-              //deseralizamos los cargos
-              if (x.pracicloparticipantes) {
-                x.pracicloparticipantes.forEach((yy) => {
-                  yy._cargo = JSON.parse(yy.cargoDetalleWs);
-                  if (yy._cargo["cod_tipoauditor"]) {
-                    yy._cargo.idCargoPuesto = yy._cargo["cod_tipoauditor"];
-                    yy._cargo.cargoPuesto = yy._cargo["descripcion"];
+              this.currentPraprogramasdeauditorium.praciclosprogauditoria.forEach(
+                (x) => {
+                  //copiamos los estaodos del ciclo al cronoramoa
+                  x.praciclocronogramas[0].estado = x.estadoDescripcion;
+                  //deseralizamos los cargos
+                  if (x.pracicloparticipantes) {
+                    x.pracicloparticipantes.forEach((yy) => {
+                      yy._cargo = JSON.parse(yy.cargoDetalleWs);
+                      if (yy._cargo["cod_tipoauditor"]) {
+                        yy._cargo.idCargoPuesto = yy._cargo["cod_tipoauditor"];
+                        yy._cargo.cargoPuesto = yy._cargo["descripcion"];
+                      }
+                      if (yy.participanteDetalleWs) {
+                        yy._personal = JSON.parse(yy.participanteDetalleWs);
+                      }
+                    });
                   }
-                  if (yy.participanteDetalleWs) {
-                    yy._personal = JSON.parse(yy.participanteDetalleWs);
-                  }
-                });
-              }
+                }
+              );
+
+              this.mode = this.currentDatosServicio.area;
+            } else {
+              this.aperturaAuditoriaService.showMessageResponse(resul);
             }
-          );
+          });
+      } else {
+        this.aperturaAuditoriaService.showMessageError(
+          "No se recibio ningun parametro de Id de servicio de auditoria"
+        );
+      }
+    });
 
-          this.mode = this.currentDatosServicio.area;
-        } else {
-          this.aperturaAuditoriaService.showMessageResponse(resul);
-        }
-      });
     this.programaForm = this.formBuilder.group({});
   }
 
@@ -155,14 +172,13 @@ export class ProgramaAuditoriaPage implements OnInit {
       });
   }
 
-
-
-  async mostrarOrganismo(){
+  async mostrarOrganismo() {
     console.log("mostramos las organizaciones");
     const popover = await this.popoverController.create({
       component: ParamOrganismosCertificadoresComponent,
       componentProps: {
-        defaultValue: this.currentPraprogramasdeauditorium.organismoCertificador
+        defaultValue: this.currentPraprogramasdeauditorium
+          .organismoCertificador,
       },
       event: event,
       mode: "ios",

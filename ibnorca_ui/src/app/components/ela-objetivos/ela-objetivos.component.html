@@ -1,4 +1,14 @@
 <ion-list>
+  <ion-item>
+    <ion-button
+      size="small"
+      fill="outline"
+      color="success"
+      (click)="guardarContenido()"    >
+      <ion-icon slot="start" name="caret-up-outline"></ion-icon>
+      Guardar
+    </ion-button>
+  </ion-item>
   <div *ngFor="let subtitulo of listSubtitulos; let i = index">
     <ion-list-header lines="full">
       <ion-text color="primary">

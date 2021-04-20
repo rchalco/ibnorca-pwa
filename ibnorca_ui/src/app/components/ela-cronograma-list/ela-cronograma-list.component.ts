@@ -11,6 +11,8 @@ export class ElaCronogramaListComponent implements OnInit {
   @Input() listCronograma: Elacronogama[];
   @Input() listaParticipantes: Personal[];
   @Output() guardarCronogramaEmitter = new EventEmitter<any>();
+  @Output() eliminarCronogramaEmitter = new EventEmitter<any>();
+
   @Input() llaves: {
     idDireccionPaproducto: null;
     idDireccionPasistema: null;
@@ -41,15 +43,10 @@ export class ElaCronogramaListComponent implements OnInit {
   }
 
   eliminarCronograma(index) {
+    let idElacronograma = this.listCronograma[index].idElAcronograma;
     this.listCronograma.splice(index, 1);
-    if (this.guardarCronogramaEmitter) {
-      this.guardarCronogramaEmitter.emit(
-        this.listCronograma.filter(
-          (x) =>
-            x.idDireccionPaproducto === this.llaves.idDireccionPaproducto &&
-            x.idDireccionPasistema === this.llaves.idDireccionPasistema
-        )
-      );
+    if (this.eliminarCronogramaEmitter) {
+      this.eliminarCronogramaEmitter.emit(idElacronograma);
     }
   }
 
@@ -63,23 +60,10 @@ export class ElaCronogramaListComponent implements OnInit {
       this.listCronograma.push(event);
     }
     if (this.guardarCronogramaEmitter) {
-      this.guardarCronogramaEmitter.emit(
-        this.listCronograma.filter(
-          (x) =>
-            x.idDireccionPaproducto === this.llaves.idDireccionPaproducto &&
-            x.idDireccionPasistema === this.llaves.idDireccionPasistema
-        )
-      );
+      this.guardarCronogramaEmitter.emit(this.listCronograma);
     }
     console.log("*** listCronograma", this.listCronograma);
     this.mode = "LIST";
-  }
-  filtrarCronogramaPorLLaves() {
-    return this.listCronograma.filter(
-      (x) =>
-        x.idDireccionPaproducto === this.llaves.idDireccionPaproducto &&
-        x.idDireccionPasistema === this.llaves.idDireccionPasistema
-    );
   }
 
   cancelarCronograma() {

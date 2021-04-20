@@ -2,7 +2,7 @@ import {
   Praciclonormassistema,
   Pradireccionespasistema,
 } from "./../../interfaces/apertura_auditoria/Praprogramasdeauditorium";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { PopoverController } from "@ionic/angular";
 import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
@@ -30,12 +30,15 @@ export class TcsListSystemsComponent implements OnInit {
   @Input() allowDelete: boolean = true;
   @Input() isAuditor: boolean = false;
   @Input() listaParticipantes: Personal[];
+  @Output() guardarCronogramaEmitter = new EventEmitter<any>();
+  @Output() eliminarCronogramaEmitter = new EventEmitter<any>();
+  @Input() addCronograma: boolean = false;
 
   currentdireccionesSistema: Pradireccionespasistema;
   currentnormaSistema: Praciclonormassistema;
 
   display = false;
-  
+
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({});
   }
@@ -46,7 +49,8 @@ export class TcsListSystemsComponent implements OnInit {
   guardarDireccion(event) {
     this.mode = "list";
     console.log("guardar direccion");
-    if (this.operacion === "UPD") this.direccionesSistema[this.currentIndex] = event;
+    if (this.operacion === "UPD")
+      this.direccionesSistema[this.currentIndex] = event;
     else this.direccionesSistema.push(event);
   }
   cancelarDireccion(event) {
@@ -57,11 +61,11 @@ export class TcsListSystemsComponent implements OnInit {
     console.log("item", item);
     this.mode = "EDIT";
     this.operacion = "UPD";
-    this.currentdireccionesSistema = item; 
+    this.currentdireccionesSistema = item;
     this.currentIndex = i;
   }
 
-  editarHorario(item, i) {    
+  editarHorario(item, i) {
     this.mode = "EDIT_HORARIO";
     this.operacion = "UPD";
   }
@@ -76,7 +80,6 @@ export class TcsListSystemsComponent implements OnInit {
     this.operacion = "ADD";
     this.currentdireccionesSistema = new Pradireccionespasistema();
     this.currentdireccionesSistema.pais = "Bolivia";
-    
   }
 
   adicionarNorma() {
@@ -84,14 +87,13 @@ export class TcsListSystemsComponent implements OnInit {
     this.operacion = "ADD";
     this.currentnormaSistema = new Praciclonormassistema();
     //this.currentnormaSistema.pais = "Bolivia";
-    
   }
 
   editarNorma(item, i) {
-    console.log("editar norma",item);
+    console.log("editar norma", item);
     this.mode = "EDIT1";
     this.operacion = "UPD";
-    this.currentnormaSistema = item; 
+    this.currentnormaSistema = item;
     this.currentIndexNorma = i;
   }
   cancelarNorma(event) {
@@ -109,11 +111,27 @@ export class TcsListSystemsComponent implements OnInit {
     this.normasSistema.splice(index, 1);
   }
 
-  cancelarCronogramaEmitter(event) {
+  cancelarCronograma(event) {
     this.mode = "list";
   }
-  guardarCronogramaEmitter(event) {
+  guardarCronograma(event) {
     this.mode = "list";
+    if (this.guardarCronogramaEmitter) {
+      this.guardarCronogramaEmitter.emit(event);
+    }
   }
-  
+
+  eliminarCronograma(event) {
+    if (this.eliminarCronogramaEmitter) {
+      this.eliminarCronogramaEmitter.emit(event);
+    }
+  }
+
+  getLlaves(sistema) {
+    let llave = {
+      idDireccionPaproducto: null,
+      idDireccionPasistema: sistema.idDireccionPasistema,
+    };
+    return llave;
+  }
 }

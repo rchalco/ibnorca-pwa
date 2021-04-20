@@ -14,9 +14,9 @@ export class TcpListProductsComponent implements OnInit {
   @Input() nombreOrganizacion: string;
   @Input() addCronograma: boolean = false;
   @Input() listaParticipantes: Personal[];
-  @Input() allowDelete: boolean = true;
-  @Input() listElacronogama: Elacronogama[];
+  @Input() allowDelete: boolean = true;  
   @Output() guardarCronogramaEmitter = new EventEmitter<any>();
+  @Output() eliminarCronogramaEmitter = new EventEmitter<any>();
 
   mode = "LIST";
   operacion = "";
@@ -73,5 +73,11 @@ export class TcpListProductsComponent implements OnInit {
       idDireccionPasistema: null,
     };
     return llave;
+  }
+
+  eliminarCronograma(event){
+    if(this.eliminarCronogramaEmitter){
+      this.eliminarCronogramaEmitter.emit(event);
+    }
   }
 }

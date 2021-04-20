@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Elacontenidoauditorium } from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 import { ElaboracionAuditoriaService } from "src/app/services/elaboracion-auditoria.service";
 import { Elalistaspredefinida } from "../../interfaces/elaboracion_auditoria/Elalistaspredefinida";
@@ -10,8 +10,10 @@ import { Elalistaspredefinida } from "../../interfaces/elaboracion_auditoria/Ela
 })
 export class ElaObjetivosComponent implements OnInit {
   @Input() listContenido: Elacontenidoauditorium[];
-  listSubtitulos: Elacontenidoauditorium[];
   @Input() area: string = "";
+  @Output() guardarContenidoEmitter = new EventEmitter<any>();
+  listSubtitulos: Elacontenidoauditorium[];
+
   constructor(
     private elaboracionAuditoriaService: ElaboracionAuditoriaService
   ) {
@@ -19,25 +21,8 @@ export class ElaObjetivosComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.area = "TCS";
-    // this.elaboracionAuditoriaService
-    //   .GetListasPredefinidas(this.area)
-    //   .subscribe((x) => {
-    //     this.listContenido = x.listEntities;
-    //     console.log("this.listContenido", this.listContenido);
-    //     this.listContenido.forEach((contenido) => {
-    //       if (
-    //         this.listSubtitulos.filter(
-    //           (hh) => hh.nemotico === contenido.nemotico
-    //         ).length === 0
-    //       ) {
-    //         this.listSubtitulos.push(contenido);
-    //       }
-    //     });
-    //   });
-    ///TDO llenamos los subtitulos
     if (this.listContenido) {
-      this.listContenido.forEach((contenido) => {
+      this.listContenido.forEach((contenido) => {               
         if (
           this.listSubtitulos.filter((hh) => hh.nemotico === contenido.nemotico)
             .length === 0
@@ -52,5 +37,14 @@ export class ElaObjetivosComponent implements OnInit {
     if (this.listContenido) {
       return this.listContenido.filter((x) => x.nemotico == nemotico);
     } else return null;
+  }
+
+  guardarContenido() {
+    this.listContenido.forEach((x) => {
+      x.seleccionado = x["select"] ? 1 : 0;
+    });
+    if (this.guardarContenidoEmitter) {
+      this.guardarContenidoEmitter.emit(this.listContenido);
+    }
   }
 }

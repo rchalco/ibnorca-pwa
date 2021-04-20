@@ -22,6 +22,7 @@ export class PlanAuditoriaComponent implements OnInit {
   mode = "TCP";
   @Input() currentPlanAuditoriaDTO: PlanAuditoriaDTO;
   @Output() guardarCronogramaEmitter = new EventEmitter<any>();
+  @Output() eliminarCronogramaEmitter = new EventEmitter<any>();
   constructor(
     public formBuilder: FormBuilder,
     private popoverController: PopoverController,
@@ -32,18 +33,7 @@ export class PlanAuditoriaComponent implements OnInit {
   listaParticipantes: Personal[];
 
   ngOnInit() {
-    this.listaParticipantes = new Array<Personal>();
-    this.currentPlanAuditoriaDTO.pracicloparticipante.forEach((yy) => {
-      yy._cargo = JSON.parse(yy.cargoDetalleWs);
-      if (yy._cargo["cod_tipoauditor"]) {
-        yy._cargo.idCargoPuesto = yy._cargo["cod_tipoauditor"];
-        yy._cargo.cargoPuesto = yy._cargo["descripcion"];
-      }
-      if (yy.participanteDetalleWs) {
-        yy._personal = JSON.parse(yy.participanteDetalleWs);
-        this.listaParticipantes.push(yy._personal);
-      }
-    });
+    this.listaParticipantes = this.currentPlanAuditoriaDTO["listaParticipantes"];    
     this.mode = this.currentPlanAuditoriaDTO.area;
   }
 
@@ -53,5 +43,10 @@ export class PlanAuditoriaComponent implements OnInit {
     }
   }
   
-  adicionarCronograma() {}
+  eliminarCronograma(event) {
+    if (this.eliminarCronogramaEmitter) {
+      this.eliminarCronogramaEmitter.emit(event);
+    }
+  }
+
 }

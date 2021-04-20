@@ -1,17 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Elaadp } from 'src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Elaadp } from "src/app/interfaces/elaboracion_auditoria/PlanAuditoriaDTO";
 
 @Component({
-  selector: 'app-ela-registro-areapreocupacion',
-  templateUrl: './ela-registro-areapreocupacion.component.html',
-  styleUrls: ['./ela-registro-areapreocupacion.component.scss'],
+  selector: "app-ela-registro-areapreocupacion",
+  templateUrl: "./ela-registro-areapreocupacion.component.html",
+  styleUrls: ["./ela-registro-areapreocupacion.component.scss"],
 })
 export class ElaRegistroAreapreocupacionComponent implements OnInit {
   @Input() listaAdp: Elaadp[];
-  
+  @Output() guardarAdpEmitter = new EventEmitter<any>();
   mode = "LIST";
   operacion = "";
-  currentAdp:  Elaadp;
+  currentAdp: Elaadp;
   currentIndex = -1;
   constructor() {}
 
@@ -23,6 +23,9 @@ export class ElaRegistroAreapreocupacionComponent implements OnInit {
 
   eliminarAdp(i) {
     this.listaAdp.splice(i, 1);
+    if (!this.guardarAdpEmitter) {
+      this.guardarAdpEmitter.emit(this.listaAdp);
+    }
   }
   editarAdp(i) {
     this.mode = "EDIT";
@@ -31,19 +34,20 @@ export class ElaRegistroAreapreocupacionComponent implements OnInit {
     this.currentAdp = this.listaAdp[i];
     this.currentIndex = i;
   }
-  guardarAreaDePreocupacion(event) {
-    this.mode = "LIST";
-    if (this.operacion === "UPD")
-      this.listaAdp[this.currentIndex] = event;
-    else this.listaAdp.push(event);
-  }
-  cancelarAreaDePreocupacion() {
-    this.mode = "LIST";
-  }
   adicionarAdp() {
     this.mode = "EDIT";
     this.operacion = "ADD";
     this.currentAdp = new Elaadp();
   }
-
+  guardarAreaDePreocupacion(event) {
+    this.mode = "LIST";
+    if (this.operacion === "UPD") this.listaAdp[this.currentIndex] = event;
+    else this.listaAdp.push(event);
+    if (this.guardarAdpEmitter) {
+      this.guardarAdpEmitter.emit(this.listaAdp);
+    }
+  }
+  cancelarAreaDePreocupacion() {
+    this.mode = "LIST";
+  }
 }

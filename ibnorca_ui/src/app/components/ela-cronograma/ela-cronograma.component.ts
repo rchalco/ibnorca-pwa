@@ -19,6 +19,7 @@ export class ElaCronogramaComponent implements OnInit {
   @Output() cancelarCronogramaEmitter = new EventEmitter<Elacronogama>();
   @Input() listaParticipantes: Personal[];
   participantes = "";
+  selectedParticipantes: string[];
 
   ionicFormHorario: FormGroup;
   constructor(
@@ -27,12 +28,18 @@ export class ElaCronogramaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.currentElacronogama = new Elacronogama();
+    if (!this.currentElacronogama)
+      this.currentElacronogama = new Elacronogama();
     this.ionicFormHorario = this.formBuilder.group({});
+    this.selectedParticipantes = new Array<string>();
+    this.currentElacronogama.auditor?.split(";").forEach((x) => {
+      this.selectedParticipantes.push(x);
+    });
   }
 
   seleccionarParticipante(event) {
     console.log("se selecciono particiapante", event);
+    console.log("valor actual de la lista", this.selectedParticipantes);
     if (event.detail) {
       event.detail.value.forEach((element) => {
         this.participantes = this.participantes + element.nombreCompleto + ";";

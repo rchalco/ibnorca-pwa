@@ -15,17 +15,6 @@
     <ion-segment-button value="list_documentos">
       <ion-label>Documentación</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="list_documentos">
-      <ion-button
-        size="small"
-        fill="outline"
-        color="success"
-        (click)="guardarPrograma()"
-      >
-        <ion-icon slot="start" name="caret-up-outline"></ion-icon>
-        Subir
-      </ion-button>
-    </ion-segment-button>
   </ion-segment>
 </ion-toolbar>
 <ion-content>
@@ -33,23 +22,28 @@
     *ngIf="select_component === 'plan_auditoria' && currentPlanAuditoriaDTO"
     [currentPlanAuditoriaDTO]="currentPlanAuditoriaDTO"
     (guardarCronogramaEmitter)="guardarCronograma($event)"
+    (eliminarCronogramaEmitter) = "eliminarElmentCronograma($event)"
   ></app-plan-auditoria>
 
   <app-ela-registro-hallazgos
     *ngIf="select_component === 'list_hallazgo'"
     [listaHallazgos]="currentPlanAuditoriaDTO.elaauditorium.elahallazgos"
     [lNormas]="currentPlanAuditoriaDTO.normas"
-    (guardarHallazgoEmitter) = "guardarHallazgo($event)"
+    (guardarHallazgoEmitter)="guardarHallazgo($event)"
   ></app-ela-registro-hallazgos>
 
   <app-ela-objetivos
     *ngIf="select_component === 'list_contenido'"
     [listContenido]="currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria"
+    (guardarContenidoEmitter)="guardarContenido($event)"
     [area]="area"
   >
   </app-ela-objetivos>
 
-  <app-ela-registro-areapreocupacion *ngIf="select_component === 'list_areas'">
+  <app-ela-registro-areapreocupacion
+    *ngIf="select_component === 'list_areas'"
+    [listaAdp]="currentPlanAuditoriaDTO.elaauditorium.elaadps"
+    (guardarAdpEmitter)="guardarAdp($event)"  >
   </app-ela-registro-areapreocupacion>
 
   <app-param-documentos

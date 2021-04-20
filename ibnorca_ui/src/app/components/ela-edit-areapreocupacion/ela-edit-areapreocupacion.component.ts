@@ -17,8 +17,6 @@ export class ElaEditAreapreocupacionComponent implements OnInit {
   @Output() guardarAdpEmitter = new EventEmitter<any>();
   @Output() cancelarAdpEmitter = new EventEmitter<any>();
   @Input() currentAdp: Elaadp = new Elaadp();
-
-  @Input() lNormas = ["ISO:2007", "ISO:9001", "ISO:4427", "ISO:1334"];
   ionicFormAdp: FormGroup;
 
   constructor(

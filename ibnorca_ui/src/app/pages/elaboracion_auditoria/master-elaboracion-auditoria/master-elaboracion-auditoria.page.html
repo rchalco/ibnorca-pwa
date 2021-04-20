@@ -29,7 +29,7 @@
     *ngIf="select_component === 'list_hallazgo'"
     [listaHallazgos]="currentPlanAuditoriaDTO.elaauditorium.elahallazgos"
     [lNormas]="currentPlanAuditoriaDTO.normas"
-    (guardarHallazgoEmitter)="guardarHallazgo($event)"
+    (guardarHallazgoEmitter)="guardarHallazgo($event)"    
   ></app-ela-registro-hallazgos>
 
   <app-ela-objetivos

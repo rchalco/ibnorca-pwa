@@ -25,6 +25,9 @@ export class ElaRegistroHallazgosComponent implements OnInit {
 
   eliminarHallazgo(i) {
     this.listaHallazgos.splice(i, 1);
+    if (this.guardarHallazgoEmitter) {
+      this.guardarHallazgoEmitter.emit(this.listaHallazgos);
+    }
   }
   editarHallazgo(i) {
     this.mode = "EDIT";

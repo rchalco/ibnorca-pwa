@@ -23,7 +23,7 @@ export class ElaRegistroAreapreocupacionComponent implements OnInit {
 
   eliminarAdp(i) {
     this.listaAdp.splice(i, 1);
-    if (!this.guardarAdpEmitter) {
+    if (this.guardarAdpEmitter) {
       this.guardarAdpEmitter.emit(this.listaAdp);
     }
   }

@@ -20,8 +20,9 @@ export class ElaEditHallazagoComponent implements OnInit {
   @Output() cancelarHallazgoEmitter = new EventEmitter<Elahallazgo>();
 
   ltiposObervacion = [
-    { nemotico: "nCM", descripcion: "No-Conformidades Mayores" },
-    { nemotico: "nCm", descripcion: "No-Conformidades Menores" },
+    { nemotico: "NCM", descripcion: "No-Conformidad Mayor" },
+    { nemotico: "OM", descripcion: "Oportunidad de mejora" },
+    { nemotico: "NCm", descripcion: "No Conformidad Menor" },
     { nemotico: "F", descripcion: "Fortaleza" },
     { nemotico: "C", descripcion: "Conformidades" },
   ];

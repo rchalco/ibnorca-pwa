@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Paramdocumento } from "src/app/interfaces/General/Paramdocumento";
+import { DocmentosServicesService } from "src/app/services/docmentos-services.service";
 import { ElaboracionAuditoriaService } from "src/app/services/elaboracion-auditoria.service";
 
 @Component({
@@ -10,15 +11,25 @@ import { ElaboracionAuditoriaService } from "src/app/services/elaboracion-audito
 export class ParamDocumentosComponent implements OnInit {
   listDocumentos: Paramdocumento[];
   @Input() area: string = "TCS";
+  @Input() IdCiclo = 0;
+
   constructor(
-    private elaboracionAuditoriaService: ElaboracionAuditoriaService
+    private elaboracionAuditoriaService: ElaboracionAuditoriaService,
+    private docmentosServicesService: DocmentosServicesService
   ) {}
 
   ngOnInit() {
-    this.elaboracionAuditoriaService.GetListasDocumetos(this.area, "ELABORACION").subscribe(
-      x => {
+    this.elaboracionAuditoriaService
+      .GetListasDocumetos(this.area, "ELABORACION")
+      .subscribe((x) => {
         this.listDocumentos = x.listEntities;
-      }
+      });
+  }
+
+  descargarDocumento(nombrePlantilla) {
+    this.docmentosServicesService.GenerarDocumento(
+      this.IdCiclo,
+      nombrePlantilla
     );
   }
 }

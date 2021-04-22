@@ -14,7 +14,7 @@ export const HEADERS_SERVICE =  new HttpHeaders({
   Accept: "*/*",
   "content-type": "application/json",
 });
-export const URL_GLOBAL = "https://localhost:44351/api/";
+export const URL_GLOBAL = "https://localhost:8001/api/";
 export const URL_APERTURA = URL_GLOBAL + "AperturaAuditoria/";
 export const URL_ELABORACION = URL_GLOBAL + "ElaboracionAuditoria/";
 /*

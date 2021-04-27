@@ -1,0 +1,48 @@
+<ion-toolbar>
+  <ion-segment #segment1 (ionChange)="segmentChanged($event)" color="tertiary">
+    <ion-segment-button value="acta">
+      <ion-label>ACTA</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="resoluion">
+      <ion-label>RESOLUCIÓN ADM</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dec_cert">
+      <ion-label>DECISION CERT.</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="dec_nocert">
+      <ion-label>DECISION CONF. REG.</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="nota_suspencion">
+      <ion-label>NOTA SUSPENSION</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="nota_retiro">
+      <ion-label>NOTA RETIRO</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+<ion-content>
+  <div *ngIf="select_component === 'acta'">
+    <app-tm-acta-reunion></app-tm-acta-reunion>
+  </div>
+  <div *ngIf="select_component === 'resoluion'">
+    <app-editor-documento
+      titulo="Resolución Adminsitrativa"
+    ></app-editor-documento>
+  </div>
+  <div *ngIf="select_component === 'dec_cert'">
+    <app-editor-documento
+      titulo="Decision de Certificacion"
+    ></app-editor-documento>
+  </div>
+  <div *ngIf="select_component === 'dec_nocert'">
+    <app-editor-documento
+      titulo="Decision de No Certificacion"
+    ></app-editor-documento>
+  </div>
+  <div *ngIf="select_component === 'nota_suspencion'">
+    <app-editor-documento titulo="Nota de Suspensión"></app-editor-documento>
+  </div>
+  <div *ngIf="select_component === 'nota_retiro'">
+    <app-editor-documento titulo="Nota de Retiro"></app-editor-documento>
+  </div>
+</ion-content>

@@ -43,6 +43,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'panel-documentos',
+    loadChildren: () => import('./pages/toma-decision/panel-documentos/panel-documentos.module').then( m => m.PanelDocumentosPageModule)
   }
 ];
 

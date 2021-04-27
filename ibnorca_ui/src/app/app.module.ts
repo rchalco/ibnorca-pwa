@@ -11,9 +11,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrMaskerModule } from "br-mask";
 import { ComponentsModule } from "./components/components.module";
-import { DatePipe } from '@angular/common';
-
-
+import { DatePipe } from "@angular/common";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,8 +24,7 @@ import { DatePipe } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     BrMaskerModule,
-    ComponentsModule
-  ],
+    ComponentsModule  ],
   providers: [
     StatusBar,
     SplashScreen,

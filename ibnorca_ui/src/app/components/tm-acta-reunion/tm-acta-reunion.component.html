@@ -1,0 +1,142 @@
+<ion-list>
+  <ion-item>
+    <app-custom-input
+      label="Nro de Acta"
+      name="nro_acta"
+      type="text"
+      [formGruop]="ionicForm"
+      [form]="form"
+      [defaultValue]=""
+    ></app-custom-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked"> Fecha </ion-label>
+    {{ fecha }}
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      Consideraciones del acta anterior
+    </ion-label>
+    <ion-select
+      interface="popover"
+      placeholder=""
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarConsideraciones($event)"
+      multiple="false"
+    >
+      <ion-select-option
+        *ngFor="let organismo of lConsideracione"
+        [value]="organismo"
+        class="cargo-select"
+        >{{ organismo }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      Revisión y recomendación a la dirección ejecutiva del IBNORCA de los
+      informes presentados al CONCER:
+    </ion-label>
+  </ion-item>
+  <ion-item *ngFor="let producto of productos; let i = index">
+    <ion-icon
+      name="pencil-sharp"
+      slot="start"
+      (click)="editar(product, i)"
+      class="big-icon"
+    ></ion-icon>
+    <div class="norma-block">
+      <h2>
+        Producto: {{ producto.producto }} [Proceso: {{ producto.proceso }}]
+        [Empresa: {{ producto.empresa }}]
+      </h2>
+      <p>
+        Norma {{ producto.norma }}, Confirmacion:
+        {{ producto.confirmacion }}
+      </p>
+      <p class="detail-paragraph">
+        <span class="sub-title">{{ producto.desc_revision }}</span>
+      </p>
+    </div>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">
+      Revisión y decisión sobre Reglamentos Particulares
+    </ion-label>
+    <ion-select
+      interface="popover"
+      placeholder=""
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarRevision($event)"
+      [value]="currentOrganismo"
+      multiple="false"
+    >
+      <ion-select-option
+        *ngFor="let organismo of lRevision"
+        [value]="organismo"
+        class="cargo-select"
+        >{{ organismo }}
+      </ion-select-option>
+    </ion-select>
+    <ion-list-header class="title-normas">
+      <ion-item>
+        <ion-icon
+          name="add-circle"
+          slot="end"
+          (click)="adicionar()"
+          class="big-icon"
+        ></ion-icon>
+        Reglamentos
+      </ion-item>
+    </ion-list-header>
+    <ion-item *ngFor="let reglamento of reglamentos; let i = index">
+      <ion-icon
+        name="pencil-sharp"
+        slot="start"
+        (click)="editar(product, i)"
+        class="big-icon"
+      ></ion-icon>
+      <ion-icon
+        name="trash"
+        slot="start"
+        (click)="eliminar(i)"
+        *ngIf="allowDelete"
+        class="big-icon"
+      ></ion-icon>
+      <div class="norma-block">
+        <h2>
+          Nombre: {{ reglamento.nombre }} [Norma Base:
+          {{ reglamento.norma_base }}]
+        </h2>
+        <p>Desicion {{ reglamento.decision }}</p>
+        <p class="detail-paragraph">
+          <span class="sub-title">{{ reglamento.descripcion }}</span>
+        </p>
+      </div>
+    </ion-item>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked"> Varios </ion-label>
+    <ion-select
+      interface="popover"
+      placeholder=""
+      class="cargo-select"
+      okText="Ok"
+      cancelText="Cancelar"
+      (ionChange)="seleccionarVarios($event)"
+      [value]="currentOrganismo"
+      multiple="false"
+    >
+      <ion-select-option
+        *ngFor="let organismo of lVarios"
+        [value]="organismo"
+        class="cargo-select"
+        >{{ organismo }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>

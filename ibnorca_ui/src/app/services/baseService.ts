@@ -70,4 +70,14 @@ export class BaseService {
     });
     toast.present();
   }
+
+  public async showMessageSucess(message) {  
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: "top",
+      color: "success",
+    });
+    toast.present();
+  }
 }

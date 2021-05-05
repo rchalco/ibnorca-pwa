@@ -2,7 +2,7 @@ import { Personal } from "./../interfaces/apertura_auditoria/personal";
 import { ResponseQuery } from "./../interfaces/wraper/ResponseQuery";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { HEADERS_SERVICE, URL_APERTURA } from "src/environments/environment";
+import { HEADERS_FILE, HEADERS_SERVICE, URL_APERTURA } from "src/environments/environment";
 import { Praprogramasdeauditorium } from "../interfaces/apertura_auditoria/Praprogramasdeauditorium";
 import { BaseService } from "./baseService";
 import { DatabaseService } from "./database.service";
@@ -19,6 +19,7 @@ import { catchError, finalize } from "rxjs/operators";
 import { Clasificador } from "../interfaces/General/Clasificador";
 
 const headers = HEADERS_SERVICE;
+const headers_file = HEADERS_FILE;
 const url_apertura = URL_APERTURA;
 @Injectable({
   providedIn: "root",
@@ -314,6 +315,29 @@ export class AperturaAuditoriaService extends BaseService {
         finalize(() => {
           console.log("se termino la llamada GenerarDesignacion");
           this.dismissLoader();
+        })
+      );
+  }
+
+  CargarSolicitud(fileToUpload ) {
+    let url_query = url_apertura + "CargarSolcitud";    
+    this.presentLoader();    
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileToUpload, fileToUpload.name);    
+    return this.httpClient
+      .post<wraper.Response>(
+        url_query,
+        formData
+      )
+      .pipe(
+        finalize(() => {
+          console.log("se termino la llamada CargarSolicitud");
+          this.dismissLoader();
+        }),
+        catchError((error) => {
+          console.error(error);
+          this.showMessageError("Error al cargar el archivo " + error.error);
+          return Observable.throw(new Error(error.status));
         })
       );
   }

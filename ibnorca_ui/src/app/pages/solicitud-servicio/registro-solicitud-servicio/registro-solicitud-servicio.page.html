@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro de solicitud de servicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list >    
+      <ion-item *ngIf="!procesoFinalizado">
+        <ion-label>
+          Elija un archivo excel para subir la solicitud
+        </ion-label>
+        <ion-input type="file" id="file" (change)="handleFileInput($event.target.files)"></ion-input>
+      </ion-item>    
+      <ion-item *ngIf="procesoFinalizado" [routerLink]="['/']">        
+        <ion-label>
+            Proceso finalizado, regresar
+          </ion-label>
+      </ion-item>    
+  </ion-list>  
+</ion-content>

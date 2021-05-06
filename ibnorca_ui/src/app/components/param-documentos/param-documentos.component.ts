@@ -15,7 +15,7 @@ export class ParamDocumentosComponent implements OnInit {
 
   constructor(
     private elaboracionAuditoriaService: ElaboracionAuditoriaService,
-    private docmentosServicesService: DocmentosServicesService
+    private docmentosServicesService: DocmentosServicesService 
   ) {}
 
   ngOnInit() {

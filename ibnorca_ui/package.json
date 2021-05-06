@@ -11,16 +11,18 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "electron:mac": "electron-packager ./electron sigad --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
+    "electron:win": "electron-packager ./electron sigad --overwrite --asar=true --platform=win32"
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "~10.0.0",
-    "@angular/core": "~10.0.0",
-    "@angular/forms": "~10.0.0",
-    "@angular/platform-browser": "~10.0.0",
-    "@angular/platform-browser-dynamic": "~10.0.0",
-    "@angular/router": "~10.0.0",
+    "@angular/common": "~11.2.13",
+    "@angular/core": "~11.2.13",
+    "@angular/forms": "~11.2.13",
+    "@angular/platform-browser": "~11.2.13",
+    "@angular/platform-browser-dynamic": "~11.2.13",
+    "@angular/router": "~11.2.13",
     "@capacitor/core": "2.4.7",
     "@ionic-native/core": "^5.31.1",
     "@ionic-native/document-viewer": "^4.20.0",
@@ -43,11 +45,11 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.1101.2",
-    "@angular/cli": "~10.0.5",
-    "@angular/compiler": "~10.0.0",
-    "@angular/compiler-cli": "~10.0.0",
-    "@angular/language-service": "~10.0.0",
+    "@angular-devkit/build-angular": "^0.1102.11",
+    "@angular/cli": "~11.2.11",
+    "@angular/compiler": "~11.2.13",
+    "@angular/compiler-cli": "~11.2.13",
+    "@angular/language-service": "~11.2.13",
     "@capacitor/cli": "2.4.7",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
@@ -55,7 +57,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@ionic/angular-toolkit": "^2.3.0",
-    "@types/jasmine": "~3.5.0",
+    "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.19.15",
     "codelyzer": "^6.0.0",
@@ -63,20 +65,20 @@
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-sqlite-storage": "^5.1.0",
-    "electron": "^12.0.2",
+    "electron": "^12.0.6",
     "electron-packager": "^15.2.0",
     "ibnorca_ui": "file:electron",
-    "jasmine-core": "~3.5.0",
+    "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~5.0.0",
+    "karma": "~6.3.2",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
-    "karma-jasmine": "~3.3.0",
+    "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.5"
+    "typescript": "~4.1.5"
   },
   "description": "An Ionic project",
   "cordova": {
@@ -113,5 +115,5 @@
         }
       ]
     }
-  }
+  }  
 }

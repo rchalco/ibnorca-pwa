@@ -44,6 +44,7 @@ export class Praciclosprogauditorium {
 export class Praciclocronograma {
   idCiclosCronogramas: number;
   idPrAcicloProgAuditoria: number | null;
+  diasPresupuesto: number | null;
   diasInsitu: number | null;
   diasRemoto: number | null;
   horarioTrabajo: string;

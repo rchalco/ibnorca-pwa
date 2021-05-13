@@ -5,6 +5,12 @@
   </ion-item>
   <ion-card-content class="ion-content-small-font">
     <div class="item-cronograma">
+      <span class="label-cronograma">DIAS TOTAL: </span>
+      <span class="data-cronograma">
+        {{ currentPraciclocronogramas.diasPresupuesto }}
+      </span>
+    </div>
+    <div class="item-cronograma">
       <span class="label-cronograma">DIAS INSITU: </span>
       <span class="data-cronograma" class="box-click edit-item" (click)="mostrarDiasInsituCronograma($event)">
         {{ currentPraciclocronogramas.diasInsitu }}

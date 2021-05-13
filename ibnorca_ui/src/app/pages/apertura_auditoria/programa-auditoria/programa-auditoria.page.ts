@@ -37,7 +37,7 @@ export class ProgramaAuditoriaPage implements OnInit {
   currentDatosServicio: DatosServicio;
   currentCliente: Cliente;
   mode = "TCS";
-  programaForm: FormGroup;
+  programaForm: FormGroup; 
 
   constructor(
     public modalController: ModalController,

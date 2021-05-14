@@ -22,6 +22,7 @@ import { DatosServicio } from "src/app/interfaces/apertura_auditoria/IBDatosServ
 import { Cargo } from "src/app/interfaces/apertura_auditoria/cargo";
 import { ParamOrganismosCertificadoresComponent } from "src/app/components/param-organismos-certificadores/param-organismos-certificadores.component";
 import { ActivatedRoute } from "@angular/router";
+import { DocmentosServicesService } from "src/app/services/docmentos-services.service";
 
 @Component({
   selector: "app-programa-auditoria",
@@ -36,7 +37,7 @@ export class ProgramaAuditoriaPage implements OnInit {
   currentDatosServicio: DatosServicio;
   currentCliente: Cliente;
   mode = "TCS";
-  programaForm: FormGroup;
+  programaForm: FormGroup; 
 
   constructor(
     public modalController: ModalController,
@@ -44,7 +45,8 @@ export class ProgramaAuditoriaPage implements OnInit {
     private popoverController: PopoverController,
     public datepipe: DatePipe,
     private aperturaAuditoriaService: AperturaAuditoriaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private docmentosServicesService: DocmentosServicesService 
   ) {}
 
   ngOnInit() {
@@ -160,7 +162,14 @@ export class ProgramaAuditoriaPage implements OnInit {
   }
 
   VerDesignacion(ciclo: Praciclosprogauditorium) {
-    this.aperturaAuditoriaService
+
+    let nombrePlantilla = this.mode === "TCS" ? "REG-PRO-TCS-03-01" : "REG-PRO-TCP-03-01";
+
+     this.docmentosServicesService.GenerarDocumento(
+      ciclo.idPrAcicloProgAuditoria,
+      nombrePlantilla
+    );
+    /*this.aperturaAuditoriaService
       .GenerarDesignacion(
         ciclo.idPrAcicloProgAuditoria,
         "REG-PRO-TCS-03-01 Designación auditoria TCS Ver 1.0.doc"
@@ -169,7 +178,7 @@ export class ProgramaAuditoriaPage implements OnInit {
         console.log(x);
         //this.presentToast(x.message);
         this.aperturaAuditoriaService.ObtenerArchivoDesignacion(x.message);
-      });
+      });*/
   }
 
   async mostrarOrganismo() {
@@ -188,5 +197,5 @@ export class ProgramaAuditoriaPage implements OnInit {
     const info = await popover.onDidDismiss();
     console.log("Padre", info);
     this.currentPraprogramasdeauditorium.organismoCertificador = info.data.item;
-  }
+  } 
 }

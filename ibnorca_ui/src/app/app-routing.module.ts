@@ -47,12 +47,16 @@ const routes: Routes = [
   {
     path: 'panel-documentos',
     loadChildren: () => import('./pages/toma-decision/panel-documentos/panel-documentos.module').then( m => m.PanelDocumentosPageModule)
+  },
+  {
+    path: 'registro-solicitud-servicio',
+    loadChildren: () => import('./pages/solicitud-servicio/registro-solicitud-servicio/registro-solicitud-servicio.module').then( m => m.RegistroSolicitudServicioPageModule)
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, useHash: true, relativeLinkResolution: 'legacy' })
   ],
   exports: [RouterModule]
 })

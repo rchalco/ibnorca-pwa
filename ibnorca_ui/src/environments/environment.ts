@@ -14,6 +14,13 @@ export const HEADERS_SERVICE =  new HttpHeaders({
   Accept: "*/*",
   "content-type": "application/json",
 });
+
+export const HEADERS_FILE =  new HttpHeaders({
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT",
+  Accept: "*/*",  
+});
+
 export const URL_GLOBAL = "https://localhost:8001/api/";
 export const URL_APERTURA = URL_GLOBAL + "AperturaAuditoria/";
 export const URL_ELABORACION = URL_GLOBAL + "ElaboracionAuditoria/";

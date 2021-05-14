@@ -18,6 +18,7 @@ export class ElaCronogramaComponent implements OnInit {
   @Output() guardarCronogramaEmitter = new EventEmitter<Elacronogama>();
   @Output() cancelarCronogramaEmitter = new EventEmitter<Elacronogama>();
   @Input() listaParticipantes: Personal[];
+  @Input() listaDirecciones: string[];
   participantes = "";
   selectedParticipantes: string[];
 
@@ -25,7 +26,7 @@ export class ElaCronogramaComponent implements OnInit {
   constructor(
     private toastController: ToastController,
     public formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (!this.currentElacronogama)
@@ -45,6 +46,11 @@ export class ElaCronogramaComponent implements OnInit {
         this.participantes = this.participantes + element.nombreCompleto + ";";
       });
     }
+  }
+
+  seleccionarDireccion(event) {
+    console.log("se selecciono direccion", event);
+    this.currentElacronogama.direccion = event.detail.value;
   }
 
   cancelar() {

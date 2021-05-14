@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-panel-documentos",
@@ -10,9 +11,16 @@ export class PanelDocumentosPage implements OnInit {
   idCiclo = 166;
   area = "TCS"
   proceso = "TOMA_DECISION";
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      this.idCiclo = params.idCiclo;
+      this.area = params.area;
+    });
+  }
   segmentChanged(event) {
     this.select_component = event.detail.value;
   }

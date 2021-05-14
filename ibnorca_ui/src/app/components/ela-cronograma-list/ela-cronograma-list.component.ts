@@ -12,6 +12,8 @@ export class ElaCronogramaListComponent implements OnInit {
   @Input() listaParticipantes: Personal[];
   @Output() guardarCronogramaEmitter = new EventEmitter<any>();
   @Output() eliminarCronogramaEmitter = new EventEmitter<any>();
+  @Input() listaDirecciones: string[];
+
 
   @Input() llaves: {
     idDireccionPaproducto: null;
@@ -22,7 +24,7 @@ export class ElaCronogramaListComponent implements OnInit {
   mode = "LIST";
   operation = "UPDATE";
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     if (!this.listCronograma) {
@@ -52,8 +54,8 @@ export class ElaCronogramaListComponent implements OnInit {
 
   guardarCronograma(event) {
     console.log("*** se guarda en lista", event);
-    event.idDireccionPaproducto = this.llaves.idDireccionPaproducto;
-    event.idDireccionPasistema = this.llaves.idDireccionPasistema;
+    /*event.idDireccionPaproducto = this.llaves.idDireccionPaproducto;
+    event.idDireccionPasistema = this.llaves.idDireccionPasistema;*/
     if (this.operation === "UPDATE") {
       this.listCronograma[this.currentCrongramaIndex] = event;
     } else {

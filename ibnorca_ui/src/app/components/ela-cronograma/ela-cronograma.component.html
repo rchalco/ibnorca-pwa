@@ -1,77 +1,58 @@
 <div class="container-product">
-  <form
-    [formGroup]="ionicFormHorario"
-    (ngSubmit)="guardarCronograma()"
-    #form="ngForm"
-  >
-    <app-custom-input
-      label="Fecha"
-      name="fechaInicio"
-      type="date"
-      [formGruop]="ionicFormHorario"
-      [form]="form"
-      [defaultValue]="currentElacronogama.fechaInicio"
-    ></app-custom-input>
-    <app-custom-input
-      label="Horario"
-      name="horario"
-      type="text"
-      [formGruop]="ionicFormHorario"
-      [form]="form"
-      [defaultValue]="currentElacronogama.horario"
-    ></app-custom-input>
-    <app-custom-input
-      label="Requisitos"
-      name="requisitosEsquema"
-      type="text"
-      [formGruop]="ionicFormHorario"
-      [form]="form"
-      [defaultValue]="currentElacronogama.requisitosEsquema"
-    ></app-custom-input>
-    <app-custom-input
-      label="Persona Entrevistada"
-      name="personaEntrevistadaCargo"
-      type="text"
-      [formGruop]="ionicFormHorario"
-      [form]="form"
-      [defaultValue]="currentElacronogama.personaEntrevistadaCargo"
-    ></app-custom-input>
-    <app-custom-input
-      label="Proceso/Area"
-      name="procesoArea"
-      type="text"
-      [formGruop]="ionicFormHorario"
-      [form]="form"
-      [defaultValue]="currentElacronogama.procesoArea"
-    ></app-custom-input>
-    <ion-item>
-      <ion-label position="floating">Participante</ion-label>
-      <ion-select
-        interface="alert"
-        placeholder="Participante"
-        class="cargo-select"
-        okText="Ok"
-        cancelText="Cancelar"
-        (ionChange)="seleccionarParticipante($event)"
-        multiple="true"
-        [value]="selectedParticipantes"
-      >
-        <ion-select-option
-          *ngFor="let participante of listaParticipantes"
-          [value]="participante"
-          class="cargo-select"
-          >{{ participante.nombreCompleto }} 
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-    <p class="detail-paragraph">
-      Fecha 21/03/2021 | Usuario: Rubén | Auditor: Jorge | Cargo: Jefe de Producción 
-    </p>
-    <section>
-      <ion-button size="small" type="submit">Guardar</ion-button>
-      <ion-button size="small" color="secondary" (click)="cancelar()"
-        >Cancelar</ion-button
-      >
-    </section>
-  </form>
+    <form [formGroup]="ionicFormHorario" (ngSubmit)="guardarCronograma()"
+        #form="ngForm">
+        <app-custom-input label="Fecha" name="fechaInicio" type="date"
+            [formGruop]="ionicFormHorario" [form]="form"
+            [defaultValue]="currentElacronogama.fechaInicio"></app-custom-input>
+        <app-custom-input label="Horario" name="horario" type="text"
+            [formGruop]="ionicFormHorario" [form]="form"
+            [defaultValue]="currentElacronogama.horario"></app-custom-input>
+        <app-custom-input label="Requisitos" name="requisitosEsquema"
+            type="text" [formGruop]="ionicFormHorario"
+            [form]="form"
+            [defaultValue]="currentElacronogama.requisitosEsquema"></app-custom-input>
+        <app-custom-input label="Persona Entrevistada"
+            name="personaEntrevistadaCargo" type="text"
+            [formGruop]="ionicFormHorario" [form]="form"
+            [defaultValue]="currentElacronogama.personaEntrevistadaCargo">
+        </app-custom-input>
+        <app-custom-input label="Proceso/Area" name="procesoArea" type="text"
+            [formGruop]="ionicFormHorario"
+            [form]="form" [defaultValue]="currentElacronogama.procesoArea"></app-custom-input>
+        <ion-item>
+            <ion-label position="floating">Participante</ion-label>
+            <ion-select interface="alert" placeholder="Participante"
+                class="cargo-select" okText="Ok"
+                cancelText="Cancelar"
+                (ionChange)="seleccionarParticipante($event)" multiple="true"
+                [value]="selectedParticipantes">
+                <ion-select-option *ngFor="let participante of
+                    listaParticipantes" [value]="participante"
+                    class="cargo-select">
+                    {{ participante.nombreCompleto }}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Direccion</ion-label>
+            <ion-select interface="popover" placeholder="direccion"
+                class="cargo-select" okText="Ok"
+                cancelText="Cancelar" (ionChange)="seleccionarDireccion($event)"
+                [value]="selectedParticipantes">
+                <ion-select-option *ngFor="let direccion of listaDirecciones"
+                    [value]="direccion"
+                    class="cargo-select">{{ direccion }}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <p class="detail-paragraph">
+            Fecha 21/03/2021 | Usuario: Rubén | Auditor: Jorge | Cargo: Jefe de
+            Producción
+        </p>
+        <section>
+            <ion-button size="small" type="submit">Guardar</ion-button>
+            <ion-button size="small" color="secondary" (click)="cancelar()">Cancelar</ion-button>
+        </section>
+    </form>
 </div>

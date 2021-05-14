@@ -24,7 +24,7 @@ export class ElaEditHallazagoComponent implements OnInit {
     { nemotico: "OM", descripcion: "Oportunidad de mejora" },
     { nemotico: "NCm", descripcion: "No Conformidad Menor" },
     { nemotico: "F", descripcion: "Fortaleza" },
-    { nemotico: "C", descripcion: "Conformidades" },
+    //{ nemotico: "C", descripcion: "Conformidades" },
   ];
 
   @Input() lNormas = ["ISO:2007", "ISO:9001", "ISO:4427", "ISO:1334"];
@@ -33,7 +33,7 @@ export class ElaEditHallazagoComponent implements OnInit {
   constructor(
     private toastController: ToastController,
     public formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.ionicFormHallazgo = this.formBuilder.group({});
@@ -45,7 +45,7 @@ export class ElaEditHallazagoComponent implements OnInit {
     }
     if (!this.elahallazgo) this.elahallazgo = new Elahallazgo();
   }
-  editarHallazgo() {}
+  editarHallazgo() { }
 
   valorHallazagos(event) {
     this.elahallazgo.hallazgo = event.detail.value;

@@ -13,51 +13,26 @@
       </ion-item>
       <ion-list-header class="title-normas">
         <ion-item>
-          <ion-icon
-            name="add-circle"
-            slot="end"
-            (click)="adicionarNorma(item, i)"
-            class="big-icon"
-          ></ion-icon>
+          <ion-icon name="add-circle" slot="end" (click)="adicionarNorma(item, i)" class="big-icon"></ion-icon>
           Normas y Alcances
         </ion-item>
         <ion-item *ngIf="isAuditor">
-          <ion-select
-            interface="alert"
-            placeholder="Cambios"
-            class="cargo-select"
-            okText="Ok"
-            cancelText="Cancelar"
-            [value]="currentNormaCambios"
-          >
-            <ion-select-option
-              *ngFor="
+          <ion-select interface="alert" placeholder="Cambios" class="cargo-select" okText="Ok" cancelText="Cancelar"
+            [value]="currentNormaCambios">
+            <ion-select-option *ngFor="
                 let data of [
                   'amplicacion redaccion alcance',
                   'reduccion redaccion alcance',
                   'N/A'
                 ]
-              "
-              [value]="norma"
-              class="cargo-select"
-              >{{ data }}
+              " [value]="norma" class="cargo-select">{{ data }}
             </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list-header>
       <ion-item *ngFor="let norma of normasSistema; let i = index">
-        <ion-icon
-          name="pencil-sharp"
-          slot="start"
-          (click)="editarNorma(norma, i)"
-          class="big-icon"
-        ></ion-icon>
-        <ion-icon
-          name="trash"
-          slot="start"
-          (click)="eliminarNorma(i)"
-          class="big-icon"
-        ></ion-icon>
+        <ion-icon name="pencil-sharp" slot="start" (click)="editarNorma(norma, i)" class="big-icon"></ion-icon>
+        <ion-icon name="trash" slot="start" (click)="eliminarNorma(i)" class="big-icon"></ion-icon>
         <div class="norma-block">
           <h2>Norma: {{ norma.norma }}</h2>
           <p>
@@ -73,48 +48,23 @@
       </ion-item>
       <ion-list-header class="title-normas">
         <ion-item>
-          <ion-icon
-            name="add-circle"
-            slot="end"
-            (click)="adicionarDireccion(item, i)"
-            class="big-icon"
-          ></ion-icon>
+          <ion-icon name="add-circle" slot="end" (click)="adicionarDireccion(item, i)" class="big-icon"></ion-icon>
           Programación de direcciones
         </ion-item>
         <ion-item *ngIf="isAuditor">
-          <ion-select
-            interface="alert"
-            placeholder="Cambios"
-            class="cargo-select"
-            okText="Ok"
-            cancelText="Cancelar"
-            [value]="currentDireccionesCambios"
-          >
-            <ion-select-option
-              *ngFor="
+          <ion-select interface="alert" placeholder="Cambios" class="cargo-select" okText="Ok" cancelText="Cancelar"
+            [value]="currentDireccionesCambios">
+            <ion-select-option *ngFor="
                 let data of ['Ampliacion Sitios', 'Reduccion Sitios', 'N/A']
-              "
-              [value]="norma"
-              class="cargo-select"
-              >{{ data }}
+              " [value]="norma" class="cargo-select">{{ data }}
             </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list-header>
       <ion-item *ngFor="let direccion of direccionesSistema; let i = index">
-        <ion-icon
-          name="pencil-sharp"
-          slot="start"
-          (click)="editarDireccion(direccion, i)"
-          class="big-icon"
-        ></ion-icon>
-        <ion-icon
-          name="trash"
-          slot="start"
-          (click)="eliminarDireccion(i)"
-          class="big-icon"
-          *ngIf="allowDelete"
-        ></ion-icon>
+        <ion-icon name="pencil-sharp" slot="start" (click)="editarDireccion(direccion, i)" class="big-icon"></ion-icon>
+        <ion-icon name="trash" slot="start" (click)="eliminarDireccion(i)" class="big-icon" *ngIf="allowDelete">
+        </ion-icon>
         <div class="direccion-block">
           <!-- <h2>{{ direccion.nombre }} - Diás Insitu: {{ direccion.dias }}</h2> -->
           <h2>Diás Insitu: {{ direccion.dias }}</h2>
@@ -126,28 +76,14 @@
             Pais: {{ direccion.pais }} | Departamento:
             {{ direccion.departamento }} | Ciudad: {{ direccion.ciudad }}
           </p> -->
-          <app-ela-cronograma-list
-            *ngIf="addCronograma"
-            [listaParticipantes]="listaParticipantes"
-            [llaves]="getLlaves(direccion)"
-            [listCronograma]="direccion['listaCronograma']"
-            (guardarCronogramaEmitter)="guardarCronograma($event)"
-            (eliminarCronogramaEmitter)="eliminarCronograma($event)"
-          ></app-ela-cronograma-list>
         </div>
       </ion-item>
     </ion-list>
-    <app-pra-direccion-sistema
-      *ngIf="mode === 'EDIT'"
-      [pradireccionespasistema]="currentdireccionesSistema"
-      (guardarDireccionEmitter)="guardarDireccion($event)"
-      (cancelarDireccionEmitter)="cancelarDireccion($event)"
-    ></app-pra-direccion-sistema>
-    <app-pra-edit-norma-sistema
-      *ngIf="mode === 'EDIT1'"
-      [praciclonormassistema]="currentnormaSistema"
-      (guardarNormaEmitter)="guardarNorma($event)"
-      (cancelarNormaEmitter)="cancelarNorma($event)"
-    ></app-pra-edit-norma-sistema>
+    <app-pra-direccion-sistema *ngIf="mode === 'EDIT'" [pradireccionespasistema]="currentdireccionesSistema"
+      (guardarDireccionEmitter)="guardarDireccion($event)" (cancelarDireccionEmitter)="cancelarDireccion($event)">
+    </app-pra-direccion-sistema>
+    <app-pra-edit-norma-sistema *ngIf="mode === 'EDIT1'" [praciclonormassistema]="currentnormaSistema"
+      (guardarNormaEmitter)="guardarNorma($event)" (cancelarNormaEmitter)="cancelarNorma($event)">
+    </app-pra-edit-norma-sistema>
   </div>
 </div>

@@ -13,29 +13,13 @@
       </ion-item>
       <ion-list-header class="title-normas">
         <ion-item>
-          <ion-icon
-            name="add-circle"
-            slot="end"
-            (click)="adicionar()"
-            class="big-icon"
-          ></ion-icon>
+          <ion-icon name="add-circle" slot="end" (click)="adicionar()" class="big-icon"></ion-icon>
           Productos
         </ion-item>
       </ion-list-header>
       <ion-item *ngFor="let product of productList; let i = index">
-        <ion-icon
-          name="pencil-sharp"
-          slot="start"
-          (click)="editar(product, i)"
-          class="big-icon"
-        ></ion-icon>
-        <ion-icon
-          name="trash"
-          slot="start"
-          (click)="eliminar(i)"
-          *ngIf="allowDelete"
-          class="big-icon"
-        ></ion-icon>
+        <ion-icon name="pencil-sharp" slot="start" (click)="editar(product, i)" class="big-icon"></ion-icon>
+        <ion-icon name="trash" slot="start" (click)="eliminar(i)" *ngIf="allowDelete" class="big-icon"></ion-icon>
         <div class="norma-block">
           <h2>
             Nombre: {{ product.nombre }} [Marca: {{ product.marca }}] [Norma:
@@ -55,22 +39,11 @@
             Nro. Cert.
             {{ product.numeroDeCertificacion }}
           </p>
-          <app-ela-cronograma-list
-            *ngIf="addCronograma"
-            [listaParticipantes]="listaParticipantes"
-            [llaves]="getLlaves(product)"
-            [listCronograma]="product['listaCronograma']"
-            (guardarCronogramaEmitter)="guardarCronograma($event)"
-            (eliminarCronogramaEmitter)="eliminarCronograma($event)"
-          ></app-ela-cronograma-list>
         </div>
       </ion-item>
     </ion-list>
-    <app-product-detail
-      *ngIf="mode == 'EDIT'"
-      [pradireccionespaproducto]="currentProduct"
-      (guardarProductEmitter)="guardarProducto($event)"
-      (cancelarProductEmitter)="cancelarProducto($event)"
-    ></app-product-detail>
+    <app-product-detail *ngIf="mode == 'EDIT'" [pradireccionespaproducto]="currentProduct"
+      (guardarProductEmitter)="guardarProducto($event)" (cancelarProductEmitter)="cancelarProducto($event)">
+    </app-product-detail>
   </div>
 </div>

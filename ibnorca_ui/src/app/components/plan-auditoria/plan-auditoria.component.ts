@@ -23,18 +23,35 @@ export class PlanAuditoriaComponent implements OnInit {
   @Input() currentPlanAuditoriaDTO: PlanAuditoriaDTO;
   @Output() guardarCronogramaEmitter = new EventEmitter<any>();
   @Output() eliminarCronogramaEmitter = new EventEmitter<any>();
+  @Input() listaDirecciones: string[] = [];
+  DocumentacionReferencia: string = "Norma NAG E 210 (2005) Sistema de tubería compuesta de acero-Polietileno unidos por termo fusión para conducción de gas natural y gases licuados de petróleo en instalaciones internas.  \n" +
+    "Sistema de Gestión conforme a los requisitos del Anexo 1 de la Especificación Esquema 5 para la certificación de productos con Sello IBNORCA. \n" +
+    "Reglamento Particular de Producto RP-TCP - 65 \n" +
+    "Procedimientos y otra documentación de la organización. \n";
+
   constructor(
     public formBuilder: FormBuilder,
     private popoverController: PopoverController,
     public datepipe: DatePipe,
     private elaboracionAuditoriaService: ElaboracionAuditoriaService
-  ) {}
+  ) { }
 
   listaParticipantes: Personal[];
 
   ngOnInit() {
-    this.listaParticipantes = this.currentPlanAuditoriaDTO["listaParticipantes"];    
+    this.listaParticipantes = this.currentPlanAuditoriaDTO["listaParticipantes"];
     this.mode = this.currentPlanAuditoriaDTO.area;
+    this.currentPlanAuditoriaDTO.pradireccionespaproducto.forEach(x => {
+      if (this.listaDirecciones.indexOf(x.direccion) === -1) {
+        this.listaDirecciones.push(x.direccion);
+      }
+    });
+
+    this.currentPlanAuditoriaDTO.pradireccionespasistema.forEach(x => {
+      if (x.dias > 0 && this.listaDirecciones.indexOf(x.direccion) === -1) {
+        this.listaDirecciones.push(x.direccion);
+      }
+    });
   }
 
   guardarCronograma(event) {
@@ -42,7 +59,7 @@ export class PlanAuditoriaComponent implements OnInit {
       this.guardarCronogramaEmitter.emit(event);
     }
   }
-  
+
   eliminarCronograma(event) {
     if (this.eliminarCronogramaEmitter) {
       this.eliminarCronogramaEmitter.emit(event);

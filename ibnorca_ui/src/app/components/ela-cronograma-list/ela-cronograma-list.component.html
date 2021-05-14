@@ -5,24 +5,21 @@
         name="add-circle"
         slot="start"
         (click)="addCronograma()"
-        class="big-icon"
-      ></ion-icon>
+        class="big-icon"></ion-icon>
       <ion-text color="secondary"> Cronograma </ion-text>
     </ion-item>
   </ion-list-header>
-  <ion-item *ngFor="let cronograma of listCronograma; let i = index">
+  <ion-item *ngFor="let cronograma of listCronograma; let i= index">
     <ion-icon
       name="pencil-sharp"
       slot="start"
       (click)="editarCronograma(i)"
-      class="big-icon"
-    ></ion-icon>
+      class="big-icon"></ion-icon>
     <ion-icon
       name="trash"
       slot="start"
       (click)="eliminarCronograma(i)"
-      class="big-icon"
-    ></ion-icon>
+      class="big-icon"></ion-icon>
     <div class="row-cronogama">
       Fecha:
       <span class="sub-title-horario">{{ cronograma.fechaInicio }}</span> |
@@ -33,11 +30,13 @@
       Responsable:
       <span class="paragraph-horario">{{
         cronograma.personaEntrevistadaCargo
-      }}</span>
+        }}</span>
       Proceso:
       <span class="paragraph-horario">{{ cronograma.procesoArea }}</span>
       Equipo:
       <span class="paragraph-horario">{{ cronograma.auditor }}</span>
+      Direccion:
+      <span class="paragraph-horario">{{ cronograma.direccion }}</span>
     </div>
   </ion-item>
 </ion-list>
@@ -45,6 +44,6 @@
   *ngIf="mode === 'EDIT'"
   [currentElacronogama]="currentCrongrama"
   [listaParticipantes]="listaParticipantes"
+  [listaDirecciones]="listaDirecciones"
   (guardarCronogramaEmitter)="guardarCronograma($event)"
-  (cancelarCronogramaEmitter)="cancelarCronograma()"
-></app-ela-cronograma>
+  (cancelarCronogramaEmitter)="cancelarCronograma()"></app-ela-cronograma>

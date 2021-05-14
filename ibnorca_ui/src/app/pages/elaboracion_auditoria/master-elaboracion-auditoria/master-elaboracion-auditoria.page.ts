@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
 import { Pracicloparticipante } from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
 import {
+  Elacontenidoauditorium,
   Elacronogama,
   Elahallazgo,
   PlanAuditoriaDTO,
@@ -18,12 +19,14 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
   select_component = "plan_auditoria";
   idCicloAuditoria = 0;
   currentPlanAuditoriaDTO: PlanAuditoriaDTO;
+  currentPlanMuestreo: Elacontenidoauditorium;
+
   area = "";
   proceso = "ELABORACION";
   constructor(
     private route: ActivatedRoute,
     private elaboracionAuditoriaService: ElaboracionAuditoriaService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -55,7 +58,6 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
 
   cargarObjetosAuxiliares() {
     this.currentPlanAuditoriaDTO["listaParticipantes"] = new Array<Personal>();
-
     //se asgina el check de seleccionado a la auditoria
     this.currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria?.forEach(
       (contenido) => {
@@ -180,6 +182,20 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
   guardarContenido(event) {
     this.currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria = event;
     console.log("guardamos contenido", this.currentPlanAuditoriaDTO);
+    this.elaboracionAuditoriaService
+      .RegistrarPlanAuditoria(this.currentPlanAuditoriaDTO)
+      .subscribe((x) => {
+        if (x.state === 1) {
+          this.currentPlanAuditoriaDTO = x.object;
+          this.cargarObjetosAuxiliares();
+        }
+        this.elaboracionAuditoriaService.showMessageResponse(x);
+      });
+  }
+
+  guardarPlanMuestreo(event) {
+
+    this.currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria = event;
     this.elaboracionAuditoriaService
       .RegistrarPlanAuditoria(this.currentPlanAuditoriaDTO)
       .subscribe((x) => {

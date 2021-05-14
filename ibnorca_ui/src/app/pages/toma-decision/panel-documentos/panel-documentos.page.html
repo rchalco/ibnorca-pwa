@@ -1,4 +1,4 @@
-<ion-toolbar>
+<!-- <ion-toolbar>
   <ion-segment #segment1 (ionChange)="segmentChanged($event)" color="tertiary">
     <ion-segment-button value="acta">
       <ion-label>ACTA</ion-label>
@@ -45,4 +45,10 @@
   <div *ngIf="select_component === 'nota_retiro'">
     <app-editor-documento titulo="Nota de Retiro"></app-editor-documento>
   </div>
-</ion-content>
+</ion-content> -->
+
+<app-param-documentos
+[area]="area"
+[IdCiclo]="idCiclo"
+[proceso]="proceso"
+>

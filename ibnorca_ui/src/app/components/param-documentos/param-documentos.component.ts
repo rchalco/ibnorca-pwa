@@ -12,6 +12,7 @@ export class ParamDocumentosComponent implements OnInit {
   listDocumentos: Paramdocumento[];
   @Input() area: string = "TCS";
   @Input() IdCiclo = 0;
+  @Input() proceso: string = "ELABORACION";
 
   constructor(
     private elaboracionAuditoriaService: ElaboracionAuditoriaService,
@@ -20,7 +21,7 @@ export class ParamDocumentosComponent implements OnInit {
 
   ngOnInit() {
     this.elaboracionAuditoriaService
-      .GetListasDocumetos(this.area, "ELABORACION")
+      .GetListasDocumetos(this.area, this.proceso)
       .subscribe((x) => {
         this.listDocumentos = x.listEntities;
       });

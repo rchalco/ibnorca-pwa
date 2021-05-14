@@ -6,7 +6,7 @@
   >
     <ion-select
       interface="alert"
-      placeholder="Tipo"
+      placeholder="Tipo de hallazgo"
       class="cargo-select"
       okText="Ok"
       cancelText="Cancelar"
@@ -22,7 +22,7 @@
       </ion-select-option>
     </ion-select>
     <app-custom-input
-      label="Proceso"
+      label="Requisito"
       name="proceso"
       type="text"
       [formGruop]="ionicFormHallazgo"
@@ -31,7 +31,7 @@
     ></app-custom-input>
 
     <app-custom-input
-      label="Sitio"
+      label="Hallazgo"
       name="sitio"
       type="text"
       [formGruop]="ionicFormHallazgo"
@@ -39,7 +39,7 @@
       [defaultValue]="elahallazgo.sitio"
     ></app-custom-input>
 
-    <ion-select
+    <!-- <ion-select
       interface="alert"
       placeholder="Normas"
       class="cargo-select"
@@ -55,10 +55,10 @@
       >
         {{ norma }}
       </ion-select-option>
-    </ion-select>
+    </ion-select> -->
 
     <ion-item>
-      <ion-label position="floating">Hallazagos</ion-label>
+      <ion-label position="floating">Evidencias</ion-label>
       <ion-textarea
         clearOnEdit="true"
         rows="10"

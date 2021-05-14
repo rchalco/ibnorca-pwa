@@ -83,4 +83,5 @@ export class Elacronogama {
   procesoArea: string;
   auditor: string;
   cargo: string;
+  direccion: string;
 }

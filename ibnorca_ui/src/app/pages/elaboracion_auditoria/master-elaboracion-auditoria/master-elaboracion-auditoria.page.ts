@@ -19,6 +19,7 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
   idCicloAuditoria = 0;
   currentPlanAuditoriaDTO: PlanAuditoriaDTO;
   area = "";
+  proceso = "ELABORACION";
   constructor(
     private route: ActivatedRoute,
     private elaboracionAuditoriaService: ElaboracionAuditoriaService

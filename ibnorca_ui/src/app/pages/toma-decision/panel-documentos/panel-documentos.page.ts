@@ -7,7 +7,9 @@ import { Component, OnInit } from "@angular/core";
 })
 export class PanelDocumentosPage implements OnInit {
   select_component = "acta";
- 
+  idCiclo = 166;
+  area = "TCS"
+  proceso = "TOMA_DECISION";
   constructor() {}
 
   ngOnInit() {}

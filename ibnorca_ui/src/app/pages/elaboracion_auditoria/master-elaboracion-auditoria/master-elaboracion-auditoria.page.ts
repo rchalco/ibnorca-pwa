@@ -20,6 +20,7 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
   idCicloAuditoria = 0;
   currentPlanAuditoriaDTO: PlanAuditoriaDTO;
   currentPlanMuestreo: Elacontenidoauditorium;
+  listaDirecciones: string[] = [];
 
   area = "";
   proceso = "ELABORACION";
@@ -97,6 +98,18 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
         (cronograma) =>
           cronograma.idDireccionPasistema === x.idDireccionPasistema
       );
+    });
+
+    this.currentPlanAuditoriaDTO.pradireccionespaproducto.forEach(x => {
+      if (this.listaDirecciones.indexOf(x.direccion) === -1) {
+        this.listaDirecciones.push(x.direccion);
+      }
+    });
+
+    this.currentPlanAuditoriaDTO.pradireccionespasistema.forEach(x => {
+      if (x.dias > 0 && this.listaDirecciones.indexOf(x.direccion) === -1) {
+        this.listaDirecciones.push(x.direccion);
+      }
     });
   }
 
@@ -210,4 +223,5 @@ export class MasterElaboracionAuditoriaPage implements OnInit {
   segmentChanged(event) {
     this.select_component = event.detail.value;
   }
+
 }

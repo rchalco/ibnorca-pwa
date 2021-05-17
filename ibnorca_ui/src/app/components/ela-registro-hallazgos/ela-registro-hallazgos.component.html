@@ -5,33 +5,30 @@
         name="add-circle"
         slot="end"
         (click)="adicionarHallazgo()"
-        class="big-icon"
-      ></ion-icon>
+        class="big-icon"></ion-icon>
       Registro de Hallazgos
     </ion-item>
   </ion-list-header>
-  <ion-item *ngFor="let hallazgos of listaHallazgos; let i = index">
+  <ion-item *ngFor="let hallazgos of listaHallazgos; let i= index">
     <ion-icon
       name="pencil-sharp"
       slot="start"
       (click)="editarHallazgo(i)"
-      class="big-icon"
-    ></ion-icon>
+      class="big-icon"></ion-icon>
     <ion-icon
       name="trash"
       slot="start"
       (click)="eliminarHallazgo(i)"
-      class="big-icon"
-    ></ion-icon>
+      class="big-icon"></ion-icon>
     <div class="norma-block">
       <h2>
         Tipo: {{ hallazgos.tipo }} [Normas: {{ hallazgos.normas }}]
       </h2>
-      <h3>Proceso: {{ hallazgos.proceso }}</h3>
+      <h3>Requisito: {{ hallazgos.proceso }}</h3>
+      <!-- <h3>Hallazgo: {{ hallazgos.proceso }}</h3> -->
       <p>
         Hallazgo:
-        <span class="sub-title"
-          >
+        <span class="sub-title">
           {{ hallazgos.hallazgo }}
           <!-- A tomar en consideración: - en el caso de las auditorías
           multisitio, la columna F permite vincular los resultados con el
@@ -41,19 +38,18 @@
           cada auditoría. Para auditorías de un solo sitio, oculte esta
           columna. Ocultar las columnas de las normas que no necesita y así
           hacer el informe más legible para el cliente. -->
-          </span
-        >
+        </span>
       </p>
       <p class="detail-paragraph">
-        Sitio.{{ hallazgos.sitio }} | Fecha {{ hallazgos.fecha }} | Auditor: {{ hallazgos.usuario }}
+        Sitio.{{ hallazgos.sitio }} | Fecha {{ hallazgos.fecha }} | Auditor: {{
+        hallazgos.usuario }}
       </p>
     </div>
   </ion-item>
 </ion-list>
 <app-ela-edit-hallazago
-  *ngIf="mode === 'EDIT'"  
-  [elahallazgo] = "currentHallazgo"
+  *ngIf="mode === 'EDIT'"
+  [elahallazgo]="currentHallazgo"
   (guardarHallazgoEmitter)="guardarHallazgo($event)"
   (cancelarHallazgoEmitter)="cancelarHallazo($event)"
-  [lNormas] = "lNormas"
-></app-ela-edit-hallazago>
+  [lNormas]="lNormas"></app-ela-edit-hallazago>

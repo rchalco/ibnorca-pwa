@@ -2,8 +2,7 @@
   <form
     [formGroup]="ionicFormHallazgo"
     (ngSubmit)="guardarHallazgo()"
-    #form="ngForm"
-  >
+    #form="ngForm">
     <ion-select
       interface="alert"
       placeholder="Tipo de hallazgo"
@@ -11,13 +10,11 @@
       okText="Ok"
       cancelText="Cancelar"
       (ionChange)="seleccionarTipo($event)"
-      [value]="tipoObservacion"
-    >
+      [value]="tipoObservacion">
       <ion-select-option
         *ngFor="let tipo of ltiposObervacion"
         [value]="tipo"
-        class="cargo-select"
-      >
+        class="cargo-select">
         {{ tipo.descripcion }}
       </ion-select-option>
     </ion-select>
@@ -27,18 +24,16 @@
       type="text"
       [formGruop]="ionicFormHallazgo"
       [form]="form"
-      [defaultValue]="elahallazgo.proceso"
-    ></app-custom-input>
+      [defaultValue]="elahallazgo.proceso"></app-custom-input>
 
-    <app-custom-input
+    <!-- <app-custom-input
       label="Hallazgo"
       name="sitio"
       type="text"
       [formGruop]="ionicFormHallazgo"
       [form]="form"
       [defaultValue]="elahallazgo.sitio"
-    ></app-custom-input>
-
+    ></app-custom-input> -->
     <!-- <ion-select
       interface="alert"
       placeholder="Normas"
@@ -56,23 +51,19 @@
         {{ norma }}
       </ion-select-option>
     </ion-select> -->
-
     <ion-item>
-      <ion-label position="floating">Evidencias</ion-label>
+      <ion-label position="floating">Hallazgo</ion-label>
       <ion-textarea
         clearOnEdit="true"
         rows="10"
         (ionChange)="valorHallazagos($event)"
-        cols="20"        
-        [value]="elahallazgo.hallazgo"
-      ></ion-textarea>
+        cols="20"
+        [value]="elahallazgo.hallazgo"></ion-textarea>
     </ion-item>
 
     <section>
       <ion-button size="small" type="submit">Guardar</ion-button>
-      <ion-button size="small" color="secondary" (click)="cancelarHallazo()"
-        >Cancelar</ion-button
-      >
+      <ion-button size="small" color="secondary" (click)="cancelarHallazo()">Cancelar</ion-button>
     </section>
   </form>
 </div>

@@ -9,26 +9,24 @@ import { Elacontenidoauditorium } from 'src/app/interfaces/elaboracion_auditoria
 export class ElaPlanMuestreoComponent implements OnInit {
 
   @Input() listaContenido: Elacontenidoauditorium[] = [];
+  @Input() nemotico: string = "";
+  @Input() titulo: string = "";
 
-  planMuestreo: Elacontenidoauditorium = new Elacontenidoauditorium();
-  DocumentacionReferencia: Elacontenidoauditorium = new Elacontenidoauditorium();
+  currentContenido: Elacontenidoauditorium = new Elacontenidoauditorium();
 
   @Output() guardarPlanMuestreo: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
-    this.planMuestreo = this.listaContenido.find(x => x.nemotico === "ACTAMUESTREO_PLAN");
-    this.DocumentacionReferencia = this.listaContenido.find(x => x.nemotico === "PLAN_CRITERIO");
+    this.currentContenido = this.listaContenido.find(x => x.nemotico === this.nemotico);
     console.log(this.listaContenido);
   }
 
   guardarMuestreo() {
 
     this.listaContenido.map(obj =>
-      this.listaContenido.find(o => o.nemotico === this.planMuestreo.nemotico) || obj);
+      this.listaContenido.find(o => o.nemotico === this.currentContenido.nemotico) || obj);
 
-    this.listaContenido.map(obj =>
-      this.listaContenido.find(o => o.nemotico === this.DocumentacionReferencia.nemotico) || obj);
 
     console.log("ingresa a guardar muestreo");
     if (this.guardarPlanMuestreo) {

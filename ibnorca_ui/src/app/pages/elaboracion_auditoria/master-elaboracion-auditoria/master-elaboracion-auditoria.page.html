@@ -27,11 +27,36 @@
   </ion-segment>
 </ion-toolbar>
 <ion-content>
-  <app-plan-auditoria
-    *ngIf="select_component === 'plan_auditoria' && currentPlanAuditoriaDTO"
-    [currentPlanAuditoriaDTO]="currentPlanAuditoriaDTO"
-    (guardarCronogramaEmitter)="guardarCronograma($event)"
-    (eliminarCronogramaEmitter)="eliminarElmentCronograma($event)"></app-plan-auditoria>
+
+  <div *ngIf="select_component === 'plan_auditoria' && currentPlanAuditoriaDTO">
+    <app-plan-auditoria
+      [currentPlanAuditoriaDTO]="currentPlanAuditoriaDTO"
+      (guardarCronogramaEmitter)="guardarCronograma($event)"
+      (eliminarCronogramaEmitter)="eliminarElmentCronograma($event)">
+    </app-plan-auditoria>
+    <app-ela-plan-muestreo
+      [listaContenido]="currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria"
+      titulo="OBJETIVOS"
+      nemotico="PLAN_OBJETIVOS"
+      (guardarPlanMuestreo)="guardarPlanMuestreo($event)"
+      *ngIf="currentPlanAuditoriaDTO && currentPlanAuditoriaDTO.area== 'TCS'">
+    </app-ela-plan-muestreo>
+    <app-ela-plan-muestreo
+      [listaContenido]="currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria"
+      titulo="DOCUMENTOS DE REFERENCIA"
+      nemotico="PLAN_CRITERIO"
+      (guardarPlanMuestreo)="guardarPlanMuestreo($event)"
+      *ngIf="currentPlanAuditoriaDTO && currentPlanAuditoriaDTO.area== 'TCP'">
+    </app-ela-plan-muestreo>
+    <app-ela-cronograma-list
+      [listaParticipantes]="currentPlanAuditoriaDTO['listaParticipantes']"
+      [listCronograma]="currentPlanAuditoriaDTO.elaauditorium.elacronogamas"
+      [listaDirecciones]="listaDirecciones"
+      (guardarCronogramaEmitter)="guardarCronograma($event)"
+      (eliminarCronogramaEmitter)="eliminarElmentCronograma($event)"></app-ela-cronograma-list>
+  </div>
+
+
   <app-ela-registro-hallazgos
     *ngIf="select_component === 'list_hallazgo'"
     [listaHallazgos]="currentPlanAuditoriaDTO.elaauditorium.elahallazgos"
@@ -59,6 +84,8 @@
 
   <app-ela-plan-muestreo
     [listaContenido]="currentPlanAuditoriaDTO.elaauditorium.elacontenidoauditoria"
+    titulo="REGISTRO DE PLAN DE AUDITORIA"
+    nemotico="ACTAMUESTREO_PLAN"
     (guardarPlanMuestreo)="guardarPlanMuestreo($event)"
     *ngIf="select_component === 'plan_muestreo'">
   </app-ela-plan-muestreo>

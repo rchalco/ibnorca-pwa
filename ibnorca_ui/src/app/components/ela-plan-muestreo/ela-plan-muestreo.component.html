@@ -11,19 +11,10 @@
   </ion-item>
   <ion-list-header lines="full">
     <ion-text color="primary">
-      <h3>REGISTRO DE PLAN DE MUESTREO</h3>
+      <h3>{{titulo}}</h3>
     </ion-text>
   </ion-list-header>
   <ion-item>
-    <ion-textarea [(ngModel)]="planMuestreo.contenido" rows="20"></ion-textarea>
-  </ion-item>
-  <ion-list-header lines="full">
-    <ion-text color="primary">
-      <h3>DOCUMENTACION DE REFERENCIA</h3>
-    </ion-text>
-  </ion-list-header>
-  <ion-item>
-    <ion-textarea [(ngModel)]="DocumentacionReferencia.contenido"
-      rows="10"></ion-textarea>
+    <ion-textarea [(ngModel)]="currentContenido.contenido" rows="15"></ion-textarea>
   </ion-item>
 </ion-list>

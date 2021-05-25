@@ -21,7 +21,7 @@ export const HEADERS_FILE =  new HttpHeaders({
   Accept: "*/*",  
 });
 
-export const URL_GLOBAL = "https://localhost:8001/api/";
+export const URL_GLOBAL = "http://localhost:8001/api/";
 export const URL_APERTURA = URL_GLOBAL + "AperturaAuditoria/";
 export const URL_ELABORACION = URL_GLOBAL + "ElaboracionAuditoria/";
 /*

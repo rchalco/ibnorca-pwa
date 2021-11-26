@@ -18,8 +18,8 @@ export class ComCalendarMonthYearComponent implements OnInit {
     { value: 9, label: "Septiembre" },
     { value: 10, label: "Octubre" },
     { value: 11, label: "Noviembre" },
-    { value: 12, label: "Diciembre" },
-  ];
+    { value: 12, label: "Diciembre" }, 
+  ]; 
 
   mesSelected="";
   yearSelected=2021;

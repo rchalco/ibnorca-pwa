@@ -1,4 +1,4 @@
-export class ResponseObject<T> extends wraper.Response {
+export class ResponseObject<T> {
   code: string;
   object: T;
 }

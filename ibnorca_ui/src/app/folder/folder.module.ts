@@ -8,8 +8,6 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
 import { ComponentsModule } from '../components/components.module';
-import { BrMaskerModule } from 'br-mask';
-
 
 @NgModule({
   imports: [
@@ -18,8 +16,7 @@ import { BrMaskerModule } from 'br-mask';
     ReactiveFormsModule,
     IonicModule,
     FolderPageRoutingModule,
-    ComponentsModule,
-    BrMaskerModule
+    ComponentsModule
   ],
   declarations: [FolderPage]
 })

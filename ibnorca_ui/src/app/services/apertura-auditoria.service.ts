@@ -1,28 +1,34 @@
-import { Personal } from "./../interfaces/apertura_auditoria/personal";
-import { ResponseQuery } from "./../interfaces/wraper/ResponseQuery";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { HEADERS_FILE, HEADERS_SERVICE, URL_APERTURA } from "src/environments/environment";
-import { Praprogramasdeauditorium } from "../interfaces/apertura_auditoria/Praprogramasdeauditorium";
-import { BaseService } from "./baseService";
-import { DatabaseService } from "./database.service";
-import { usuario } from "../interfaces/seguridad/usuario";
-import { ResponseObject } from "../interfaces/wraper/ResponseObject";
-import { CargoItem } from "../interfaces/apertura_auditoria/cargo_item";
-import { Norma } from "../interfaces/apertura_auditoria/Norma";
-import { Pais } from "../interfaces/General/Pais";
-import { Estado } from "../interfaces/General/Estado";
-import { Ciudad } from "../interfaces/General/Ciudad";
-import { LoadingController, ToastController } from "@ionic/angular";
-import { Observable, of } from "rxjs";
-import { catchError, finalize } from "rxjs/operators";
-import { Clasificador } from "../interfaces/General/Clasificador";
+/* eslint-disable @typescript-eslint/naming-convention */
+import { Personal } from './../interfaces/apertura_auditoria/personal';
+import { ResponseQuery } from './../interfaces/wraper/ResponseQuery';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {
+  HEADERS_FILE,
+  HEADERS_SERVICE,
+  URL_APERTURA,
+} from 'src/environments/environment';
+import { Praprogramasdeauditorium } from '../interfaces/apertura_auditoria/Praprogramasdeauditorium';
+import { BaseService } from './baseService';
+import { DatabaseService } from './database.service';
+import { usuario } from '../interfaces/seguridad/usuario';
+import { ResponseObject } from '../interfaces/wraper/ResponseObject';
+import { CargoItem } from '../interfaces/apertura_auditoria/cargo_item';
+import { Norma } from '../interfaces/apertura_auditoria/Norma';
+import { Pais } from '../interfaces/General/Pais';
+import { Estado } from '../interfaces/General/Estado';
+import { Ciudad } from '../interfaces/General/Ciudad';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { Observable, of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
+import { Clasificador } from '../interfaces/General/Clasificador';
+import { CustomResponse } from '../interfaces/wraper/ResponseObject copy';
 
 const headers = HEADERS_SERVICE;
-const headers_file = HEADERS_FILE;
-const url_apertura = URL_APERTURA;
+
+
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AperturaAuditoriaService extends BaseService {
   constructor(
@@ -34,34 +40,34 @@ export class AperturaAuditoriaService extends BaseService {
     super(databaseService, httpClient, loadingController, toastController);
   }
 
-  ObtenerProgramaAuditoria(IdServicio) {
-    let url_query = url_apertura + "ObtenerProgramaAuditoria";
-    let dataRequest = {
-      IdServicio: IdServicio,
-      Usuario: usuario.currentUser.nick,
+  ObtenerProgramaAuditoria(pidServicio) {
+    const urlQuery = URL_APERTURA + 'ObtenerProgramaAuditoria';
+    const dataRequest = {
+      idServicio: pidServicio,
+      usuario: usuario.currentUser.nick,
     };
     this.presentLoader();
     return this.httpClient
-      .post<ResponseObject<Praprogramasdeauditorium>>(
-        url_query,
+      .post<any>(
+        urlQuery,
         JSON.stringify(dataRequest),
         { headers }
       )
       .pipe(
         finalize(() => {
-          console.log("**se termino la llamada ObtenerProgramaAuditoria");
+          console.log('**se termino la llamada ObtenerProgramaAuditoria');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   ObtenerCargos() {
-    let url_query = url_apertura + "ObtenerCargos";
-    let dataRequest = {};
+    const url_query = URL_APERTURA + 'ObtenerCargos';
+    const dataRequest = {};
 
     this.presentLoader();
     return this.httpClient
@@ -70,20 +76,20 @@ export class AperturaAuditoriaService extends BaseService {
       })
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada ObtenerCargos");
+          console.log('se termino la llamada ObtenerCargos');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   ObtenerParticipanteXCargos(IdCargoCalificado) {
-    let url_query = url_apertura + "BuscarPersonalCargos";
-    let dataRequest = {
-      IdCargoCalificado: IdCargoCalificado,
+    const url_query = URL_APERTURA + 'BuscarPersonalCargos';
+    const dataRequest = {
+      IdCargoCalificado,
     };
 
     this.presentLoader();
@@ -93,20 +99,20 @@ export class AperturaAuditoriaService extends BaseService {
       })
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada");
+          console.log('se termino la llamada');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   BuscarNormas(Codigo) {
-    let url_query = url_apertura + "BuscarNormas";
-    let dataRequest = {
-      Codigo: Codigo,
+    const url_query = URL_APERTURA + 'BuscarNormas';
+    const dataRequest = {
+      Codigo,
     };
 
     this.presentLoader();
@@ -116,20 +122,20 @@ export class AperturaAuditoriaService extends BaseService {
       })
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada BuscarNormas");
+          console.log('se termino la llamada BuscarNormas');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   BuscarNormasInternacionales(Codigo) {
-    let url_query = url_apertura + "BuscarNormasInternacionales";
-    let dataRequest = {
-      Codigo: Codigo,
+    const url_query = URL_APERTURA + 'BuscarNormasInternacionales';
+    const dataRequest = {
+      Codigo,
     };
 
     this.presentLoader();
@@ -139,20 +145,20 @@ export class AperturaAuditoriaService extends BaseService {
       })
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada BuscarNormasInternacionales");
+          console.log('se termino la llamada BuscarNormasInternacionales');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   BuscarPais(pais) {
-    let url_query = url_apertura + "BuscarPais";
-    let dataRequest = {
-      pais: pais,
+    const url_query = URL_APERTURA + 'BuscarPais';
+    const dataRequest = {
+      pais,
     };
 
     this.presentLoader();
@@ -162,20 +168,20 @@ export class AperturaAuditoriaService extends BaseService {
       })
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada BuscarPais");
+          console.log('se termino la llamada BuscarPais');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   BuscarEstado(IdPais) {
-    let url_query = url_apertura + "BuscarEstado";
-    let dataRequest = {
-      IdPais: IdPais,
+    const url_query = URL_APERTURA + 'BuscarEstado';
+    const dataRequest = {
+      IdPais,
     };
 
     this.presentLoader();
@@ -185,20 +191,20 @@ export class AperturaAuditoriaService extends BaseService {
       })
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada BuscarEstado");
+          console.log('se termino la llamada BuscarEstado');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   BuscarCiudad(IdEstado) {
-    let url_query = url_apertura + "BuscarCiudad";
-    let dataRequest = {
-      IdEstado: IdEstado,
+    const url_query = URL_APERTURA + 'BuscarCiudad';
+    const dataRequest = {
+      IdEstado,
     };
 
     this.presentLoader();
@@ -208,42 +214,42 @@ export class AperturaAuditoriaService extends BaseService {
       })
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada BuscarCiudad");
+          console.log('se termino la llamada BuscarCiudad');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   RegisterProgramaAuditoria(programa) {
-    let url_query = url_apertura + "RegisterProgramaAuditoria";
+    const url_query = URL_APERTURA + 'RegisterProgramaAuditoria';
 
     this.presentLoader();
     return this.httpClient
-      .post<ResponseObject<Praprogramasdeauditorium>>(
+      .post<any>(
         url_query,
         JSON.stringify(programa),
         { headers }
       )
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada RegisterProgramaAuditoria");
+          console.log('se termino la llamada RegisterProgramaAuditoria');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   GenerarDesignacion(IdCiclo, Plantilla) {
-    let url_query = url_apertura + "GenerarDesignacion";
-    let dataRequest = {
-      IdCiclo: IdCiclo,
+    const url_query = URL_APERTURA + 'GenerarDesignacion';
+    const dataRequest = {
+      IdCiclo,
       pathPlantilla: Plantilla,
     };
     this.presentLoader();
@@ -253,45 +259,45 @@ export class AperturaAuditoriaService extends BaseService {
       })
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada GenerarDesignacion");
+          console.log('se termino la llamada GenerarDesignacion');
           this.dismissLoader();
         }),
         catchError((error) => {
-          this.showMessageError("No se tiene comunicacion con el servidor");
+          this.showMessageError('No se tiene comunicacion con el servidor');
           return Observable.throw(new Error(error.status));
         })
       );
   }
 
   ObtenerArchivoDesignacion(fileName) {
-    let url_query =
-      url_apertura + "ObtenerArchivoDesignacion?fileName=" + fileName;
+    const url_query =
+      URL_APERTURA + 'ObtenerArchivoDesignacion?fileName=' + fileName;
 
     this.httpClient
       .get(url_query, {
-        responseType: "arraybuffer",
-        headers: headers,
+        responseType: 'arraybuffer',
+        headers,
       })
       //.subscribe((response) => this.downLoadFile(response, "application/pdf"));
       .subscribe((response) =>
-        this.downLoadFileWord(response, "Desginacion.doc")
+        this.downLoadFileWord(response, 'Desginacion.doc')
       );
   }
 
   downLoadFile(data: any, type: string) {
-    let blob = new Blob([data], { type: type });
-    let url = window.URL.createObjectURL(blob);
-    let pwa = window.open(url);
-    if (!pwa || pwa.closed || typeof pwa.closed == "undefined") {
+    const blob = new Blob([data], { type });
+    const url = window.URL.createObjectURL(blob);
+    const pwa = window.open(url);
+    if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
       alert(
-        "Por favor deshabilite los bloqueadores de descarga para continuar."
+        'Por favor deshabilite los bloqueadores de descarga para continuar.'
       );
     }
   }
 
   downLoadFileWord(data: any, fileName: string) {
-    var blob = new Blob([data], { type: "application/octet-stream" });
-    var link = document.createElement("a");
+    const blob = new Blob([data], { type: 'application/octet-stream' });
+    const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     // set the name of the file
     link.download = fileName;
@@ -300,8 +306,8 @@ export class AperturaAuditoriaService extends BaseService {
   }
 
   BuscarOrganismosCertificadores() {
-    let url_query = url_apertura + "BuscarOrganismosCertificadores";
-    let dataRequest = {};
+    const url_query = URL_APERTURA + 'BuscarOrganismosCertificadores';
+    const dataRequest = {};
     this.presentLoader();
     return this.httpClient
       .post<ResponseQuery<Clasificador>>(
@@ -313,32 +319,27 @@ export class AperturaAuditoriaService extends BaseService {
       )
       .pipe(
         finalize(() => {
-          console.log("se termino la llamada GenerarDesignacion");
+          console.log('se termino la llamada GenerarDesignacion');
           this.dismissLoader();
         })
       );
   }
 
-  CargarSolicitud(fileToUpload ) {
-    let url_query = url_apertura + "CargarSolcitud";    
-    this.presentLoader();    
+  CargarSolicitud(fileToUpload) {
+    const urlQuery = URL_APERTURA + 'CargarSolcitud';
+    this.presentLoader();
     const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name);    
-    return this.httpClient
-      .post<wraper.Response>(
-        url_query,
-        formData
-      )
-      .pipe(
-        finalize(() => {
-          console.log("se termino la llamada CargarSolicitud");
-          this.dismissLoader();
-        }),
-        catchError((error) => {
-          console.error(error);
-          this.showMessageError("Error al cargar el archivo " + error.error);
-          return Observable.throw(new Error(error.status));
-        })
-      );
+    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    return this.httpClient.post<CustomResponse>(urlQuery, formData).pipe(
+      finalize(() => {
+        console.log('se termino la llamada CargarSolicitud');
+        this.dismissLoader();
+      }),
+      catchError((error) => {
+        console.error(error);
+        this.showMessageError('Error al cargar el archivo ' + error.error);
+        return Observable.throw(new Error(error.status));
+      })
+    );
   }
 }

@@ -1,3 +1,5 @@
-export class ResponseQuery<T> extends wraper.Response {
-    listEntities: T[];
+export class ResponseQuery<T> extends Response {
+  listEntities: T[];
+  state: number;
+  message: string;
 }

@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
   ViewChild,
-} from "@angular/core";
+} from '@angular/core';
 import {
   Form,
   FormControl,
@@ -13,18 +13,18 @@ import {
   NgForm,
   ValidatorFn,
   Validators,
-} from "@angular/forms";
-import { IonDatetime, PopoverController } from "@ionic/angular";
-import { BrMaskModel } from "br-mask";
-import { ValidationControl } from "src/app/interfaces/cross-ui/ValidationControl";
+} from '@angular/forms';
+import { IonDatetime, PopoverController } from '@ionic/angular';
+
+import { ValidationControl } from 'src/app/interfaces/cross-ui/ValidationControl';
 
 @Component({
-  selector: "app-custom-input",
-  templateUrl: "./custom-input.component.html",
-  styleUrls: ["./custom-input.component.scss"],
+  selector: 'app-custom-input',
+  templateUrl: './custom-input.component.html',
+  styleUrls: ['./custom-input.component.scss'],
 })
 export class CustomInputComponent implements OnInit {
-  @Input() readonly: boolean = false;
+  @Input() readonly = false;
   @Input() label: string;
   @Input() name: string;
   @Input() type: string;
@@ -33,16 +33,15 @@ export class CustomInputComponent implements OnInit {
   @Input() form: NgForm;
   @Input() defaultValue: any;
   @Output() _ionChange = new EventEmitter();
-  @Input() brmasker: BrMaskModel = {}; //https://github.com/amarkes/br-mask
   customPickerOption: any;
   customDate: Date;
   currentDate = new Date();
-  @Input() formatDate = "DD/MM/YYYY";
+  @Input() formatDate = 'DD/MM/YYYY';
   @Input() maxDate = this.currentDate.getUTCFullYear() + 10;
   @Output() eventKeyEnterEmiiter = new EventEmitter<any>();
 
   constructor(private popoverController: PopoverController) {
-    console.log("maxDate", this.maxDate);
+    console.log('maxDate', this.maxDate);
   }
 
   ngOnInit() {
@@ -60,7 +59,7 @@ export class CustomInputComponent implements OnInit {
     this.customPickerOption = {
       buttons: [
         {
-          text: "Confirmar",
+          text: 'Confirmar',
           handler: (event) => {
             console.log(event);
             let day = 1;
@@ -75,16 +74,16 @@ export class CustomInputComponent implements OnInit {
               0
             );
 
-            if (this.type === "datetime") {
-              this.formGruop.controls[this.name]["valueDate"] = this.customDate;
+            if (this.type === 'datetime') {
+              this.formGruop.controls[this.name]['valueDate'] = this.customDate;
             }
 
             if (this._ionChange) {
-              if(this.popoverController){
+              if (this.popoverController) {
                 this.popoverController.dismiss({
-                  item: this.formGruop.controls[this.name]["valueDate"],
+                  item: this.formGruop.controls[this.name]['valueDate'],
                 });
-              }              
+              }
               this._ionChange.emit(event);
             }
           },
@@ -92,15 +91,15 @@ export class CustomInputComponent implements OnInit {
       ],
     };
 
-    if (this.type === "datetime" && this.defaultValue) {
+    if (this.type === 'datetime' && this.defaultValue) {
       let date = new Date(this.defaultValue);
       date.setDate(date.getDate() + 1);
-      this.formGruop.controls[this.name]["valueDate"] = date;
+      this.formGruop.controls[this.name]['valueDate'] = date;
     }
   }
 
   get Control() {
-    console.log("solicitando el control");
+    console.log('solicitando el control');
     console.log(this.formGruop.controls[this.name].errors);
     return this.formGruop.controls[this.name];
   }
@@ -110,12 +109,12 @@ export class CustomInputComponent implements OnInit {
   }
 
   eventKeyEnter(event) {
-    if(this.popoverController){
+    if (this.popoverController) {
       this.popoverController.dismiss({
-        item: this.formGruop.controls[this.name]["value"],
+        item: this.formGruop.controls[this.name]['value'],
       });
-    }      
-    if(this.eventKeyEnterEmiiter){
+    }
+    if (this.eventKeyEnterEmiiter) {
       this.eventKeyEnterEmiiter.emit(event);
     }
   }

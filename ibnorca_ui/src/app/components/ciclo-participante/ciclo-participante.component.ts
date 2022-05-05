@@ -1,23 +1,22 @@
-import { ThrowStmt } from "@angular/compiler";
-import { Component, Input, OnInit } from "@angular/core";
-import { CargoItem } from "src/app/interfaces/apertura_auditoria/cargo_item";
-import { Personal } from "src/app/interfaces/apertura_auditoria/personal";
-import { Pracicloparticipante } from "src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium";
-import { AperturaAuditoriaService } from "src/app/services/apertura-auditoria.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { CargoItem } from 'src/app/interfaces/apertura_auditoria/cargo_item';
+import { Personal } from 'src/app/interfaces/apertura_auditoria/personal';
+import { Pracicloparticipante } from 'src/app/interfaces/apertura_auditoria/Praprogramasdeauditorium';
+import { AperturaAuditoriaService } from 'src/app/services/apertura-auditoria.service';
 
 @Component({
-  selector: "app-ciclo-participante",
-  templateUrl: "./ciclo-participante.component.html",
-  styleUrls: ["./ciclo-participante.component.scss"],
+  selector: 'app-ciclo-participante',
+  templateUrl: './ciclo-participante.component.html',
+  styleUrls: ['./ciclo-participante.component.scss'],
 })
 export class CicloParticipanteComponent implements OnInit {
   @Input() currentPracicloparticipantes: Pracicloparticipante[];
-  @Input() allowEdit: boolean = true;
+  @Input() allowEdit = true;
 
-  visibleAdd = "NO";
+  visibleAdd = 'NO';
   ListaCargoItem: CargoItem[];
   ListaPersonal: Personal[];
-  operacion = "";
+  operacion = '';
   selectParticipante: Pracicloparticipante;
   currentIndex = 0;
   constructor(private aperturaAuditoriaService: AperturaAuditoriaService) {}
@@ -28,8 +27,8 @@ export class CicloParticipanteComponent implements OnInit {
   }
 
   adicionarParticipante() {
-    this.visibleAdd = "SI";
-    this.operacion = "ADD";
+    this.visibleAdd = 'SI';
+    this.operacion = 'ADD';
     this.selectParticipante = new Pracicloparticipante();
   }
 
@@ -40,13 +39,13 @@ export class CicloParticipanteComponent implements OnInit {
       (x) => x.idCargoPuesto === this.selectParticipante._cargo.idCargoPuesto
     )[0];
     this.ObtenerPersonalXIdCargos(this.selectParticipante._cargo.idCargoPuesto);
-    this.visibleAdd = "SI";
-    this.operacion = "UPD";
+    this.visibleAdd = 'SI';
+    this.operacion = 'UPD';
   }
 
   eliminar(index) {
-    console.log("item eliminado");
-    this.operacion = "DEL";
+    console.log('item eliminado');
+    this.operacion = 'DEL';
     this.currentPracicloparticipantes.splice(index, 1);
   }
 
@@ -96,19 +95,18 @@ export class CicloParticipanteComponent implements OnInit {
     this.selectParticipante.participanteDetalleWs = JSON.stringify(
       this.selectParticipante._personal
     );
-    this.visibleAdd = "NO";
+    this.visibleAdd = 'NO';
     console.log(this.selectParticipante);
-    if (this.operacion == "UPD") {
-      this.currentPracicloparticipantes[
-        this.currentIndex
-      ] = this.selectParticipante;
+    if (this.operacion == 'UPD') {
+      this.currentPracicloparticipantes[this.currentIndex] =
+        this.selectParticipante;
     }
-    if (this.operacion == "ADD") {
+    if (this.operacion == 'ADD') {
       this.currentPracicloparticipantes.push(this.selectParticipante);
     }
   }
 
   cancelar() {
-    this.visibleAdd = "NO";
+    this.visibleAdd = 'NO';
   }
 }

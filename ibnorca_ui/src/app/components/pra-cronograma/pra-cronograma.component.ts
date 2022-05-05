@@ -4,7 +4,6 @@ import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { PopoverController } from "@ionic/angular";
 import { CustomInputComponent } from "../custom-input/custom-input.component";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { ParamHorariosComponent } from "../param-horarios/param-horarios.component";
 
 @Component({
@@ -156,7 +155,7 @@ export class PraCronogramaComponent implements OnInit {
     this.currentPraciclocronogramas.diasRemoto = info.data.item;
   }
 
-  
+
   async mostrarHorarioCronograma(event) {
     const popover = await this.popoverController.create({
       component: ParamHorariosComponent,
@@ -174,5 +173,5 @@ export class PraCronogramaComponent implements OnInit {
   }
 
 
-  
+
 }

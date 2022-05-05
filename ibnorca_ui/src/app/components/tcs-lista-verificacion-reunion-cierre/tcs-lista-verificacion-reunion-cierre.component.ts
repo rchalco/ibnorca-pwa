@@ -9,63 +9,81 @@ import { ElaboracionAuditoriaService } from 'src/app/services/elaboracion-audito
   styleUrls: ['./tcs-lista-verificacion-reunion-cierre.component.scss'],
 })
 export class TcsListaVerificacionReunionCierreComponent implements OnInit {
-  
-  isIndeterminate:boolean;
-  masterCheck:boolean;
+  isIndeterminate: boolean;
+  masterCheck: boolean;
 
-   
-    pParamitemselect: Paramitemselect[];
+  pParamitemselect: Paramitemselect[];
 
-   checkBoxList = [
-    {item:'1.',
-      value:"Agradecimiento.",
-      isChecked:false
-    },{item:'2.',
-      value:"Confirmación del alcance y objetivos de la auditoría, alcance de la certificación y norma auditada.",
-      isChecked:false
-    },{item:'3.',
-    value:"Informar que las evidencias de auditoría reunidas se basan en un muestreo por lo tanto se introduce un elemento de incertidumbre.",
-    isChecked:false
-  },{item:'4.',
-    value:"Lectura y hallazgos de auditoría indicando su categorización .",
-    isChecked:false
-  },{item:'5.',
-    value:"Lectura de conclusión de auditoría.",
-    isChecked:false
-  },{item:'6.',
-    value:"Informar sobre el plazo máximo de 15 días calendario a partir de la culminación de la auditoría para él envió de las correcciones y acciones correctivas al auditor líder de las No conformidades menores y/o mayores identificadas para posterior aprobación por el auditor líder. En el caso de no conformidades mayores la organización debe de enviar las evidencias en un plazo de 90 días calendario a partir de la auditoría, para posterior aprobación por el auditor líder.",
-    isChecked:false
-  },{item:'7.',
-    value:"Fecha estimada de la próxima auditoría.",
-    isChecked:false
-  },{item:'8.',
-    value:"Informar acerca de los procesos que tienen IBNORCA, para el tratamiento de quejas y de apelaciones.",
-    isChecked:false
-  },{item:'9.',
-    value:"Aclaraciones.",
-    isChecked:false
-  },{item:'10 .',
-    value:"Firma del informe de auditoría.",
-    isChecked:false
-  },
-  {item:'11.',
-    value:"Revisión del alcance en el informe y el formulario de Datos de la organización.",
-    isChecked:false
+  checkBoxList = [
+    { item: '1.', value: 'Agradecimiento.', isChecked: false },
+    {
+      item: '2.',
+      value:
+        'Confirmación del alcance y objetivos de la auditoría, alcance de la certificación y norma auditada.',
+      isChecked: false,
+    },
+    {
+      item: '3.',
+      value:
+        'Informar que las evidencias de auditoría reunidas se basan en un muestreo por lo tanto se introduce un elemento de incertidumbre.',
+      isChecked: false,
+    },
+    {
+      item: '4.',
+      value: 'Lectura y hallazgos de auditoría indicando su categorización .',
+      isChecked: false,
+    },
+    {
+      item: '5.',
+      value: 'Lectura de conclusión de auditoría.',
+      isChecked: false,
+    },
+    {
+      item: '6.',
+      value:
+        // eslint-disable-next-line max-len
+        'Informar sobre el plazo máximo de 15 días calendario a partir de la culminación de la auditoría para él envió de las correcciones y acciones correctivas al auditor líder de las No conformidades menores y/o mayores identificadas para posterior aprobación por el auditor líder. En el caso de no conformidades mayores la organización debe de enviar las evidencias en un plazo de 90 días calendario a partir de la auditoría, para posterior aprobación por el auditor líder.',
+      isChecked: false,
+    },
+    {
+      item: '7.',
+      value: 'Fecha estimada de la próxima auditoría.',
+      isChecked: false,
+    },
+    {
+      item: '8.',
+      value:
+        'Informar acerca de los procesos que tienen IBNORCA, para el tratamiento de quejas y de apelaciones.',
+      isChecked: false,
+    },
+    { item: '9.', value: 'Aclaraciones.', isChecked: false },
+    {
+      item: '10 .',
+      value: 'Firma del informe de auditoría.',
+      isChecked: false,
+    },
+    {
+      item: '11.',
+      value:
+        'Revisión del alcance en el informe y el formulario de Datos de la organización.',
+      isChecked: false,
+    },
+  ];
+  constructor(
+    private elaboracionAuditoriaService: ElaboracionAuditoriaService
+  ) {}
+
+  ngOnInit() {
+    this.elaboracionAuditoriaService
+      .GetListasVerificacion(2)
+      .subscribe((resul) => {
+        this.pParamitemselect = resul.listEntities;
+      });
   }
-  ]
-  constructor(private elaboracionAuditoriaService: ElaboracionAuditoriaService) { }
-
-  ngOnInit() {this.elaboracionAuditoriaService.GetListasVerificacion(2).subscribe((resul) =>{
- 
-
-    this.pParamitemselect = resul.listEntities;
-
-    
-  });}
 
   checkMaster() {
-    setTimeout(()=>{
-      this.checkBoxList.forEach(obj => {
+    setTimeout(() => {
+      this.checkBoxList.forEach((obj) => {
         obj.isChecked = this.masterCheck;
       });
     });
@@ -74,14 +92,16 @@ export class TcsListaVerificacionReunionCierreComponent implements OnInit {
   checkEvent() {
     const totalItems = this.checkBoxList.length;
     let checked = 0;
-    this.checkBoxList.map(obj => {
-      if (obj.isChecked) checked++;
+    this.checkBoxList.map((obj) => {
+      if (obj.isChecked) {
+        checked++;
+      }
     });
     if (checked > 0 && checked < totalItems) {
       //If even one item is checked but not all
       this.isIndeterminate = true;
       this.masterCheck = false;
-    } else if (checked == totalItems) {
+    } else if (checked === totalItems) {
       //If all are checked
       this.masterCheck = true;
       this.isIndeterminate = false;
@@ -91,5 +111,4 @@ export class TcsListaVerificacionReunionCierreComponent implements OnInit {
       this.masterCheck = false;
     }
   }
-
 }

@@ -3,8 +3,8 @@ import {
   Pracicloparticipante,
   Pradireccionespaproducto,
   Pradireccionespasistema,
-} from "../apertura_auditoria/Praprogramasdeauditorium";
-import { Cliente } from "../General/Cliente";
+} from '../apertura_auditoria/Praprogramasdeauditorium';
+import { Cliente } from '../General/Cliente';
 
 export class PlanAuditoriaDTO {
   designacion: Designacion;
@@ -17,6 +17,7 @@ export class PlanAuditoriaDTO {
   nombreClienteCertificado: string;
   area: string;
   normas: string[];
+  listaParticipantes: any;
 }
 export class Designacion {
   codigoServicio: string;
@@ -55,6 +56,7 @@ export class Elacontenidoauditorium {
   area: string;
   seleccionado: number | null;
   endocumento: number | null;
+  select: boolean;
 }
 export class Elahallazgo {
   idelahallazgo: number;

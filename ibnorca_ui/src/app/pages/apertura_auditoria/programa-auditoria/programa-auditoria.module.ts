@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ProgramaAuditoriaPageRoutingModule } from './programa-auditoria-routing.module';
-import { BrMaskerModule } from 'br-mask';
 import { ProgramaAuditoriaPage } from './programa-auditoria.page';
 import { ComponentsModule } from './../../../components/components.module';
 
@@ -12,12 +11,11 @@ import { ComponentsModule } from './../../../components/components.module';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,    
+    IonicModule,
     ReactiveFormsModule,
     ProgramaAuditoriaPageRoutingModule,
-    BrMaskerModule,
-    ComponentsModule
+    ComponentsModule,
   ],
-  declarations: [ProgramaAuditoriaPage]
+  declarations: [ProgramaAuditoriaPage],
 })
 export class ProgramaAuditoriaPageModule {}

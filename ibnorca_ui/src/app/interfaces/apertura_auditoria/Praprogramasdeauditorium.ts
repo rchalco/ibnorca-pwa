@@ -1,6 +1,6 @@
-import { Cargo } from "./cargo";
-import { CargoItem } from "./cargo_item";
-import { Personal } from "./personal";
+import { Cargo } from './cargo';
+import { CargoItem } from './cargo_item';
+import { Personal } from './personal';
 export class Praprogramasdeauditorium {
   idPrAprogramaAuditoria: number;
   idparamArea: number | null;
@@ -55,7 +55,7 @@ export class Praciclocronograma {
   usuarioRegistro: string;
   fechaDesde: string | null;
   fechaHasta: string | null;
-  estado: string| null;
+  estado: string | null;
   idPrAcicloProgAuditoriaNavigation: Praciclosprogauditorium;
 }
 export class Praciclonormassistema {
@@ -76,7 +76,7 @@ export class Pracicloparticipante {
   idPrAcicloProgAuditoria: number | null;
   idParticipanteWs: number | null;
   participanteDetalleWs: string;
-  idCargoWs: number | null;  
+  idCargoWs: number | null;
   cargoDetalleWs: string;
   usuarioRegistro: string;
   fechaDesde: string | null;
@@ -103,12 +103,13 @@ export class Pradireccionespaproducto {
   usuarioRegistro: string;
   fechaDesde: string | null;
   fechaHasta: string | null;
+  listaCronograma: any;
 }
 export class Pradireccionespasistema {
   idDireccionPasistema: number;
   idPrAcicloProgAuditoria: number | null;
-  nombre: string;  
-  direccion: string;  
+  nombre: string;
+  direccion: string;
   pais: string;
   departamento: string;
   ciudad: string;
@@ -116,4 +117,5 @@ export class Pradireccionespasistema {
   usuarioRegistro: string;
   fechaDesde: string | null;
   fechaHasta: string | null;
+  listaCronograma: any;
 }

@@ -1,8 +1,7 @@
 {
-  "name": "ibnorca_ui",
+  "name": "test1",
   "integrations": {
-    "cordova": {},
-    "capacitor": {}
+    "cordova": {}
   },
   "type": "angular"
 }

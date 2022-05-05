@@ -17,12 +17,13 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "~11.2.13",
+    "@angular-devkit/build-angular": "^13.3.5",
+    "@angular/common": "^13.3.6",
     "@angular/core": "^13.3.6",
-    "@angular/forms": "~11.2.13",
-    "@angular/platform-browser": "~11.2.13",
-    "@angular/platform-browser-dynamic": "~11.2.13",
-    "@angular/router": "~11.2.13",
+    "@angular/forms": "^13.3.6",
+    "@angular/platform-browser": "^13.3.6",
+    "@angular/platform-browser-dynamic": "^13.3.6",
+    "@angular/router": "^13.3.6",
     "@capacitor/core": "2.4.7",
     "@ionic-native/core": "^5.31.1",
     "@ionic-native/document-viewer": "^4.20.0",
@@ -45,7 +46,7 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^13.3.5",
+    "@angular-devkit/core": "^13.3.5",
     "@angular/cli": "^13.3.5",
     "@angular/compiler": "~11.2.13",
     "@angular/compiler-cli": "~11.2.13",

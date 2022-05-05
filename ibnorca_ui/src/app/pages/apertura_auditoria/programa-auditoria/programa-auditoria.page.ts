@@ -49,7 +49,7 @@ export class ProgramaAuditoriaPage implements OnInit {
     private docmentosServicesService: DocmentosServicesService 
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {    
     this.route.queryParams.subscribe((params) => {
       console.log(params);
       if (params.currentIdService) {

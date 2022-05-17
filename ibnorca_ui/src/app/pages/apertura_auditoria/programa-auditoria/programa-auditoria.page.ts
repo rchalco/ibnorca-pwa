@@ -24,6 +24,7 @@ import { Cargo } from 'src/app/interfaces/apertura_auditoria/cargo';
 import { ParamOrganismosCertificadoresComponent } from 'src/app/components/param-organismos-certificadores/param-organismos-certificadores.component';
 import { ActivatedRoute } from '@angular/router';
 import { DocmentosServicesService } from 'src/app/services/docmentos-services.service';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-programa-auditoria',
@@ -39,6 +40,7 @@ export class ProgramaAuditoriaPage implements OnInit {
   currentCliente: Cliente;
   mode = 'TCS';
   programaForm: FormGroup;
+  ciclosVisbles = {};
 
   constructor(
     public modalController: ModalController,
@@ -89,6 +91,15 @@ export class ProgramaAuditoriaPage implements OnInit {
                   }
                 }
               );
+
+              if (
+                this.currentPraprogramasdeauditorium.praciclosprogauditoria
+                  .length > 0
+              ) {
+                this.ciclosVisbles[
+                  this.currentPraprogramasdeauditorium.praciclosprogauditoria[0].idPrAcicloProgAuditoria
+                ] = true;
+              }
 
               this.mode = this.currentDatosServicio.area;
             } else {
@@ -198,5 +209,12 @@ export class ProgramaAuditoriaPage implements OnInit {
     const info = await popover.onDidDismiss();
     console.log('Padre', info);
     this.currentPraprogramasdeauditorium.organismoCertificador = info.data.item;
+  }
+
+  segmentChanged(event) {
+    this.currentPraprogramasdeauditorium.praciclosprogauditoria.forEach((x) => {
+      this.ciclosVisbles[x.idPrAcicloProgAuditoria] = false;
+    });
+    this.ciclosVisbles[event.detail.value] = true;
   }
 }

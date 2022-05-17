@@ -3,7 +3,7 @@
     <ion-label position="floating">{{ label }}</ion-label>
     <ion-input
       class="margin-top"
-      *ngIf="type != 'datetime'"
+      *ngIf="type !== 'datetime'"
       [formControlName]="name"
       [type]="type"
       [readonly]="readonly"
@@ -11,11 +11,10 @@
     ></ion-input>
     <ion-datetime
       class="margin-top"
-      [formControlName]="name"
-      [pickerOptions]="customPickerOption"
       *ngIf="type === 'datetime'"
-      [displayFormat]="formatDate"
-      [max]="maxDate"
+      [presentation]="formatDate"
+      locale="es-BO"
+      (ionChange)="selectionarFecha($event)"
     ></ion-datetime>
   </ion-item>
   <div *ngIf="Validations">

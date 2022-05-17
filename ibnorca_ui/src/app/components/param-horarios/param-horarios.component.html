@@ -1,24 +1,28 @@
-<ion-ilst>
+<ion-list>
   <ion-item>
     <ion-label>Inicio</ion-label>
     <ion-datetime
+      presentation="time"
       display-format="H:mm"
       picker-format="H:mm"
       cancelText="Cancelar"
       doneText="Confirmar"
-      [ngModel]="horarioIni"
       (ionChange)="selectionarHorarioIni($event)"
     ></ion-datetime>
   </ion-item>
   <ion-item>
     <ion-label>Fin</ion-label>
     <ion-datetime
+      presentation="time"
       display-format="H:mm"
       picker-format="H:mm"
       cancelText="Cancelar"
       doneText="Confirmar"
-      [ngModel]="horarioFin"
       (ionChange)="selectionarHorarioFin($event)"
-    ></ion-datetime>
+    >
+    </ion-datetime>
   </ion-item>
-</ion-ilst>
+  <ion-item>
+    <ion-button (click)="confirmarSeleccion()"> Confirmar </ion-button>
+  </ion-item>
+</ion-list>

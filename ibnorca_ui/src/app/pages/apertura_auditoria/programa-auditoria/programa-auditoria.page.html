@@ -30,80 +30,92 @@
               >{{currentPraprogramasdeauditorium.organismoCertificador}}</span
             >
           </div>
-          <ion-slides pager="false" class="slide-full">
-            <ion-slide
+
+          <ion-segment
+            #segment1
+            color="tertiary"
+            (ionChange)="segmentChanged($event)"
+          >
+            <ion-segment-button
               *ngFor="let ciclo of currentPraprogramasdeauditorium.praciclosprogauditoria; let i=index"
+              [value]="ciclo.idPrAcicloProgAuditoria"
             >
-              <div class="container-detail-auditoria">
-                <ion-item color="title-medium">
-                  <ion-label class="title-medium-font">
-                    <ion-icon
-                      name="pencil-sharp"
-                      slot="end"
-                      (click)="editarCiclo(ciclo, i)"
-                      class="big-icon"
-                    ></ion-icon>
-                    AÑO {{ciclo.anio}} {{ciclo.referencia}}
-                  </ion-label>
-                </ion-item>
-                <ion-row>
-                  <ion-col
-                    size="6"
-                    size-lg="6"
-                    size-md="6"
-                    size-sm="6"
-                    size-xs="12"
-                  >
-                    <app-pra-cronograma
-                      [currentPraciclocronogramas]="ciclo.praciclocronogramas[0]"
-                    ></app-pra-cronograma>
-                  </ion-col>
-                  <ion-col
-                    size="6"
-                    size-lg="6"
-                    size-md="6"
-                    size-sm="6"
-                    size-xs="12"
-                  >
-                    <app-ciclo-participante
-                      [currentPracicloparticipantes]="ciclo.pracicloparticipantes"
-                    ></app-ciclo-participante>
-                  </ion-col>
-                </ion-row>
-                <app-tcp-list-products
-                  [productList]="ciclo.pradireccionespaproductos"
-                  [nombreOrganizacion]="ciclo.nombreOrganizacionCertificado"
-                  *ngIf="mode === 'TCP'"
-                ></app-tcp-list-products>
-                <app-tcs-list-systems
-                  [nombreOrganizacion]="ciclo.nombreOrganizacionCertificado"
-                  [direccionesSistema]="ciclo.pradireccionespasistemas"
-                  [normasSistema]="ciclo.praciclonormassistemas"
-                  *ngIf="mode === 'TCS'"
-                ></app-tcs-list-systems>
-                <ion-buttons slot="start" class="buttons-group">
-                  <ion-button
-                    size="small"
-                    fill="outline"
-                    color="success"
-                    (click)="guardarPrograma()"
-                  >
-                    <ion-icon slot="start" name="save"></ion-icon>
-                    Guardar
-                  </ion-button>
-                  <ion-button
-                    size="small"
-                    fill="outline"
-                    color="tertiary"
-                    (click)="VerDesignacion(ciclo)"
-                  >
-                    <ion-icon slot="start" name="document"></ion-icon>
-                    Ver Designacion
-                  </ion-button>
-                </ion-buttons>
-              </div>
-            </ion-slide>
-          </ion-slides>
+              <ion-label> AÑO {{ciclo.anio}}</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+          <div
+            class="container-detail-auditoria"
+            *ngFor="let ciclo of currentPraprogramasdeauditorium.praciclosprogauditoria; let i=index"
+          >
+            <div *ngIf="ciclosVisbles[ciclo.idPrAcicloProgAuditoria]">
+              <ion-item color="title-medium">
+                <ion-label class="title-medium-font">
+                  <ion-icon
+                    name="pencil-sharp"
+                    slot="end"
+                    (click)="editarCiclo(ciclo, i)"
+                    class="big-icon"
+                  ></ion-icon>
+                  AÑO {{ciclo.anio}} {{ciclo.referencia}}
+                </ion-label>
+              </ion-item>
+              <ion-row>
+                <ion-col
+                  size="6"
+                  size-lg="6"
+                  size-md="6"
+                  size-sm="6"
+                  size-xs="12"
+                >
+                  <app-pra-cronograma
+                    [currentPraciclocronogramas]="ciclo.praciclocronogramas[0]"
+                  ></app-pra-cronograma>
+                </ion-col>
+                <ion-col
+                  size="6"
+                  size-lg="6"
+                  size-md="6"
+                  size-sm="6"
+                  size-xs="12"
+                >
+                  <app-ciclo-participante
+                    [currentPracicloparticipantes]="ciclo.pracicloparticipantes"
+                  ></app-ciclo-participante>
+                </ion-col>
+              </ion-row>
+              <app-tcp-list-products
+                [productList]="ciclo.pradireccionespaproductos"
+                [nombreOrganizacion]="ciclo.nombreOrganizacionCertificado"
+                *ngIf="mode === 'TCP'"
+              ></app-tcp-list-products>
+              <app-tcs-list-systems
+                [nombreOrganizacion]="ciclo.nombreOrganizacionCertificado"
+                [direccionesSistema]="ciclo.pradireccionespasistemas"
+                [normasSistema]="ciclo.praciclonormassistemas"
+                *ngIf="mode === 'TCS'"
+              ></app-tcs-list-systems>
+              <ion-buttons slot="start" class="buttons-group">
+                <ion-button
+                  size="small"
+                  fill="outline"
+                  color="success"
+                  (click)="guardarPrograma()"
+                >
+                  <ion-icon slot="start" name="save"></ion-icon>
+                  Guardar
+                </ion-button>
+                <ion-button
+                  size="small"
+                  fill="outline"
+                  color="tertiary"
+                  (click)="VerDesignacion(ciclo)"
+                >
+                  <ion-icon slot="start" name="document"></ion-icon>
+                  Ver Designacion
+                </ion-button>
+              </ion-buttons>
+            </div>
+          </div>
         </ion-col>
       </ion-row>
     </ion-card-content>

@@ -39,6 +39,7 @@ export class Praciclosprogauditorium {
   pracicloparticipantes: Pracicloparticipante[];
   pradireccionespaproductos: Pradireccionespaproducto[];
   pradireccionespasistemas: Pradireccionespasistema[];
+  referencia: string;
 }
 
 export class Praciclocronograma {

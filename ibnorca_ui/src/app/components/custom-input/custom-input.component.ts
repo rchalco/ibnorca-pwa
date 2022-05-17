@@ -34,9 +34,9 @@ export class CustomInputComponent implements OnInit {
   @Input() defaultValue: any;
   @Output() _ionChange = new EventEmitter();
   customPickerOption: any;
-  customDate: Date;
+  customDate = new Date();
   currentDate = new Date();
-  @Input() formatDate = 'DD/MM/YYYY';
+  @Input() formatDate = 'date';
   @Input() maxDate = this.currentDate.getUTCFullYear() + 10;
   @Output() eventKeyEnterEmiiter = new EventEmitter<any>();
 
@@ -47,52 +47,21 @@ export class CustomInputComponent implements OnInit {
   ngOnInit() {
     if (this.formGruop && !this.formGruop.get(this.name)) {
       this.formGruop.addControl(this.name, new FormControl(this.defaultValue));
-      let validators: ValidatorFn[] = [];
+      const validators: ValidatorFn[] = [];
       if (this.Validations) {
-        for (let val of this.Validations) {
+        for (const val of this.Validations) {
           validators.push(val.validator);
         }
         this.formGruop.controls[this.name].setValidators(validators);
       }
     }
 
-    this.customPickerOption = {
-      buttons: [
-        {
-          text: 'Confirmar',
-          handler: (event) => {
-            console.log(event);
-            let day = 1;
-            if (event.day) day = event.day.value;
-            this.customDate = new Date(
-              event.year.value,
-              event.month.value - 1,
-              day,
-              0,
-              0,
-              0,
-              0
-            );
-
-            if (this.type === 'datetime') {
-              this.formGruop.controls[this.name]['valueDate'] = this.customDate;
-            }
-
-            if (this._ionChange) {
-              if (this.popoverController) {
-                this.popoverController.dismiss({
-                  item: this.formGruop.controls[this.name]['valueDate'],
-                });
-              }
-              this._ionChange.emit(event);
-            }
-          },
-        },
-      ],
-    };
-
     if (this.type === 'datetime' && this.defaultValue) {
-      let date = new Date(this.defaultValue);
+      const date = new Date(this.defaultValue);
+      date.setDate(date.getDate() + 1);
+      this.formGruop.controls[this.name]['valueDate'] = date;
+    } else if (this.type === 'datetime' && !this.defaultValue) {
+      const date = (this.defaultValue = new Date());
       date.setDate(date.getDate() + 1);
       this.formGruop.controls[this.name]['valueDate'] = date;
     }
@@ -116,6 +85,18 @@ export class CustomInputComponent implements OnInit {
     }
     if (this.eventKeyEnterEmiiter) {
       this.eventKeyEnterEmiiter.emit(event);
+    }
+  }
+
+  selectionarFecha(event) {
+    const dateSelect = new Date(event.detail.value);
+    if (this.popoverController) {
+      this.popoverController.dismiss({
+        item: dateSelect,
+      });
+    }
+    if (this.eventKeyEnterEmiiter) {
+      this.eventKeyEnterEmiiter.emit(dateSelect);
     }
   }
 }

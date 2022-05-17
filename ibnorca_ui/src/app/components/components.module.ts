@@ -32,6 +32,7 @@ import { ElaEditAreapreocupacionComponent } from './ela-edit-areapreocupacion/el
 import { EditorDocumentoComponent } from './editor-documento/editor-documento.component';
 import { TmActaReunionComponent } from './tm-acta-reunion/tm-acta-reunion.component';
 import { ElaPlanMuestreoComponent } from './ela-plan-muestreo/ela-plan-muestreo.component';
+import { ParamHorariosComponent } from './param-horarios/param-horarios.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ElaPlanMuestreoComponent } from './ela-plan-muestreo/ela-plan-muestreo.
     EditorDocumentoComponent,
     TmActaReunionComponent,
     ElaPlanMuestreoComponent,
+    ParamHorariosComponent
   ],
   imports: [
     CommonModule,
@@ -103,7 +105,8 @@ import { ElaPlanMuestreoComponent } from './ela-plan-muestreo/ela-plan-muestreo.
     ElaEditAreapreocupacionComponent,
     EditorDocumentoComponent,
     TmActaReunionComponent,
-    ElaPlanMuestreoComponent
+    ElaPlanMuestreoComponent,
+    ParamHorariosComponent
   ],
 })
 export class ComponentsModule { }

@@ -22,7 +22,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { Clasificador } from '../interfaces/General/Clasificador';
-import { CustomResponse } from '../interfaces/wraper/ResponseObject copy';
+import { CustomResponse } from '../interfaces/wraper/CustomResponse';
 
 const headers = HEADERS_SERVICE;
 

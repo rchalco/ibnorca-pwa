@@ -5,7 +5,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { HEADERS_SERVICE, URL_ELABORACION } from 'src/environments/environment';
-import { CustomResponse } from '../interfaces/wraper/ResponseObject copy';
+import { CustomResponse } from '../interfaces/wraper/CustomResponse';
 import { ResponseQuery } from '../interfaces/wraper/ResponseQuery';
 import { BaseService } from './baseService';
 import { DatabaseService } from './database.service';

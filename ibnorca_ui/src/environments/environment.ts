@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
@@ -22,8 +23,8 @@ export const HEADERS_FILE =  new HttpHeaders({
 });
 
 //export const URL_GLOBAL = 'http://localhost:8001/api/';
-//export const URL_GLOBAL = 'http://formacion.ibnorca.org:8880/api/';
-export const URL_GLOBAL = 'http://localhost/api/';
+export const URL_GLOBAL = 'http://formacion.ibnorca.org:8880/api/';
+//export const URL_GLOBAL = 'http://localhost/api/';
 export const URL_APERTURA = URL_GLOBAL + 'AperturaAuditoria/';
 export const URL_ELABORACION = URL_GLOBAL + 'ElaboracionAuditoria/';
 /*
